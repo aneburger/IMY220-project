@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div id="searchDiv">
                     <NavLink to="/home" id="homeNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Home</NavLink>
                     <NavLink to="/projects" id="projectsNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Projects</NavLink>
-                    <NavLink to="/profile" id="profileNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Profile</NavLink>
+                    <NavLink to="/profile:userId" id="profileNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Profile</NavLink>
                     <img alt="profile" id="profileB" src="/assets/images/profile.png" height="60"/>
                 </div>
             </div>

@@ -60,12 +60,25 @@ const SignUp = () => {
         setErrors(newErrors);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm(formData);
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
+            try {
+                const response = await fetch("http://localhost:3000/api/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+                const data = await response.json();
+                console.log('Form submitted:', data);
+            } catch(err) {
+                console.error("Error in handleSubmit() in SignUp.js", err);
+            }
             console.log('Form submitted:', formData);
             navigate('/home');
         }

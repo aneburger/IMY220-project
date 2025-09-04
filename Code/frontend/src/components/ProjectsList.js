@@ -10,28 +10,28 @@ const ProjectsList = () => {
             <article className="projectCard">
                 <h1>Project_Name</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <Link to="/project:id"><button id="viewProjectButton">View</button></Link>
+                <Link to="/project:projectId"><button id="viewProjectButton">View</button></Link>
                 <button id="deleteProjectButton">Delete</button>
             </article>
 
             <article className="projectCard2">
                 <h1>Project_Name</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button id="viewProjectButton">View</button>
+                <Link to="/project:projectId"><button id="viewProjectButton">View</button></Link>
                 <button id="deleteProjectButton">Delete</button>
             </article>
 
             <article className="projectCard3">
                 <h1>Project_Name</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button id="viewProjectButton">View</button>
+                <Link to="/project:projectId"><button id="viewProjectButton">View</button></Link>
                 <button id="deleteProjectButton">Delete</button>
             </article>
 
             <article className="projectCard4">
                 <h1>Project_Name</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button id="viewProjectButton">View</button>
+                <Link to="/project:projectId"><button id="viewProjectButton">View</button></Link>
                 <button id="deleteProjectButton">Delete</button>
             </article>
         </div>
