@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+#editImgDiv {
+    grid-column: 3/4;
+    grid-row: 3/4;
+    margin-left: 2.3em;
+    margin-top: 0.5em;
+}
+
+#editImgDiv #editProjectButtonDiv button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: white;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 300;
+    transition: border-color 0.4 ease-in-out;
+    width: 6.2em;
+    padding-bottom: 10px;
+}
+
+#editImgDiv #editProjectButtonDiv button:hover {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+
+
+
+#editProjectFormDiv {
+  width: 19em;
+  height: 15em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#editProjectFormDiv #editProjectForm input {
+    display: inline-block;
+    width: 17em;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+    /* padding: 6px; */
+}
+
+#editProjectForm label {
+    margin-bottom: 0.7em;
+}
+
+#editProjectForm #imgUpload::file-selector-button {
+    background-color: #2ba1dc;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    padding: 8px;
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+}
+
+/* #editProjectForm input:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#editProjectForm input::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: #ffffffb9;
+    font-weight: 400;
+}
+
+#editProjectForm input:hover {
+    border: 1px solid white;
+} */
+
+#editProjectFormDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#editProjectFormDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#editProjectFormDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    padding-left: 40px;
+    padding-right: 15px;
+    z-index: 1000;
+
+    width: 19.7em;
+    height: 35em;
+    border-radius: 15px;
+}
+
+/* #editProjectFormDiv #editProjectForm input {
+    background-color: transparent;
+    border: 1px solid #ffffffb2;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    color: white;
+    border-radius: 7px;
+    padding: 7px;
+    margin-bottom: 1.1em;
+} */
+
+#editProjectFormDiv #editProjectForm input:hover {
+    border: 1px solid white;
+}
+
+#editProjectFormDiv #editProjectForm input:focus {
+    border: 1px solid white;
+    outline: none;
+}
+
+#editProjectFormDiv #editProjectForm input::placeholder {
+    color: #ffffffc1;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+#editProjectFormButtons {
+    margin-left: 3em;
+}
+
+#editProjectFormDiv #editProjectForm #editProjectFormButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 0.9em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#editProjectFormDiv #editProjectForm #editProjectFormButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#editProjectFormDiv #editProjectForm #editProjectFormButtons #cancel {
+    margin-left: 0.8em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#editProjectFormDiv #editProjectForm #editProjectFormButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}

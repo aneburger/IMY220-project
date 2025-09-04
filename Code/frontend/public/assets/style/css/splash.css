@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+body {
+    padding-top: 7em;
+}
+
+html, body {
+  margin: 0;
+  /* padding: 0; */
+  height: 100%;   
+  width: 100%;    
+}
+
+.splashBody {
+    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+#commited {
+    margin-top: 3.5em;
+    margin-left: 3.5em;
+}
+
+#splash-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+#already {
+    align-self: flex-end;
+    color: white;
+    font-family: 'Albert Sans';
+    font-size: 1.7em;
+}
+
+#logIn {
+    align-self: flex-end;
+    color: #0B9EE9;
+    background-color: transparent;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 750;
+    margin-left: 1em;
+    margin-right: 2.1em;
+    border: 1px solid transparent;
+    padding: 4px 15px 6px 15px;
+    border-radius: 2.1em;
+    transition: border-color 0.4s ease;
+}
+
+#logIn:hover {
+    border: 1px solid #0B9EE9;
+    padding: 4px 15px 6px 15px;
+    border-radius: 2.1em;
+    cursor: pointer;
+}
+
+#flow {
+    margin: auto;
+    width: 600px;
+    margin-top: 12em;
+}
+
+
+#favourite {
+    font-family: 'Albert Sans';
+    font-size: 1.9em;
+    color: white;
+    width: 570px;
+    padding: 13px 8px 17px 25px;
+    margin: auto;
+    margin-top: 1em;
+    background: rgba(255, 255, 255, 0.111);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border-radius: 2.1em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 10px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.149),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 8px 1px rgba(255, 255, 255, 0.221);
+    position: relative;
+    overflow: hidden;
+}
+
+#favourite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#favourite::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+
+#greater {
+    position: absolute;
+    width: 1.34em;
+    height: 1.34em;
+}
+
+#newUser {
+    font-family: 'Albert Sans';
+    font-size: 1.3em;
+    color: white;
+    margin: auto;
+    width: 4.9em;
+    margin-top: 2em;
+}
+
+#signUp {
+    display: block;
+    margin: auto;
+    font-family: 'Albert Sans';
+    font-size: 0.9em;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid #0B9EE9;
+    padding: 6px 15px 8px 15px;
+    border-radius: 2.1em;
+    color: #0B9EE9;
+    margin-top: 0.8em;
+    transition: background-color 0.4s ease;
+    transition: color 0.4s ease;
+}
+
+#newUser a {
+    text-decoration: none;
+}
+
+#signUp:hover {
+    cursor: pointer;
+    background-color: #0B9EE9;
+    color: white;
+    border: 1px solid #0B9EE9;
+}

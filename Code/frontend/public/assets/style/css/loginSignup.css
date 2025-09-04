@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+.loginBody {
+    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    padding-top: 10em;
+    /* padding-bottom: 16.5em; */
+    overflow: hidden;
+}
+
+.signupBody {
+    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    padding-top: 6em;
+    /* padding-bottom: 8em; */
+    overflow: hidden;
+}
+
+#loginDiv {
+    width: 600px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    margin-top: 7em;
+    border: 2px solid #6f797e;
+    border-radius: 2.1em;
+}
+
+#loginHead {
+    font-family: 'Albert Sans';
+    font-weight: 550;
+    color: white;
+    font-size: 3em;
+    width: 2.5em;
+    margin: auto;
+    margin-top: 0.6em;
+    margin-bottom: 0.8em;
+}
+
+#signUpHead {
+    font-family: 'Albert Sans';
+    font-weight: 550;
+    color: white;
+    font-size: 3em;
+    width: 3.65em;
+    margin: auto;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+#username, #password, #surname, #email {
+    display: block;
+    width: 20em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+}
+
+#username2, #password2 {
+    display: block;
+    width: 20em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+}
+
+#password {
+    margin-bottom: 1em;
+}
+
+#password2 {
+    margin-bottom: 1em;
+}
+
+#username:focus, #password:focus, #surname:focus, #email:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#username:hover, #password:hover, #surname:hover, #email:hover {
+    border: 1px solid white;
+}
+
+#username2:focus, #password2:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#username2:hover, #password2:hover {
+    border: 1px solid white;
+}
+
+#username::placeholder, #password::placeholder, #surname::placeholder, #email::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.622);
+    font-weight: 200;
+}
+
+#username2::placeholder, #password2::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.622);
+    font-weight: 200;
+}
+
+form {
+    width: 10.1em;
+    margin: auto;
+    margin-left: 3em;
+}
+
+label {
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.15em;
+    font-weight: 200;
+    margin-left: 8px;
+}
+
+#usernameError, #surnameError, #emailError, #passwordError {
+  font-size: 0.9em;
+  width: 20em;
+  margin-left: 8px;
+  color: #ff6cf0;
+  font-weight: 400;
+  margin-top: 0em;
+}
+
+
+#loginB {
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.15em;
+    font-weight: 200;
+    background-color: #0B9EE9;
+    border: 1px solid transparent;
+    padding: 7px 18px 8px 18px;
+    border-radius: 0.4em;
+    transition: background-color 0.4s ease;
+    margin-left: 5em;
+}
+
+#signUpB {
+    display: inline-block;
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.15em;
+    font-weight: 200;
+    background-color: #0B9EE9;
+    border: 1px solid transparent;
+    padding: 7px 18px 8px 18px;
+    border-radius: 0.4em;
+    transition: background-color 0.4s ease;
+    margin-left: 5em;
+}
+
+#signUpB:hover {
+    background-color: #1bb2fd;
+    border: 1px solid #128ac7;
+    cursor: pointer;
+}
+
+#loginB:hover {
+    background-color: #1bb2fd;
+    border: 1px solid #128ac7;
+    cursor: pointer;
+}
+
+
+#loginBdiv {
+    margin-left: 8.2em;
+    width: 10em;
+}
+
+#signUpBdiv {
+    margin-left: 7.2em;
+    margin-top: 1em;
+    width: 10em;
+}
+
+
+#clear {
+    display: inline-block;
+    position: absolute;
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.15em;
+    font-weight: 200;
+    background-color: #ffffff66;
+    border: 1px solid transparent;
+    padding: 7px 18px 8px 18px;
+    border-radius: 0.4em;
+    transition: background-color 0.4s ease;
+    margin-right: 0.8em;
+}
+
+#clear:hover {
+    background-color: #ffffffb1;
+    border: 1px solid #ffffffb0;
+    cursor: pointer;
+}
+
+.glass-card {
+  width: 400px;
+  max-height: 460px;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 35px;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+
+.glass-card2 {
+  width: 400px;
+  max-height: 700px;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
+.glass-card2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+.glass-card2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}

@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+.projectsBody {
+    background-color: #001841;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+#projectsGrid {
+    display: grid;
+    max-width: 78em;
+    grid-template-columns: 26em 36em 30em;
+    grid-template-rows: 5.2em 6em 10em 10em 10em;
+    margin: auto;
+    margin-top: 5em;
+}
+
+#projectsPageHead {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-top: 0.4em;
+}
+
+#projectsPageHead h1 {
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 2.2em;
+    font-weight: 400;
+}
+
+#projectPageFeedDiv {
+    grid-column: 1/4;
+    grid-row: 2/5;
+    width: 61em;
+    height: 25em;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-top: 1.4em;
+    overflow-y: scroll;
+}
+
+#quickAside {
+    grid-column: 3/4;
+    grid-row: 1/5;
+}
+
+#quickAside section #quickDiv {
+    height: 25em;
+}
+
+#quickAside section {
+    margin-top: 3.4em;
+}
+
+#quickAside #quickHead {
+    font-size: 1.5em;
+    margin-bottom: 0.9em;
+}
+
+#createPB {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-left: 27.3em;
+    margin-top: 2.9em;
+}
+
+#createProjectB {
+    background-color: #0b9fe9c4;
+    color: white;
+    border: 1px solid #0b9fe9c4;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    width: 7em;
+    padding: 6px 5px 7px 5px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#createProjectB:hover {
+    background-color: #3cb5f1cf;
+    cursor: pointer;
+}
+
+#projectsListComp {
+    grid-column: 1/3;
+    grid-row: 2/5;
+    margin-left: 2.6em;
+    margin-top: 0em;
+    margin-bottom: 2.6em;
+}
+
+.projectsListGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    width: 57em;
+}
+
+.projectCard h1 {
+    font-family: 'Albert Sans';
+    font-size: 1.7em;
+    color: white;
+    font-weight: 400;
+    width: 7em;
+    text-align: center;
+    margin-top: 0.6em;
+    margin-left: 0.8em;
+    border-bottom: 1px solid #ffffff85;
+    padding-bottom: 10px;
+}
+
+.projectCard p {
+    text-align: center;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.projectCard button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 1.7em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.projectCard button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#viewProjectButton {
+    margin-left: 2em;
+}
+
+#deleteProjectButton {
+    margin-left: 1em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#deleteProjectButton:hover {
+    background-color: #0b9fe9c4;
+    border-color: 1px solid #0b9fe9c4;
+}
+
+.projectCard {
+    grid-column: 1/2;
+    grid-row: 1/2;
+
+    background-color: #ffffff52;
+    border: 1px solid #a8a6a6ad;
+    border-radius: 10px;
+    width: 15em;
+    height: 19em;
+    margin-left: 1.6em;
+    margin-top: 3em;
+}
+
+
+
+
+
+
+.projectCard2 {
+    grid-column: 2/3;
+    grid-row: 1/2;
+
+    background-color: #ffffff52;
+    border: 1px solid #a8a6a6ad;
+    border-radius: 10px;
+    width: 15em;
+    height: 19em;
+    margin-left: 1.6em;
+    margin-top: 3em;
+}
+
+
+
+.projectCard3 {
+    grid-column: 3/4;
+    grid-row: 1/2;
+
+    background-color: #ffffff52;
+    border: 1px solid #a8a6a6ad;
+    border-radius: 10px;
+    width: 15em;
+    height: 19em;
+    margin-left: 1.6em;
+    margin-top: 3em;
+}
+
+
+
+.projectCard4 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+
+    background-color: #ffffff52;
+    border: 1px solid #a8a6a6ad;
+    border-radius: 10px;
+    width: 15em;
+    height: 19em;
+    margin-left: 1.6em;
+    margin-top: 3em;
+}
+
+
+
+.projectCard2 h1 {
+    font-family: 'Albert Sans';
+    font-size: 1.7em;
+    color: white;
+    font-weight: 400;
+    width: 7em;
+    text-align: center;
+    margin-top: 0.6em;
+    margin-left: 0.8em;
+    border-bottom: 1px solid #ffffff85;
+    padding-bottom: 10px;
+}
+
+.projectCard2 p {
+    text-align: center;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.projectCard2 button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 1.7em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.projectCard2 button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+
+
+
+
+.projectCard3 h1 {
+    font-family: 'Albert Sans';
+    font-size: 1.7em;
+    color: white;
+    font-weight: 400;
+    width: 7em;
+    text-align: center;
+    margin-top: 0.6em;
+    margin-left: 0.8em;
+    border-bottom: 1px solid #ffffff85;
+    padding-bottom: 10px;
+}
+
+.projectCard3 p {
+    text-align: center;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.projectCard3 button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 1.7em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.projectCard3 button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+
+
+
+
+
+.projectCard4 h1 {
+    font-family: 'Albert Sans';
+    font-size: 1.7em;
+    color: white;
+    font-weight: 400;
+    width: 7em;
+    text-align: center;
+    margin-top: 0.6em;
+    margin-left: 0.8em;
+    border-bottom: 1px solid #ffffff85;
+    padding-bottom: 10px;
+}
+
+.projectCard4 p {
+    text-align: center;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.projectCard4 button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 1.7em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.projectCard4 button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+

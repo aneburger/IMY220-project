@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+.profileBody {
+    background-color: #001841;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+#profileGrid {
+    display: grid;
+    max-width: 78em;
+    grid-template-columns: 32em 19em 12em 15em;
+    grid-template-rows: 7em 5.6em 10em 13.8em 4.4em 10em 10em 10em;
+    margin: auto;
+    margin-top: 5em;
+}
+
+#profileHead {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-top: 0.4em;
+}
+
+#editButtonDiv {
+    grid-column: 4/5;
+    grid-row: 4/5;
+    margin-top: 10em;
+}
+
+#tagCloudDiv {
+    grid-column: 4/5;
+    grid-row: 5/7;
+    margin-top: 0em;
+}
+
+#tagCloudDiv h1 {
+    font-family: 'Albert Sans';
+    font-size: 2.3em;
+    margin-left: 1.7em;
+    color: white;
+    font-weight: 400;
+}
+
+#tagCloudDiv p {
+    display: inline-block;
+    background-color: white;
+    color: #2c333f;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 0em;
+    margin-left: 1em;
+}
+
+#editButtonDiv button {
+    background-color: #ffffff87;
+    color: white;
+    border: 1px solid #ffffff87;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    width: 13em;
+    padding: 5px 5px 5px 5px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#editButtonDiv button:hover {
+    background-color: #ffffff98;
+    cursor: pointer;
+}
+
+#profileCreateProject {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-top: 3.1em;
+    margin-left: 2.5em;
+}
+
+#projectsHead {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin-top: 1em;
+}
+
+#activityHead {
+    grid-column: 1/2;
+    grid-row: 6/7;
+}
+
+#yearFilter {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin-left: 11.5em;
+    margin-top: 3.1em;
+}
+
+#sortE2 {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin-left: 20.8em;
+    margin-top: 3.1em;
+}
+
+#projectFeedDiv {
+    grid-column: 1/4;
+    grid-row: 3/5;
+    width: 61em;
+    height: 25em;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-top: 1.4em;
+    overflow-y: scroll;
+}
+
+#projectFeedDiv div {
+    margin-left: 1.2em;
+    margin-bottom: 2.6em;
+}
+
+#activityFeedDiv {
+    grid-column: 1/4;
+    grid-row: 6/9;
+    width: 61em;
+    height: 21em;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-top: 5.8em;
+    overflow-y: scroll;
+}
+
+select {
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 300;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px 10px 5px 4px;
+    border-radius: 7px;
+    color: white;
+    width: 130px;
+}
+
+select option {
+    background-color: rgba(255, 255, 255, 0.544);
+    color: #001841;
+    font-weight: 500;
+    border-radius: 7px;
+    font-size: 0.8em;
+    transition: background-color 0.4s ease;
+}
+
+select option:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+select option:focus {
+    background-color: white;
+    cursor: pointer;
+}
+
+.reposLink, .friendsLink {
+    font-family: 'Albert Sans';
+    color: white;
+    height: 1em;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding-bottom: 9px;
+    border-bottom: 1px solid transparent;
+    margin-top: 2.5em;
+    margin-left: 3em;
+    transition: border-color 0.4s ease;
+}
+
+.reposLink:hover, .friendsLink:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+.reposLink {
+    margin-left: 9.9em;
+    width: 5.8em;
+}
+
+.friendsLink {
+    width: 3.5em;
+}
+
+#profileGrid a {
+    text-decoration: none;
+}
+
+#profileB2 {
+    margin-right: 0em;
+    margin-left: 2.2em;
+    margin-top: 3em;
+    padding-bottom: 5px;
+}
+
+.infoCard {
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    color: #ffffffb7;
+    /* border-bottom: 1px solid #ffffff52; */
+    border-bottom: 1px solid transparent;
+    padding-bottom: 7px;
+    padding-left: 1.4em;
+    font-weight: 400;
+    margin-left: 0em;
+    margin-top: 1em;
+    width: 6.4em;
+
+    grid-column: 4/5;
+    grid-row: 1/3;
+    width: 13em;
+    background-color: #1f314f;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    height: 16.8em;
+}
+ 

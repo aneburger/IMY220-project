@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+#localGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr, 1fr;
+    max-width: 88em;
+    padding-bottom: 21px;
+}
+
+p {
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+h2 {
+    font-family: 'Albert Sans';
+    color: rgb(205, 205, 205);
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+#timeH {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid rgb(205, 205, 205); */
+}
+
+#userH {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid rgb(205, 205, 205); */
+}
+
+#projectH {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid rgb(205, 205, 205); */
+}
+
+#checkedH {
+    grid-column: 4/5;
+    grid-row: 1/2;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid rgb(205, 205, 205); */
+}
+
+#viewH {
+    grid-column: 5/6;
+    grid-row: 1/2;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 1em;
+    text-align: center;
+    padding-bottom: 10px;
+    /* border-bottom: 1px solid rgb(205, 205, 205); */
+}
+
+#localHeadings {
+    grid-column: 1/6;
+    grid-row: 1/2;
+} 
+
+#localHeadings h2 {
+    display: inline-block;
+}
+
+.actCard {
+    grid-column: 1/5;
+    grid-row: 1/2;
+
+    display: grid;
+    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+.actCard2 {
+    grid-column: 1/5;
+    grid-row: 2/3;
+
+    display: grid;
+    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+.actCard3 {
+    grid-column: 1/5;
+    grid-row: 3/4;
+
+    display: grid;
+    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+.actCard4 {
+    grid-column: 1/5;
+    grid-row: 4/5;
+
+    display: grid;
+    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+.actCard5 {
+    grid-column: 1/5;
+    grid-row: 5/6;
+
+    display: grid;
+    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+.profileBFeed {
+    display: inline-block;
+    margin-right: 0.7em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.user {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    font-size: 1.1em;
+    display: inline-block;
+}
+
+.timestamp, .project, .checkedInOut {
+    display: inline-block;
+}
+
+.timestamp {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-right: 0em;
+    margin-top: 2em;
+}
+
+.project {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-left: 1.3em;
+}
+
+.checkedInOut {
+    grid-column: 4/5;
+    grid-row: 1/2;
+    margin-top: 1.3em;
+    margin-left: 4em;
+}
+
+.inOut {
+    color: #4bc2fe;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+.actCard button, .actCard2 button, .actCard3 button, .actCard4 button, .actCard5 button {
+    grid-column: 5/6;
+    grid-row: 1/2;
+    margin-top: 1.1em;
+    margin-left: 1.6em;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 300;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 8px 10px 8px 4px;
+    border-radius: 7px;
+    color: white;
+    width: 95px;
+    height: 43px;
+    transition: background-color 0.4s ease;
+}
+
+.actCard button:hover, .actCard2 button:hover, .actCard3 button:hover, .actCard4 button:hover  {
+    cursor: pointer;
+    background-color: #0b9fe9c6;
+    border: 1px solid #0b9fe9c6;
+}
+
+/* #timestamp {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+    /* border-right: 1px solid rgb(205, 205, 205); 
+} */
+/* 
+#user {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+}
+
+#projectName {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+}
+
+#checkedInOut {
+    grid-column: 4/5;
+    grid-row: 2/3;
+    margin-left: 2em;
+    margin-top: 1em;
+    text-align: center;
+}
+
+#viewButtons {
+    grid-column: 5/6;
+    grid-row: 2/3;
+    margin-left: 4em;
+    margin-top: 2em;
+}
+
+#viewButtons button {
+    display: block;
+    margin-bottom: 0.7em;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 300;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px 10px 5px 4px;
+    border-radius: 7px;
+    color: white;
+    width: 95px;
+    transition: background-color 0.4s ease;
+}
+
+#viewButtons button:hover {
+    cursor: pointer;
+    background-color: #0b9fe9c6;
+    border: 1px solid #0b9fe9c6;
+} */

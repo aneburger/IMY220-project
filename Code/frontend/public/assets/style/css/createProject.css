@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+#createProjectFormDiv {
+  width: 19em;
+  height: 26em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#createProjectFormDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#createProjectFormDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#createProjectFormDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    padding-left: 40px;
+    z-index: 1000;
+
+    width: 50em;
+    height: 35em;
+    border-radius: 15px;
+}
+
+#createProjectForm {
+    display: grid;
+    grid-template-columns: 17em 17em 16em;
+    grid-template-rows: 10em 10em 10em;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    padding-left: 40px;
+    z-index: 1000;
+
+    width: 50em;
+    height: 35em;
+}
+
+
+#createProjectForm input {
+    display: block;
+    width: 11.5em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    margin-left: 14em;
+    margin-top: 1.65em;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons button {
+    background-color: #ffffff97;
+    color: #001841;
+    border-radius: 7px;
+    padding: 11px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 3.6em;
+    margin-top: 0.9em;
+    width: 4.5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons button:hover {
+    cursor: pointer;
+    background-color: #001841ad;
+    color: white;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons {
+    display: inline-block;
+    margin-left: 1.6em;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons #cancel {
+    margin-left: 0.7em;
+    border: 1px solid transparent;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+    padding-left: 10px;
+}
+
+#createProjectFormDiv #createProjectForm #createProjectFormButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+#createProjectForm #details #imgUpload::file-selector-button {
+    background-color: #2ba1dc;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    padding: 6px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+}
+
+#createProjectForm #details #imgUpload {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+}
+
+#createProjectForm input:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#createProjectForm input::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: #ffffffb9;
+    font-weight: 400;
+}
+
+#createProjectForm input:hover {
+    border: 1px solid white;
+} 
+
+
+#projectFormImg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: inline-block;
+    margin-left: 2.8em;
+}
+
+#prName {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    margin-left: 17em;
+    display: inline-block;
+    margin-top: 0.7em;
+}
+
+#prName input {
+    width: 9.8em;
+}
+
+/* #prName, #crDate label, input {
+    display: inline-block;
+} */
+
+#crDate {
+    grid-column: 2/4;
+    grid-row: 1/2;
+    margin-left: 11.2em;
+    display: inline-block;
+    margin-top: 0.7em;
+}
+
+#crDate input {
+    width: 9em;
+    height: 1.15em;
+}
+
+#details {
+    grid-column: 1/2;
+    grid-row: 2/4;
+
+    border: 1px solid #52c5ff;
+    border-radius: 15px;
+    padding: 17px 7px 12px 20px;
+    height: 22em;
+    width: 13em;
+}
+
+#descr {
+    grid-column: 2/4;
+    grid-row: 1/3;
+    width: 33em;
+    height: 6em;
+    margin-top: 7em;
+}
+
+#descr form {
+    margin: 0em;
+}
+
+#descr form fieldset legend {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    font-weight: 200;
+    color: white;
+    margin-left: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#descr form fieldset {
+    border: 1px solid #ffffffb9;
+    border-radius: 15px;
+    width: 30em;
+    height: 6em;
+}
+
+#descr form fieldset textarea {
+    background-color: transparent;
+    border: 1px solid transparent;
+    height: 4em;
+    width: 26.8em;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 200;
+    color: white;
+    margin-bottom: 0.8em;
+}
+
+#descr form fieldset textarea:focus {
+    outline: none;
+}
+
+#descr form fieldset textarea::placeholder {
+    color: #ffffff95;
+    font-weight: 300;
+}
+
+
+
+#filesField {
+    grid-column: 2/4;
+    grid-row: 2/4;
+    margin-top: 5em;
+}
+
+#filesField form {
+    margin: 0em;
+}
+
+#filesField form fieldset legend {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    font-weight: 200;
+    color: white;
+    margin-left: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#filesField form fieldset input {
+    display: inline-block;
+    margin-left: 1em;
+    width: 15em;
+    font-size: 0.9em;
+    font-family: 'Albert Sans';
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    margin-bottom: 0em;
+}
+
+#filesField form fieldset p {
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    color: white;
+    margin-left: 1em;
+    margin-bottom: 0.8em;
+}
+
+#filesField form fieldset button {
+    display: inline-block;
+    background-color: #2bacec;
+    color: white;
+    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    font-family: 'Albert Sans';
+    font-weight: 400;
+    font-size: 1em;
+    margin-left: 0.6em;
+    margin-top: 0.4em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#filesField form fieldset button:hover {
+    cursor: pointer;
+    background-color: #38bdff;
+}
+
+#filesField form fieldset {
+    border: 1px solid #ffffffb9;
+    border-radius: 15px;
+    width: 30em;
+    height: 8em;
+    overflow-y: scroll;
+}
+
+#createProjectForm #filesField form fieldset input::file-selector-button {
+    background-color: #2ba1dc;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    padding: 6px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+}
+
+
+
+
+#membersField {
+    grid-column: 2/4;
+    grid-row: 3/4;
+    margin-top: 5em;
+}
+
+#membersField form {
+    margin: 0em;
+}
+
+#membersField form fieldset legend {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    font-weight: 200;
+    color: white;
+    margin-left: 1em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#membersField form fieldset input {
+    display: inline-block;
+    margin-left: 1em;
+    width: 15em;
+    font-size: 0.9em;
+    font-family: 'Albert Sans';
+    padding-top: 13px;
+    padding-bottom: 14px;
+    padding-left: 10px;
+    margin-bottom: 0em;
+}
+
+#membersField form fieldset input::placeholder {
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+#membersField form fieldset p {
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    color: white;
+    margin-left: 1em;
+    margin-bottom: 0.8em;
+}
+
+#membersField form fieldset button {
+    display: inline-block;
+    background-color: #2bacec;
+    color: white;
+    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    font-family: 'Albert Sans';
+    font-weight: 400;
+    font-size: 1em;
+    margin-left: 0.6em;
+    margin-top: 0.4em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#membersField form fieldset button:hover {
+    cursor: pointer;
+    background-color: #38bdff;
+}
+
+#membersField form fieldset {
+    border: 1px solid #ffffffb9;
+    border-radius: 15px;
+    width: 30em;
+    height: 7.8em;
+    overflow-y: scroll;
+}
