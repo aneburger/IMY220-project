@@ -3,34 +3,26 @@
 
 /* Ane' Burger 24565068, 33 */
 
-#editImgDiv {
-    grid-column: 3/4;
-    grid-row: 3/4;
-    margin-left: 2.3em;
-    margin-top: 0.5em;
-}
 
-#editImgDiv #editProjectButtonDiv button {
-    background-color: transparent;
-    border: 1px solid transparent;
+
+#checkInButtonDiv #checkInB {
+    background-color: #ffffff52;
     color: white;
+    border: 1px solid #ffffff8e;
     font-family: 'Albert Sans';
-    font-size: 1.1em;
-    font-weight: 300;
-    transition: border-color 0.4 ease-in-out;
-    width: 6.2em;
-    padding-bottom: 10px;
+    font-size: 1em;
+    font-weight: 400;
+    padding: 8px 10px 8px 10px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
 }
 
-#editImgDiv #editProjectButtonDiv button:hover {
-    border-bottom: 1px solid white;
+#checkInButtonDiv #checkInB:hover {
+    background-color: #ffffff7f;
     cursor: pointer;
 }
 
-
-
-
-#editProjectFormDiv {
+#checkInFormDiv {
   width: 19em;
   height: 15em;
   margin: auto;
@@ -49,7 +41,7 @@
   overflow: hidden;
 }
 
-#editProjectFormDiv #editProjectForm input {
+#checkInFormDiv #checkInProjectForm input {
     display: inline-block;
     width: 17em;
     margin-top: 0em;
@@ -66,11 +58,11 @@
     /* padding: 6px; */
 }
 
-#editProjectForm label {
+#checkInProjectForm label {
     margin-bottom: 0.7em;
 }
 
-#editProjectForm #imgUpload::file-selector-button {
+#checkInProjectForm #imgUpload::file-selector-button {
     background-color: #2ba1dc;
     color: white;
     border-radius: 7px;
@@ -80,23 +72,7 @@
     font-size: 1.2em;
 }
 
-/* #editProjectForm input:focus {
-    outline: none;
-    border: 1px solid white;
-}
-
-#editProjectForm input::placeholder {
-    font-family: 'Albert Sans';
-    font-size: 1.2em;
-    color: #ffffffb9;
-    font-weight: 400;
-}
-
-#editProjectForm input:hover {
-    border: 1px solid white;
-} */
-
-#editProjectFormDiv::before {
+#checkInFormDiv::before {
   content: '';
   position: fixed;
   top: 0;
@@ -111,7 +87,7 @@
   );
 }
 
-#editProjectFormDiv::after {
+#checkInFormDiv::after {
   content: '';
   position: fixed;
   top: 0;
@@ -126,7 +102,8 @@
   );
 }
 
-#editProjectFormDiv {
+
+#checkInFormDiv {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -137,41 +114,31 @@
     z-index: 1000;
 
     width: 19.7em;
-    height: 35em;
+    height: 20.2em;
     border-radius: 15px;
 }
 
-/* #editProjectFormDiv #editProjectForm input {
-    background-color: transparent;
-    border: 1px solid #ffffffb2;
-    font-family: 'Albert Sans';
-    font-size: 1em;
-    color: white;
-    border-radius: 7px;
-    padding: 7px;
-    margin-bottom: 1.1em;
-} */
 
-#editProjectFormDiv #editProjectForm input:hover {
+#checkInFormDiv #checkInProjectForm input:hover {
     border: 1px solid white;
 }
 
-#editProjectFormDiv #editProjectForm input:focus {
+#checkInFormDiv #checkInProjectForm input:focus {
     border: 1px solid white;
     outline: none;
 }
 
-#editProjectFormDiv #editProjectForm input::placeholder {
+#checkInFormDiv #checkInProjectForm input::placeholder {
     color: #ffffffc1;
     font-weight: 300;
     font-size: 1.2em;
 }
 
-#editProjectFormButtons {
+#checkInProjectFormButtons {
     margin-left: 3em;
 }
 
-#editProjectFormDiv #editProjectForm #editProjectFormButtons button {
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons button {
     background-color: #ffffffc0;
     color: #001841;
     border-radius: 7px;
@@ -186,19 +153,19 @@
     transition: background-color 0.4s ease-in-out;
 }
 
-#editProjectFormDiv #editProjectForm #editProjectFormButtons button:hover {
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons button:hover {
     cursor: pointer;
     background-color: #ffffffe6;
 }
 
-#editProjectFormDiv #editProjectForm #editProjectFormButtons #cancel {
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons #cancel {
     margin-left: 0.8em;
     background-color: #ffffff52;
     color: white;
     font-weight: 400;
 }
 
-#editProjectFormDiv #editProjectForm #editProjectFormButtons #cancel:hover {
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons #cancel:hover {
     cursor: pointer;
     background-color: #ffffff7e;
 }

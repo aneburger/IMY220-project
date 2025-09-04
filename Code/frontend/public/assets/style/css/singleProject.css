@@ -10,6 +10,7 @@
     background-size: cover;
     background-attachment: fixed;
     min-height: 100vh;
+    padding-top: 7em;
 }
 
 #singleProjectGrid {
@@ -49,7 +50,7 @@
 #downloadDelete {
     grid-column: 2/3;
     grid-row: 1/2;
-    margin-left: 15.2em;
+    margin-left: 18em;
     margin-top: 2.2em;
 }
 
@@ -58,19 +59,21 @@
     margin-left: 1.3em;
 }
 
-#downloadDelete div #downloadFilesB {
+#filesAdd div #downloadFilesB {
+    position: absolute;
     background-color: #ffffff52;
     color: white;
     border: 1px solid #ffffff8e;
     font-family: 'Albert Sans';
     font-size: 1em;
     font-weight: 400;
-    padding: 8px 10px 8px 10px;
+    padding: 6px 10px 6px 10px;
     border-radius: 8px;
     transition: background-color 0.4s ease-in-out;
+    margin-top: 1.6em;
 }
 
-#downloadDelete div #downloadFilesB:hover {
+#filesAdd div #downloadFilesB:hover {
     background-color: #ffffff7f;
     cursor: pointer;
 }
@@ -85,6 +88,7 @@
     padding: 8px 10px 8px 10px;
     border-radius: 8px;
     transition: background-color 0.4s ease-in-out;
+    margin-left: 0em;
 }
 
 #downloadDelete div #deleteProjectB:hover {
@@ -796,7 +800,7 @@
 #filesAdd {
     grid-column: 2/3;
     grid-row: 4/5;
-    margin-left: 29.3em;
+    margin-left: 20em;
 }
 
 #filesAdd .filesAddB {
@@ -809,6 +813,7 @@
     font-size: 1.1em;
     font-weight: 500;
     margin-top: 1.5em;
+    margin-left: 8.6em;
     font-family: 'Albert Sans';
     transition: background-color 0.4s ease-in-out;
 }

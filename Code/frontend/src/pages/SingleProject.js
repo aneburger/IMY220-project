@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
+import { useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import '../../public/assets/style/css/singleProject.css';
 import DownloadFiles from "../components/DownloadFiles";
@@ -12,8 +13,12 @@ import AddFiles from "../components/AddFiles";
 import FilesList from "../components/FilesList";
 import ActivityList from "../components/ActivityList";
 import EditProject from "../components/EditProject";
+import ProjectMessages from "../components/ProjectMessages";
+import CheckIn from "../components/CheckIn";
 
 const SingleProject = () => {
+    const { projectId } = useParams();
+
     const [isOpen, setIsOpen] = useState(false);
     const [isFilesOpen, setIsFilesOpen] = useState(false);
             
@@ -33,13 +38,13 @@ const SingleProject = () => {
 
             <main id="singleProjectGrid">
                 <div id="projectNameHead"> 
-                    <h1 id="pName">Project_Name</h1>
+                    <h1 id="pName">Project_Name with ID {projectId}</h1>
                 </div>
 
                 <p id="createdDate">Created: 2025 / 08 / 01</p>
 
                 <div id="downloadDelete">
-                    <DownloadFiles/>
+                    <CheckIn/>
                     <DeleteProject/>
                 </div>
 
@@ -63,7 +68,6 @@ const SingleProject = () => {
                     <div id="typeApp">
                         <select id="typeAppSelect" name="typeAppSelect">
                             <option value="webApp">Web App</option>
-                            <option value="desktopApp">Desktop App</option>
                             <option value="desktopApp">Desktop App</option>
                             <option value="mobileApp">Mobile App</option>
                             <option value="framework">Framework</option>
@@ -104,20 +108,7 @@ const SingleProject = () => {
                 </div>
 
                 <div id="discussionDiv">
-                    <section className="messageCard">
-                        <p>20 mins ago <span>by @user_name</span></p>
-                        <p>"Lorem ipsum dolor sit amet..."</p>
-                    </section>
-
-                    <section className="messageCard">
-                        <p>23 mins ago <span>by @user_name</span></p>
-                        <p>"Lorem ipsum dolor sit amet..."</p>
-                    </section>
-
-                    <section className="messageCard">
-                        <p>3 hours ago <span>by @user_name</span></p>
-                        <p>"Lorem ipsum dolor sit amet..."</p>
-                    </section>
+                    <ProjectMessages/>
                 </div>
 
                 <div id="descriptionHead"> 
@@ -140,6 +131,7 @@ const SingleProject = () => {
                 </div>
 
                 <div id="filesAdd">
+                    <DownloadFiles/>
                     <button onClick={toggleFileDiv} className="filesAddB">Add +</button>
                     {isFilesOpen && <AddFiles onCancel={toggleFileDiv}/>}
                 </div>

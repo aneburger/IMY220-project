@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
+import { useParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import ProfileTemplate from "../components/ProfileTemplate";
 import { Link } from "react-router-dom";
@@ -17,6 +18,8 @@ import ProfileForm from "../components/ProfileForm";
 import FriendsList from "../components/FriendsList";
 
 const Profile = () => {
+    const { userId } = useParams();
+
     const [isOpen, setIsOpen] = useState(false);
     
     const toggle = () => {
@@ -29,7 +32,7 @@ const Profile = () => {
             </div>
             <div id="profileGrid">
                 <div id="profileHead"> 
-                    <h1 id="uAct">Username's Profile</h1>
+                    <h1 id="uAct">Username's Profile with ID {userId}</h1>
                 </div>
                 <p className="reposLink">Repositories</p>
                 <p className="friendsLink" onClick={toggle}>Friends</p>
