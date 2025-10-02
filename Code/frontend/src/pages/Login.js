@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../public/assets/style/css/loginSignup.css';
+// import '../../public/output.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -23,15 +24,17 @@ const Login = () => {
         let newErrors = {};
         if (!data.username) {
             newErrors.username = 'Username is required';
-        } else if (data.username != 'test user') {
-            newErrors.username = 'Username invalid.';
         }
+        // } else if (data.username != 'test user') {
+        //     newErrors.username = 'Username invalid.';
+        // }
 
         if (!data.password) {
             newErrors.password = 'Password is required';
-        } else if (data.password != '12345@Aa') {
-            newErrors.password = 'Password invalid.';
         }
+        // } else if (data.password != '12345@Aa') {
+        //     newErrors.password = 'Password invalid.';
+        // }
 
         return newErrors;
     }
@@ -60,12 +63,18 @@ const Login = () => {
                     body: JSON.stringify(formData),
                 });
                 const data = await response.json();
+                if (data.success) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    console.log("User logged in: ", localStorage.getItem('user'));
+                    navigate('/home');
+                } else {
+                    setErrors({ general: data.message });
+                }
                 console.log('Form submitted:', data);
             } catch(err) {
                 console.error("Error in handleSubmit() in Login.js", err);
+                setErrors({ general: "Server error. Please try again later." });
             }
-            console.log('Logged In:', formData);
-            navigate('/home');
         }
     };
 
@@ -78,6 +87,7 @@ const Login = () => {
             <div className="glass-card">
                 <h1 id="loginHead">Login</h1>
                 <form onSubmit={handleSubmit} action="/home" method="post">
+                {errors.general && <p className="error">{errors.general}</p>}
                     <label htmlFor="username">Username: *</label>
                     <input type="text" name="username" id="username"  placeholder="Username" autoComplete="username"
                             value={formData.username}

@@ -151,6 +151,12 @@ label {
   margin-top: 0em;
 }
 
+.error {
+  font-size: 1.2em;
+  margin-left: 8px;
+  color: #ff6cf0;
+  font-weight: 400;
+}
 
 #loginB {
     font-family: 'Albert Sans';

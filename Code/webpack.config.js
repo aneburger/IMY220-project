@@ -1,11 +1,17 @@
-const path = require("path");
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+// const path = require("path");
+import path from 'path';
+// const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+// module.exports
 
-module.exports = {
+export default {
     entry: "./frontend/src/index.js",
+    // target: 'node',
     output: {
         path: path.resolve('frontend', 'public'),
-        filename: "bundle.js"
+        publicPath: '/',
+        filename: "bundle.js",
+        // module: true,
     },
     mode: "development",
     module: {
@@ -27,6 +33,9 @@ module.exports = {
               "crypto": false
             }
     },
+    // experiments: {
+    //     outputModule: true, 
+    // },
     plugins: [
         new NodePolyfillPlugin()
     ]

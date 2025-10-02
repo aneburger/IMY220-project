@@ -4,9 +4,18 @@
 /* Ane' Burger 24565068, 33 */
 
 #localGrid {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr, 1fr, 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr, 1fr; */
+    display: flex;
+    flex-direction: column;
+    max-width: 88em;
+    padding-bottom: 21px;
+}
+
+#globalGrid {
+    display: flex;
+    flex-direction: column;
     max-width: 88em;
     padding-bottom: 21px;
 }
@@ -90,7 +99,7 @@ h2 {
     grid-row: 1/2;
 
     display: grid;
-    grid-template-columns: 5em 13em 14em 17em 9em;
+    grid-template-columns: 5em 16em 17em 11em 9em;
     grid-template-rows: 1fr;
     margin-left: 1.5em;
     margin-top: 1.4em;
@@ -99,6 +108,63 @@ h2 {
     width: 58em;
     border-radius: 15px;
 }
+
+
+#localGrid #noActDisplay {
+    text-align: center;
+    margin-top: 7.3em;
+    font-size: 1.5em;
+    color: #90d9fd;
+    font-weight: 340;
+}
+
+#localGrid #noActDisplay span {
+    display: block;
+    font-size: 0.63em;
+    font-weight: 200;
+    color: #ffffff91;
+}
+
+#localGrid #noPersonalActDisplay {
+    text-align: center;
+    margin-top: 5.7em;
+    font-size: 1.5em;
+    color: #90d9fd;
+    font-weight: 340;
+}
+
+#localGrid #noPersonalActDisplay span {
+    display: block;
+    font-size: 0.63em;
+    font-weight: 200;
+    color: #ffffff91;
+}
+
+#globalGrid #noGlobalActDisplay {
+    text-align: center;
+    margin-top: 7.3em;
+    font-size: 1.5em;
+    color: #90d9fd;
+    font-weight: 340;
+}
+
+#globalGrid #noGlobalActDisplay span {
+    display: block;
+    font-size: 0.63em;
+    font-weight: 200;
+    color: #ffffff91;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .actCard2 {
     grid-column: 1/5;
@@ -174,6 +240,18 @@ h2 {
     display: inline-block;
 }
 
+.actCard a p {
+    margin-top: 0.7em;
+}
+
+.actCard a {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    font-size: 1.1em;
+    display: inline-block;
+    text-decoration: none;
+}
+
 .timestamp, .project, .checkedInOut {
     display: inline-block;
 }
@@ -191,14 +269,15 @@ h2 {
     font-size: 1.5em;
     font-weight: 500;
     margin-top: 1em;
-    margin-left: 1.3em;
+    margin-left: 0em;
+    text-align: center;
 }
 
 .checkedInOut {
     grid-column: 4/5;
     grid-row: 1/2;
     margin-top: 1.3em;
-    margin-left: 4em;
+    margin-left: 1em;
 }
 
 .inOut {

@@ -4,18 +4,23 @@
   "main": "frontend/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack && babel backend/server.js -d backend/dist",
+    "build": "webpack && babel backend/server.js backend/database.js -d backend/dist",
     "start": "npm run build && node backend/dist/server.js"
   },
   "author": "33-24565068",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "archiver": "^7.0.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "fuse.js": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.19.0",
+    "multer": "^2.0.2",
     "node-polyfill-webpack-plugin": "^4.1.0",
     "nodemon": "^3.1.10",
     "path": "^0.12.7",
@@ -24,6 +29,8 @@
     "react-dom": "^18.3.1",
     "react-router": "^7.8.1",
     "react-router-dom": "^6.30.1",
+    "tailwindcss": "^4.1.13",
+    "url": "^0.11.4",
     "vm-browserify": "^1.1.2"
   },
   "devDependencies": {

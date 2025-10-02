@@ -2,27 +2,21 @@
 
 import React from "react";
 import '../../public/assets/style/css/singleProject.css';
+import { Link } from "react-router-dom";
 
-const ActivityList = () => {
+const ActivityList = ({ activities }) => {
     return (
         <div id="activityListDiv">
-            <section className="actProjectCard">
-                <p className="actUserName">User_name</p>
-                <p className="actChecked">In</p>
-                <p className="acttimeSt">5 mins ago</p>
-            </section>
-
-            <section className="actProjectCard">
-                <p className="actUserName">User_name</p>
-                <p className="actChecked">In</p>
-                <p className="acttimeSt">7 mins ago</p>
-            </section>
-
-            <section className="actProjectCard">
-                <p className="actUserName">User_name</p>
-                <p className="actChecked">In</p>
-                <p className="acttimeSt">10 mins ago</p>
-            </section>
+            { activities.length === 0 ? (
+                <p>No activity yet.</p>
+            ):(
+            activities.map(act => (
+                <section className="actProjectCard" key={act._id}>
+                    <Link to={`/profile/${act.user}`}><p className="actUserName">{act.user}</p></Link>
+                    <p className="actChecked">{act.action === "checked in" ? "In" : "Out"}</p>
+                    <p className="acttimeSt">{new Date(act.timestamp).toLocaleString()}</p>
+                </section>
+            )))}
         </div>
     );
 }

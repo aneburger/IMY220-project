@@ -6,7 +6,7 @@ import '../../public/assets/style/css/editProfile.css';
 // import '../../public/assets/style/css/profileForm.css';
 import EditProjectForm from "./EditProjectForm";
 
-const EditProject = () => {
+const EditProject = ({ project, onProjectUpdated }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -16,7 +16,7 @@ const EditProject = () => {
     return (
         <div id="editProjectButtonDiv">
             <button onClick={toggle} id="editImg">Edit Project</button>
-            {isOpen && <EditProjectForm onCancel={toggle}/>}
+            {isOpen && <EditProjectForm project={project} onCancel={toggle} onProjectUpdated={onProjectUpdated}/>}
         </div>
     );
 }

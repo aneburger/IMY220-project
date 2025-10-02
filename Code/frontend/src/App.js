@@ -12,11 +12,12 @@ import Profile from "./pages/Profile";
 import SingleProject from "./pages/SingleProject";
 
 const App = () => {
+    const user = localStorage.getItem('user');
+    const userObj = JSON.parse(user);
+    
     return (
         <BrowserRouter>
             <div>
-                {/* <h1>HELLO</h1> */}
-                {/* <Navbar/> */}
                 <Routes>
                     <Route path="/home" element={<Home />} />
                     <Route path="/" element={<Splash />} />
@@ -25,7 +26,6 @@ const App = () => {
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/profile/:userId" element={<Profile />} />
                     <Route path="/project/:projectId" element={<SingleProject />} />
-                    {/* <Route path="/splash" element={<Splash />} /> */}
                 </Routes>
             </div>
         </BrowserRouter>

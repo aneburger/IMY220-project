@@ -60,6 +60,20 @@ const SignUp = () => {
         setErrors(newErrors);
     };
 
+    const handleUsernameBlur = async (e) => {
+        const username = e.target.value;
+        if (!username) return;
+        try {
+            const response = await fetch(`http://localhost:3000/api/check-username/${encodeURIComponent(username)}`);
+            const data = await response.json();
+            if (data.exists) {
+                setErrors(prev => ({ ...prev, username: "Username is already taken." }));
+            }
+        } catch (err) {
+            setErrors(prev => ({ ...prev, username: "Error checking username." }));
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm(formData);
@@ -75,12 +89,18 @@ const SignUp = () => {
                     body: JSON.stringify(formData),
                 });
                 const data = await response.json();
+                if (data.success) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    console.log("User signed up: ", localStorage.getItem('user'));
+                    navigate('/home');
+                } else {
+                    setErrors({ general: data.message });
+                }
                 console.log('Form submitted:', data);
             } catch(err) {
                 console.error("Error in handleSubmit() in SignUp.js", err);
+                setErrors({ general: "Server error. Please try again later." });
             }
-            console.log('Form submitted:', formData);
-            navigate('/home');
         }
     };
 
@@ -98,7 +118,7 @@ const SignUp = () => {
                     <input type="text" name="username" id="username2" placeholder="Username" autoComplete="username"
                             value={formData.username}
                             onChange={handleChange}
-                            onBlur={handleChange}/>
+                            onBlur={handleUsernameBlur}/>
                     {errors.username && <p id="usernameError">{errors.username}</p>}
 
                     <label htmlFor="surname">Surname: *</label>

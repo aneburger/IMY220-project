@@ -6,7 +6,7 @@ import '../../public/assets/style/css/profile.css';
 // import '../../public/assets/style/css/profileForm.css';
 import ProfileForm from "./ProfileForm";
 
-const EditProfile = () => {
+const EditProfile = ({ userObj, onProfileUpdated }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -16,7 +16,7 @@ const EditProfile = () => {
     return (
         <div id="editButtonDiv">
             <button onClick={toggle}>Edit Profile</button>
-            {isOpen && <ProfileForm onCancel={toggle}/>}
+            {isOpen && <ProfileForm userObj={userObj} onCancel={toggle} onProfileUpdated={onProfileUpdated}/>}
         </div>
     );
 }

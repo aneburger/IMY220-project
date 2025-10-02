@@ -1,3 +1,22 @@
+// {
+//   "presets": [
+//     [
+//       "@babel/preset-env",
+//       {
+//         "targets": {
+//           "node": "current"
+//         },
+//         "modules": false // This is the crucial setting
+//       }
+//     ],
+    
+//     "@babel/preset-react"
+//   ]
+// }
+
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
+  "presets": [
+    "@babel/preset-env", 
+    "@babel/preset-react"
+  ]
 }

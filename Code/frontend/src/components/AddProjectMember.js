@@ -5,7 +5,7 @@ import { useState } from "react";
 import MemberForm from "./MemberForm";
 import '../../public/assets/style/css/singleProject.css';
 
-const AddProjectMember = () => {
+const AddProjectMember = ({ projectId, onMemberAdded, members }) => {
     const [isOpen, setIsOpen] = useState(false);
         
     const toggle = () => {
@@ -16,7 +16,7 @@ const AddProjectMember = () => {
     return (
         <div id="addMemberDiv">
             <button onClick={toggle} id="addMain">Add +</button>
-            {isOpen && <MemberForm onCancel={toggle}/>}
+            {isOpen && <MemberForm projectId={projectId} members={members} onCancel={toggle} onMemberAdded={onMemberAdded}/>}
         </div>  
     );
 }

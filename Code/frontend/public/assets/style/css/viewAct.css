@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+
+
+
+
+#viewProjectActDiv {
+  width: 19em;
+  height: 15em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+
+#viewProjectActDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#viewProjectActDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#viewProjectActDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    padding-left: 20px;
+    padding-right: 15px;
+    z-index: 1000;
+
+    width: 61em;
+    height: 24em;
+    border-radius: 15px;
+}
+
+#viewCardButtons {
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+#viewCardButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 0em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#viewCardButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#viewCardButtons #cancel {
+    margin-left: 0.8em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#viewCardButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+
+#viewCard {
+    height: 20em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.viewActCard {
+    display: grid;
+    grid-template-columns: 5em 13em 14em 18em 8em;
+    grid-template-rows: 1fr;
+    margin-left: 1.5em;
+    margin-top: 1.4em;
+    background-color: rgba(255, 255, 255, 0.342);
+    height: 5em;
+    width: 58em;
+    border-radius: 15px;
+}
+
+
+.profileBFeed {
+    display: inline-block;
+    margin-right: 0.7em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.userV {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    font-size: 1.1em;
+    display: inline-block;
+}
+
+.timestampV, .checkMsg, .checkedInOutV {
+    display: inline-block;
+}
+
+.timestampV {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-right: 0em;
+    margin-top: 2em;
+}
+
+.checkMsg {
+    grid-column: 3 / 6;
+    grid-row: 1 / 2;
+    font-size: 1.2em;
+    font-weight: 250;
+    margin-top: 0.9em;
+    margin-left: 1.1em;
+    color: #ffffff9e;
+    border-left: 1px solid white;
+    height: 1.9em;
+    padding-top: 11px;
+    padding-left: 22px;
+}
+
+.checkMsg span {
+    color: #001841;
+    font-weight: 500;
+    margin-left: 1em;
+}
+
+.checkedInOutV {
+    grid-column: 5/6;
+    grid-row: 1/2;
+    margin-top: 1.3em;
+    margin-left: 4em;
+}
+
+.inOutV {
+    color: #4bc2fe;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding-left: 5px;
+}

@@ -142,7 +142,7 @@ select:open::picker-icon {
 .quickL {
     grid-column: 3/4;
     grid-row: 2/6;
-    margin-top: 1.8em;
+    margin-top: 1.2em;
 }
 
 section #quickHdiv {
@@ -197,8 +197,8 @@ section #quickDiv a {
 .quickLink {
     display: inline-block;
     position: absolute;
-    margin-top: 1.2em;
-    margin-left: 1.3em;
+    margin-top: 0em;
+    margin-left: 1.5em;
 }
 
 .quickLink2 {

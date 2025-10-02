@@ -15,6 +15,7 @@
     padding: 8px 10px 8px 10px;
     border-radius: 8px;
     transition: background-color 0.4s ease-in-out;
+    width: 6.4em;
 }
 
 #checkInButtonDiv #checkInB:hover {
@@ -109,12 +110,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 30px;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-right: 15px;
     z-index: 1000;
 
     width: 19.7em;
-    height: 20.2em;
+    height: 19.5em;
     border-radius: 15px;
 }
 
@@ -136,6 +137,7 @@
 
 #checkInProjectFormButtons {
     margin-left: 3em;
+    width: 300px;
 }
 
 #checkInFormDiv #checkInProjectForm #checkInProjectFormButtons button {
@@ -147,7 +149,7 @@
     font-size: 1em;
     font-weight: 500;
     border: 1px solid transparent;
-    margin-left: 0.8em;
+    margin-left: 1.8em;
     margin-top: 0.9em;
     width: 5em;
     transition: background-color 0.4s ease-in-out;
@@ -169,3 +171,9 @@
     cursor: pointer;
     background-color: #ffffff7e;
 }
+
+
+#checkInProjectForm {
+    margin-left: 1.3em;
+}
+

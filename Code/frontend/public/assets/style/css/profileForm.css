@@ -63,7 +63,7 @@
     z-index: 1000;
 
     width: 19em;
-    height: 30em;
+    height: 34em;
     border-radius: 15px;
     overflow-y: scroll;
 }
@@ -101,10 +101,12 @@
 #profileFormButtons {
     display: inline-block;
     margin-left: 1.6em;
+    width: 300px;
+    margin-bottom: 1em;
 }
 
 #profileFormButtons #cancel {
-    margin-left: 1em;
+    margin-left: 0.7em;
     border: 1px solid transparent;
     background-color: #ffffff52;
     color: white;
@@ -129,6 +131,7 @@
 #profileForm input:focus {
     outline: none;
     border: 1px solid white;
+    font-weight: 400;
 }
 
 #profileForm input::placeholder {
@@ -140,4 +143,24 @@
 
 #profileForm input:hover {
     border: 1px solid white;
+}
+
+#profileForm {
+  margin-left: 0em;
+}
+
+
+#profileFormDiv #profileForm #deleteProfileB {
+    margin-left: 2.2em;
+    width: 11.7em;
+    background-color: transparent;
+    font-weight: 300;
+    color: #ffffffb5;
+}
+
+#profileFormDiv #profileForm #deleteProfileB:hover {
+    color: white;
+    background-color: #2ba1dc;
+    border: 1px solid #1e85b9;
+    cursor: pointer;
 }

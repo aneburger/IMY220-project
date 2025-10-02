@@ -55,7 +55,7 @@
     margin-top: 0em;
     margin-bottom: 1em;
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.662);
+    border: 1px solid #ffffffa9;
     border-radius: 0.7em;
     padding: 14px 18px 14px 18px;
     font-family: 'Albert Sans';
@@ -137,20 +137,10 @@
     z-index: 1000;
 
     width: 19.7em;
-    height: 35em;
+    height: 31.5em;
     border-radius: 15px;
 }
 
-/* #editProjectFormDiv #editProjectForm input {
-    background-color: transparent;
-    border: 1px solid #ffffffb2;
-    font-family: 'Albert Sans';
-    font-size: 1em;
-    color: white;
-    border-radius: 7px;
-    padding: 7px;
-    margin-bottom: 1.1em;
-} */
 
 #editProjectFormDiv #editProjectForm input:hover {
     border: 1px solid white;
@@ -168,7 +158,8 @@
 }
 
 #editProjectFormButtons {
-    margin-left: 3em;
+    margin-left: 2.3em;
+    width: 300px;
 }
 
 #editProjectFormDiv #editProjectForm #editProjectFormButtons button {
@@ -201,4 +192,30 @@
 #editProjectFormDiv #editProjectForm #editProjectFormButtons #cancel:hover {
     cursor: pointer;
     background-color: #ffffff7e;
+}
+
+#editProjectForm {
+    margin-left: 0.7em;
+}
+
+
+#editProjectFormDiv #editProjectForm #typeApp {
+    margin-left: 0em;
+    margin-top: 0.2em;
+}
+
+#editProjectFormDiv #editProjectForm #typeApp #typeAppSelect {
+    height: 3.4em;
+    border-radius: 9px;
+    width: 18.6em;
+    border-color: #ffffffa9;
+    padding-left: 14px;
+}
+
+#editProjectFormDiv #editProjectForm p {
+    color: #ff6cf0;
+    font-size: 0.9em;
+    margin-top: 0em;
+    margin-left: 0.4em;
+    width: 18em;
 }

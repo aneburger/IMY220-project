@@ -3,10 +3,10 @@
 import React from "react";
 import '../../public/assets/style/css/singleProject.css';
 
-const DeleteProject = () => {
+const DeleteProject = ({ onDelete }) => {
     return (
         <div id="deleteProjectDiv">
-            <button id="deleteProjectB">Delete Project</button>
+            <button id="deleteProjectB" onClick={onDelete}>Delete Project</button>
         </div>
     );
 }
