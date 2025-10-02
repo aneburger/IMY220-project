@@ -45,10 +45,19 @@ const ProjectView = ({ project, onDelete, loggedInUsername }) => {
                     title={enlarged ? "Click to shrink" : "Click to enlarge"}
                 />
                 <h1>{project.projectName}</h1>
-                <p>{project.description}</p>
+                <div className="desc"><p>{project.description}</p></div>
+                <p id="creation">Created On: {new Date(project.createdOn).toLocaleString()}</p> 
                 <Link to={`/project/${project.projectId || project._id}`}><button id="viewProjectButton">View</button></Link>
                 {isOwner && (
-                    <button id="deleteProjectButton" onClick={handleDelete}>Delete</button>
+                    // <button id="deleteProjectButton" onClick={handleDelete}>Delete</button>
+                    <img
+                        alt="delete"
+                        id="deleteProjectButton"
+                        src="/assets/images/trash.png"
+                        height="25"
+                        onClick={handleDelete}
+                        style={{ cursor: "pointer" }}
+                    />
                 )}
             </article>
         </section>

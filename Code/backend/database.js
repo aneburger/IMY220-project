@@ -126,6 +126,7 @@ async function insertData() {
 
 
 
+
 async function getUser(userN) {
     try {
         await client.connect();

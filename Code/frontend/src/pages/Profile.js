@@ -212,10 +212,10 @@ const Profile = () => {
                     <>
                         <div id="sortE2">
                             <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)}>
-                                <option value="sort">Sort</option>
-                                <option value="option1">Most popular</option>
-                                <option value="option2">Newest to oldest</option>
-                                <option value="option3">Oldest to newest</option>
+                                <option value="">Sort</option>
+                                <option value="Alphabetically">Alphabetically</option>
+                                <option value="Newest to oldest">Newest to oldest</option>
+                                <option value="Oldest to newest">Oldest to newest</option>
                             </select>
                         </div>
                     </>
@@ -232,7 +232,7 @@ const Profile = () => {
                 <div id="projectFeedDiv">
                     <div>
                          {(isOwnProfile || isFriend)
-                            ? <ProjectsList projects={projects}/>
+                            ? <ProjectsList projects={projects} sort={sort}/>
                             : <p id="notFriendMessage">Connect with {userData.username} to view their projects! <span id="clickOn">(Click on the 'Connect' button to send a friend request)</span></p>
                         }
                     </div>
