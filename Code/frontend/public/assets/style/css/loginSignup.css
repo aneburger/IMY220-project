@@ -4,7 +4,7 @@
 /* Ane' Burger 24565068, 33 */
 
 .loginBody {
-    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-image: url('../../images/Splashpagebackground.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -15,7 +15,7 @@
 }
 
 .signupBody {
-    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-image: url('../../images/Splashpagebackground.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

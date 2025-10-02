@@ -15,7 +15,7 @@ html, body {
 }
 
 .splashBody {
-    background-image: url('/frontend/public/assets/images/Splashpagebackground.png');
+    background-image: url('../../images/Splashpagebackground.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
