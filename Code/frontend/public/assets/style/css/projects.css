@@ -148,6 +148,7 @@
     margin-left: 0.4em;
 
     grid-column: 2/3;
+    grid-row: 1/2;
 }
 
 .projectCard p {
@@ -170,10 +171,10 @@
 #creation {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    position: absolute;
     width: 20em;
-    margin-left: 7.65em;
+    margin-left: 0.6em;
     margin-top: 4em;
+    text-align: left;
 }
 
 .desc {
