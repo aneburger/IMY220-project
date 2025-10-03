@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+
+
+#loveFormDiv {
+  width: 19em;
+  height: 15em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#loveFormDiv input {
+    display: inline-block;
+    width: 12em;
+    margin-top: 0em;
+    margin-bottom: 0.7em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+}
+
+
+#loveFormDiv input:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#loveFormDiv input::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: #ffffffb9;
+    font-weight: 400;
+}
+
+#loveFormDiv input:hover {
+    border: 1px solid white;
+}
+
+#loveFormDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#loveFormDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#loveFormDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    padding-left: 10px;
+    z-index: 1000;
+
+    width: 19.7em;
+    min-height: 8em;
+    max-height: 9.4em;
+    border-radius: 15px;
+}
+
+#addLang {
+    display: inline-block;
+    background-color: #0b9fe9c4;
+    color: white;
+    border-radius: 7px;
+    padding: 11px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 400;
+    border: 1px solid transparent;
+    margin-left: 0.5em;
+    margin-top: 0.7em;
+    width: 4.1em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#loveFormButtons {
+    margin-left: 5em;
+}
+
+#loveFormButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 0.9em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#loveFormButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#loveFormButtons #cancel {
+    margin-left: 0.8em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#loveFormButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+
+#loveForm {
+    margin-left: 2em;
+    margin-right: 0em;
+    width: 20.2em;
+}
+
+#loveForm p {
+    font-size: 0.9em;
+    margin-top: 0em;
+    margin-left: 0.2em;
+    color: #ff6cf0;
+}
+

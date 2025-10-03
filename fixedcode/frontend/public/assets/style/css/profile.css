@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+.profileBody {
+    background-color: #001841;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-top: 7em;
+}
+
+#profileGrid {
+    display: grid;
+    max-width: 78em;
+    grid-template-columns: 32em 19em 12em 15em;
+    grid-template-rows: 7em 5.6em 10em 13.8em 4.4em 10em 10em 10em;
+    margin: auto;
+    margin-top: 5em;
+}
+
+#profileHead {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-top: 0.4em;
+}
+
+#editButtonDiv {
+    grid-column: 4/5;
+    grid-row: 4/5;
+    margin-top: 11.8em;
+}
+
+#logoutDiv {
+    grid-column: 4/5;
+    grid-row: 4/6;
+    margin-top: 14.4em;
+}
+
+#tagCloudDiv {
+    grid-column: 4/5;
+    grid-row: 5/7;
+    margin-top: 3em;
+}
+
+#tagCloudDiv h1 {
+    font-family: 'Albert Sans';
+    font-size: 2.3em;
+    margin-left: 1.7em;
+    color: white;
+    font-weight: 400;
+}
+
+#tagCloudDiv p {
+    display: inline-block;
+    background-color: white;
+    color: #2c333f;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 0em;
+    margin-left: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+#tagCloudDiv .addHash {
+    background-color: #ffffff6b;
+    color: #ffffffa3;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#tagCloudDiv .addHash:hover {
+    background-color: white;
+    color: #2c333f;
+    cursor: pointer;
+}
+
+#editButtonDiv button {
+    background-color: #ffffff87;
+    color: white;
+    border: 1px solid #ffffff87;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    width: 13em;
+    padding: 5px 5px 5px 5px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#editButtonDiv button:hover {
+    background-color: #ffffff98;
+    cursor: pointer;
+}
+
+
+#logoutDiv button {
+    background-color: transparent;
+    color: #ffffff98;
+    border: 1px solid #ffffff98;
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    width: 13em;
+    padding: 5px 5px 5px 5px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#logoutDiv button:hover {
+    background-color: #2ba1dc;
+    color: white;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+#profileCreateProject {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-top: 3.1em;
+    margin-left: 11.7em;
+}
+
+#projectsHead {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin-top: 1em;
+}
+
+#activityHead {
+    grid-column: 1/2;
+    grid-row: 6/7;
+}
+
+#yearFilter {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin-left: 11.5em;
+    margin-top: 3.1em;
+}
+
+#sortE2 {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    margin-left: 20.8em;
+    margin-top: 3.1em;
+}
+
+#profileGrid #tempSection {
+    grid-column: 4 / 5;
+}
+
+#projectFeedDiv {
+    grid-column: 1/4;
+    grid-row: 3/5;
+    width: 61em;
+    height: 25em;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-top: 1.4em;
+    overflow-y: scroll;
+}
+
+#projectFeedDiv div {
+    margin-left: 0.7em;
+    margin-bottom: 2.6em;
+}
+
+#activityFeedDiv {
+    grid-column: 1/4;
+    grid-row: 6/9;
+    width: 61em;
+    height: 21em;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-top: 5.8em;
+    overflow-y: scroll;
+}
+
+select {
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    font-weight: 300;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 5px 10px 5px 4px;
+    border-radius: 7px;
+    color: white;
+    width: 130px;
+}
+
+select option {
+    background-color: rgba(255, 255, 255, 0.544);
+    color: #001841;
+    font-weight: 500;
+    border-radius: 7px;
+    font-size: 0.8em;
+    transition: background-color 0.4s ease;
+}
+
+select option:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+select option:focus {
+    background-color: white;
+    cursor: pointer;
+}
+
+.reposLink, .friendsLink {
+    font-family: 'Albert Sans';
+    color: white;
+    height: 1em;
+    font-size: 1.2em;
+    font-weight: 400;
+    padding-bottom: 9px;
+    border-bottom: 1px solid transparent;
+    margin-top: 2.5em;
+    margin-left: 3em;
+    transition: border-color 0.4s ease;
+}
+
+.reposLink:hover, .friendsLink:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+.reposLink {
+    margin-left: 9.9em;
+    width: 5.8em;
+}
+
+.friendsLink {
+    width: 3.5em;
+    grid-column: 3/4;
+}
+
+#profileGrid a {
+    text-decoration: none;
+}
+
+#profileB2 {
+    margin-right: 0em;
+    margin-left: 2.2em;
+    margin-top: 3em;
+    padding-bottom: 5px;
+}
+
+.infoCard {
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    color: #ffffffb7;
+    /* border-bottom: 1px solid #ffffff52; */
+    border-bottom: 1px solid transparent;
+    padding-bottom: 7px;
+    padding-left: 1.4em;
+    font-weight: 400;
+    margin-left: 0em;
+    margin-top: 1em;
+
+    grid-column: 4/5;
+    grid-row: 1/3;
+    width: 12.4em;
+    background-color: #1f314f;
+    border: 1px solid #ffffff52;
+    border-radius: 15px;
+    min-height: 16.8em;
+    padding-right: 14px;
+}
+
+.infoCard p {
+    font-size: 1em;
+    margin-bottom: 22px;
+}
+
+.infoCard p span {
+    font-size: 0.9em;
+    color: #63cbff;
+    font-weight: 500;
+    padding-left: 7px;
+}
+ 
+
+#projectFeedDiv div #notFriendMessage {
+    text-align: center;
+    margin-top: 7.3em;
+    font-size: 1.5em;
+    color: #90d9fd;
+    font-weight: 340;
+}
+
+#projectFeedDiv div #notFriendMessage #clickOn {
+    display: block;
+    font-size: 0.63em;
+    font-weight: 200;
+    color: #ffffff91;
+}
+
+
+
+
+
+#notifsListDiv {
+  width: 19em;
+  height: 15em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#notifsListDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#notifsListDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#notifsListDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    padding-left: 35px;
+    padding-right: 30px;
+    z-index: 1000;
+
+    width: 21.7em;
+    height: 9.8em;
+    border-radius: 15px;
+    overflow-y: scroll;
+    max-height: 13em;
+}
+
+#notifsListDiv .friendReq {
+    font-family: 'Albert Sans';
+    color: white;
+    font-weight: 400;
+    margin-top: 0em;
+    border-bottom: 0.0001em solid white;
+    padding-bottom: 14px;
+    padding-left: 2.3em;
+    font-size: 1.7em;
+}
+
+#notifsListDiv .friendReqCard {
+    margin-bottom: 0.6em;
+    border-bottom: 1px solid #ffffff61;
+    padding-bottom: 16px;
+}
+
+#notifsListDiv .friendReqCard p {
+    display: inline-block;
+    margin-top: 0.2em;
+    font-size: 1.05em;
+    margin-bottom: 0em;
+}
+
+
+#notifsButtons {
+    margin-left: 3em;
+}
+
+#notifsButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 0.9em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#notifsButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#notifsButtons .reject {
+    margin-left: 0.8em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#notifsButtons .reject:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+
+#notifsListDiv .friendReqCard #notifsButtons {
+    /* display: inline-block; */
+    margin-left: 0em;
+    float: inline-end;
+}
+
+#notifsListDiv .friendReqCard #notifsButtons button {
+    font-size: 0.8em;
+    height: 2.3em;
+    padding-top: 6px;
+    margin-top: 0em;
+}
+
+
+
+
+
+#profileGrid .connectedLink {
+    background-color: #4eb4e7a8;
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.2em;
+    padding: 5px 8px 5px 8px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    margin-left: 9.6em;
+    margin-top: 2.1em;
+}
+
+#profileGrid #notifsListDiv p {
+    color: #5ec3f5;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+
+#profileGrid #notifsListDiv #cancel {
+    background: transparent;
+    color: #ffffffb8;
+    font-size: 1em;
+    font-family: 'Albert Sans';
+    border: 1px solid #ffffffb8;
+    border-radius: 5px;
+    padding: 5px 9px 5px 9px;
+    font-weight: 300;
+    margin-top: 1em;
+}
+
+#profileGrid #notifsListDiv #cancel:hover {
+    background: transparent;
+    color: white;
+    font-size: 1em;
+    font-family: 'Albert Sans';
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 9px 5px 9px;
+    font-weight: 300;
+    cursor: pointer;
+}

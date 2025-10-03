@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+
+#profileFormDiv {
+  width: 19em;
+  height: 26em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#profileFormDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#profileFormDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#profileFormDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    padding-left: 40px;
+    z-index: 1000;
+
+    width: 19em;
+    height: 34em;
+    border-radius: 15px;
+    overflow-y: scroll;
+}
+
+#profileForm input {
+    display: block;
+    width: 18.5em;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+}
+
+#profileFormButtons button {
+    width: 5.5em;
+    background-color: #ffffffb9;
+    color: #001841;
+    font-weight: 400;
+    margin-left: 0.8em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#profileFormButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffd7;
+}
+
+#profileFormButtons {
+    display: inline-block;
+    margin-left: 1.6em;
+    width: 300px;
+    margin-bottom: 1em;
+}
+
+#profileFormButtons #cancel {
+    margin-left: 0.7em;
+    border: 1px solid transparent;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#profileFormButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+#profileForm #imgProfileUpload::file-selector-button {
+    background-color: #2ba1dc;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    padding: 8px;
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+}
+
+#profileForm input:focus {
+    outline: none;
+    border: 1px solid white;
+    font-weight: 400;
+}
+
+#profileForm input::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: #ffffffb9;
+    font-weight: 400;
+}
+
+#profileForm input:hover {
+    border: 1px solid white;
+}
+
+#profileForm {
+  margin-left: 0em;
+}
+
+
+#profileFormDiv #profileForm #deleteProfileB {
+    margin-left: 2.2em;
+    width: 11.7em;
+    background-color: transparent;
+    font-weight: 300;
+    color: #ffffffb5;
+}
+
+#profileFormDiv #profileForm #deleteProfileB:hover {
+    color: white;
+    background-color: #2ba1dc;
+    border: 1px solid #1e85b9;
+    cursor: pointer;
+}

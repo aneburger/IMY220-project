@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+
+
+#checkInButtonDiv #checkInB {
+    background-color: #ffffff52;
+    color: white;
+    border: 1px solid #ffffff8e;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 400;
+    padding: 8px 10px 8px 10px;
+    border-radius: 8px;
+    transition: background-color 0.4s ease-in-out;
+    width: 6.4em;
+}
+
+#checkInButtonDiv #checkInB:hover {
+    background-color: #ffffff7f;
+    cursor: pointer;
+}
+
+#checkInFormDiv {
+  width: 19em;
+  height: 15em;
+  margin: auto;
+  margin-top: 0em;
+  background: #36455f7d;
+  backdrop-filter: blur(23px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#checkInFormDiv #checkInProjectForm input {
+    display: inline-block;
+    width: 17em;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    transition: border-color 0.4s ease-in-out;
+    /* padding: 6px; */
+}
+
+#checkInProjectForm label {
+    margin-bottom: 0.7em;
+}
+
+#checkInProjectForm #imgUpload::file-selector-button {
+    background-color: #2ba1dc;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #178cc7;
+    padding: 8px;
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+}
+
+#checkInFormDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#checkInFormDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+
+#checkInFormDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    padding-left: 20px;
+    padding-right: 15px;
+    z-index: 1000;
+
+    width: 19.7em;
+    height: 19.5em;
+    border-radius: 15px;
+}
+
+
+#checkInFormDiv #checkInProjectForm input:hover {
+    border: 1px solid white;
+}
+
+#checkInFormDiv #checkInProjectForm input:focus {
+    border: 1px solid white;
+    outline: none;
+}
+
+#checkInFormDiv #checkInProjectForm input::placeholder {
+    color: #ffffffc1;
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+#checkInProjectFormButtons {
+    margin-left: 3em;
+    width: 300px;
+}
+
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 1.8em;
+    margin-top: 0.9em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons #cancel {
+    margin-left: 0.8em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#checkInFormDiv #checkInProjectForm #checkInProjectFormButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+
+#checkInProjectForm {
+    margin-left: 1.3em;
+}
+
