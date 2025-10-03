@@ -31,20 +31,20 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; } /* Ane' Burger 24565068, 33 */
 var app = (0, _express["default"])();
 var port = 3000;
+var _filename = (0, _url.fileURLToPath)(import.meta.url);
+var _dirname = _path["default"].dirname(_filename);
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+// const __dirname = path.resolve();
 
-var _dirname = _path["default"].resolve();
 app.use((0, _cors["default"])());
 app.use(_express["default"].urlencoded({
   extended: false
 }));
 app.use(_express["default"].json());
-app.use(_express["default"]["static"](_path["default"].join(_dirname, 'frontend', 'public')));
 
-// app.use(express.static(path.join(__dirname, "../../frontend/public")));
+// app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
+app.use(_express["default"]["static"](_path["default"].join(_dirname, "../../frontend/public")));
 var storage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
     cb(null, _path["default"].join(_dirname, 'frontend', 'public', 'assets', 'images'));
@@ -1772,14 +1772,13 @@ app["delete"]('/api/profile/:userId', /*#__PURE__*/function () {
 //     res.sendFile(path.resolve('frontend', 'public', 'index.html'));
 // });
 
-app.get(/^\/(?!api).*/, function (req, res) {
-  res.sendFile(_path["default"].resolve('frontend', 'public', 'index.html'));
-});
-
-// app.get("/*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
+// app.get(/^\/(?!api).*/, (req, res) => {
+//   res.sendFile(path.resolve('frontend', 'public', 'index.html'));
 // });
 
+app.get("/*", function (req, res) {
+  res.sendFile(_path["default"].join(_dirname, "../../frontend/public", "index.html"));
+});
 app.listen(port, function () {
   console.log("Listening on http://localhost:".concat(port));
 });

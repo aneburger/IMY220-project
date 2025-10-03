@@ -17,18 +17,18 @@ const app = express();
 const port = 3000;
 
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
+// app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
-// app.use(express.static(path.join(__dirname, "../../frontend/public")));
+app.use(express.static(path.join(__dirname, "../../frontend/public")));
 
 
 const storage = multer.diskStorage({
@@ -757,13 +757,13 @@ app.delete('/api/profile/:userId', async (req, res) => {
 //     res.sendFile(path.resolve('frontend', 'public', 'index.html'));
 // });
 
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.resolve('frontend', 'public', 'index.html'));
-});
-
-// app.get("/*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
+// app.get(/^\/(?!api).*/, (req, res) => {
+//   res.sendFile(path.resolve('frontend', 'public', 'index.html'));
 // });
+
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
+});
 
 
 app.listen(port, () => {

@@ -8,8 +8,8 @@ export default {
     entry: "./frontend/src/index.js",
     // target: 'node',
     output: {
-        path: path.resolve('frontend', 'public'),
-        publicPath: '/',
+        path: path.resolve('./frontend', 'public'),
+        // publicPath: '/',
         filename: "bundle.js",
         // module: true,
     },
@@ -25,7 +25,12 @@ export default {
         {
             test: /\.css$/,
             use: ["style-loader", "css-loader"],
-      },]
+        },
+        {
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            type: 'asset/resource',
+        }
+    ]
     },
     resolve: {
             fallback: {

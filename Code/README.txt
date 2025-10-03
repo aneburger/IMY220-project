@@ -1,4 +1,4 @@
-IMY220 - Project D1
+IMY220 - Project
 Ané Burger - 24565068
 
 GitHub repository URL:
