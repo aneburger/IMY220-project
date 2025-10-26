@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+
+#searchResultsListDiv {
+  width: 19em;
+  height: 26em;
+  margin: auto;
+  margin-top: 0em;
+  background: rgba(255, 255, 255, 0.111);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.149),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 1px rgba(255, 255, 255, 0.234);
+  position: fixed;
+  overflow: hidden;
+}
+
+#searchResultsListDiv::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+#searchResultsListDiv::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#searchResultsListDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    padding-left: 40px;
+    z-index: 1000;
+
+    width: 35em;
+    height: 17em;
+    border-radius: 15px;
+    padding-top: 20px;
+}
+
+#resultsButtons {
+    margin-left: 12.8em;
+    margin-top: 0.3em;
+}
+
+#resultsButtons button {
+    background-color: #ffffffc0;
+    color: #001841;
+    border-radius: 7px;
+    padding: 7px;
+    font-family: 'Albert Sans';
+    font-size: 1em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    margin-left: 0.8em;
+    margin-top: 0.9em;
+    width: 5em;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#resultsButtons button:hover {
+    cursor: pointer;
+    background-color: #ffffffe6;
+}
+
+#resultsButtons #cancel {
+    margin-left: 1em;
+    background-color: #ffffff52;
+    color: white;
+    font-weight: 400;
+}
+
+#resultsButtons #cancel:hover {
+    cursor: pointer;
+    background-color: #ffffff7e;
+}
+
+#resultsList {
+    border: 1px solid #ffffffbe;
+    border-radius: 15px;
+    height: 10.2em;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+#searchResultsListDiv #resultsList .hashProjectCard h1 {
+    font-family: 'Albert Sans';
+    color: white;
+    font-weight: 550;
+    font-size: 1.2em;
+    margin-left: 1em;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard p {
+    background-color: transparent;
+    color: white;
+    font-weight: 300;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-left: 0.4em;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard p span {
+    color: #71ccf9;
+    font-weight: 450;
+    margin-left: 0.4em;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard button {
+    background-color: transparent;
+    border: 1px solid #ffffffca;
+    border-radius: 5px;
+    color: #ffffffca;
+    font-family: 'Albert Sans';
+    padding: 3px 10px 4px 10px;
+    font-size: 1em;
+    font-weight: 300;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard button:hover {
+    background-color: #0b9fe9c4;
+    border: 1px solid #0b9fe9c4;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard div button {
+    margin-top: 1em;
+    margin-left: 0.6em;
+}
+
+.hashProjectCard {
+    display: grid;
+    grid-template-columns: 13em 15.3em 5em;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid #ffffff75;
+    margin-bottom: 0.3em;
+}
+
+#searchResultsListDiv h2 {
+    margin-top: 0em;
+    font-weight: 300;
+    text-align: center;
+}
+
+#searchResultsListDiv h2 span {
+    color: #82d5ff;
+    font-weight: 350;
+}
+
+#searchResultsListDiv #resultsList .hashProjectCard p a {
+    text-decoration: none;
+}
+
+
+.userProjectCard {
+    display: grid;
+    grid-template-columns: 5em 12em 16.3em;
+    grid-template-rows: 1fr;
+    border-bottom: 1px solid #ffffff75;
+    margin-bottom: 0.3em;
+}
+
+
+#searchResultsListDiv #resultsList .userProjectCard h1 {
+    font-family: 'Albert Sans';
+    color: #71ccf9;
+    font-weight: 550;
+    font-size: 1.2em;
+    margin-left: 1em;
+    margin-top: 0.5em;
+}
+
+#searchResultsListDiv #resultsList .userProjectCard p {
+    background-color: transparent;
+    color: white;
+    font-weight: 300;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-left: 0.4em;
+}
+
+#searchResultsListDiv #resultsList .userProjectCard p span {
+    color: #71ccf9;
+    font-weight: 450;
+    margin-left: 0.4em;
+}
+
+#searchResultsListDiv #resultsList .userProjectCard a {
+    text-decoration: underline;
+    color: #71ccf9;
+    cursor: pointer;
+}
+
+
+#resultsList .userProjectCard .profileBFeed {
+    margin-top: 0em;
+}

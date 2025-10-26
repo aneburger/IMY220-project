@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap'); /* Albert Sans */
+@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap'); /* Borel */
+
+/* Ane' Burger 24565068, 33 */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 12em;
+    background-color: #001841;
+    z-index: 2;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 10em; */
+}
+
+#commitedLogo {
+    margin-top: 3em;
+    margin-left: 4em;
+    height: 4.1em;
+}
+
+.active-link {
+    border-bottom: 1px solid white;
+    transition: border-color 0.4s ease;
+}
+
+#searchDiv {
+    align-self: flex-end;
+}
+
+#searchBarDiv {
+    align-self: flex-end;
+}
+
+#search {
+    margin-right: 0em;
+    width: 20em;
+    margin-top: 1.5em;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.662);
+    border-radius: 0.7em;
+    padding: 14px 18px 14px 18px;
+    font-family: 'Albert Sans';
+    font-size: 0.85em;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+}
+
+#searchBarDiv label {
+    margin-right: 0.8em;
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+#search:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+#search:hover {
+    border: 1px solid white;
+}
+
+#search::placeholder {
+    font-family: 'Albert Sans';
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.622);
+    font-weight: 200;
+}
+
+#homeNav, #projectsNav {
+    font-family: 'Albert Sans';
+    color: white;
+    font-size: 1.4em;
+    font-weight: 400;
+    padding-bottom: 5px;
+    transition: border-color 0.4s ease;
+}
+
+#homeNav {
+    margin-right: 4em;
+    /* border-bottom: 1px solid transparent; */
+}
+
+#projectsNav {
+    margin-right: 5em;
+    /* border-bottom: 1px solid transparent; */
+}
+
+#profileB {
+    align-self: flex-end;
+    position: relative;
+    margin-right: 4em;
+    margin-top: 3em;
+    padding-bottom: 5px;
+}
+
+/* #profileB:hover {
+    cursor: pointer;
+} */
+
+#profileNav {
+    position: absolute;
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-top: 5em;
+    font-family: 'Albert Sans';
+    /* border-bottom: 1px solid transparent; */
+    color: white;
+    font-size: 1.4em;
+    font-weight: 200;
+    transition: border-color 0.4s ease;
+}
+
+#profileNav:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+#homeNav:hover, #projectsNav:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+nav a {
+    text-decoration: none;
+}
