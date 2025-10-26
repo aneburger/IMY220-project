@@ -5,7 +5,7 @@ import { useState } from "react";
 import '../../public/assets/style/css/editProfile.css';
 import ProjectImageUpload from "./ProjectImageUpload";
 
-const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
+const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }) => {
     const [ownerInput, setOwnerInput] = useState(project.owner);
     const [ownerError, setOwnerError] = useState("");
     const [formData, setFormData] = useState({
@@ -21,6 +21,9 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    const requestingUsername = requestingUser || (loggedInUser ? loggedInUser.username : null);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (ownerError) return;
@@ -33,7 +36,8 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         newOwnerUsername: ownerInput,
-                        previousOwnerUsername: project.owner
+                        previousOwnerUsername: project.owner,
+                        requestingUser: requestingUsername
                     })
                 });
                 const ownerData = await ownerResponse.json();
@@ -53,7 +57,7 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
             const response = await fetch(`http://localhost:3000/api/project/${project._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, owner: ownerInput })
+                body: JSON.stringify({ ...formData, owner: ownerInput, requestingUser: requestingUsername })
             });
             const data = await response.json();
             if (data.success) {

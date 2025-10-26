@@ -9,6 +9,8 @@ exports.addDiscussionMessage = addDiscussionMessage;
 exports.addProject = addProject;
 exports.addProjectMember = addProjectMember;
 exports.addUser = addUser;
+exports.canModifyProject = canModifyProject;
+exports.canModifyUser = canModifyUser;
 exports.changeProjectOwner = changeProjectOwner;
 exports.checkInProject = checkInProject;
 exports.checkOutProject = checkOutProject;
@@ -518,7 +520,7 @@ function updateUser(_x22, _x23) {
 }
 function _updateUser() {
   _updateUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(userId, updateFields) {
-    var updatedUser, _t9;
+    var user, oldUsername, newUsername, updatedUser, _t9;
     return _regenerator().w(function (_context0) {
       while (1) switch (_context0.p = _context0.n) {
         case 0:
@@ -527,28 +529,151 @@ function _updateUser() {
           return client.connect();
         case 1:
           _context0.n = 2;
+          return userCollection.findOne({
+            _id: new _mongodb.ObjectId(userId)
+          });
+        case 2:
+          user = _context0.v;
+          if (user) {
+            _context0.n = 3;
+            break;
+          }
+          throw new Error("User not found");
+        case 3:
+          oldUsername = user.username;
+          newUsername = updateFields.username;
+          if (!(newUsername && newUsername !== oldUsername)) {
+            _context0.n = 14;
+            break;
+          }
+          _context0.n = 4;
           return userCollection.updateOne({
             _id: new _mongodb.ObjectId(userId)
           }, {
             $set: updateFields
           });
-        case 2:
-          _context0.n = 3;
+        case 4:
+          _context0.n = 5;
+          return projectCollection.updateMany({
+            owner: oldUsername
+          }, {
+            $set: {
+              owner: newUsername
+            }
+          });
+        case 5:
+          _context0.n = 6;
+          return projectCollection.updateMany({
+            members: oldUsername
+          }, {
+            $set: {
+              "members.$[elem]": newUsername
+            }
+          }, {
+            arrayFilters: [{
+              elem: oldUsername
+            }]
+          });
+        case 6:
+          _context0.n = 7;
+          return projectCollection.updateMany({
+            checkedOutBy: oldUsername
+          }, {
+            $set: {
+              checkedOutBy: newUsername
+            }
+          });
+        case 7:
+          _context0.n = 8;
+          return activityCollection.updateMany({
+            user: oldUsername
+          }, {
+            $set: {
+              user: newUsername
+            }
+          });
+        case 8:
+          _context0.n = 9;
+          return activityCollection.updateMany({
+            members: oldUsername
+          }, {
+            $set: {
+              "members.$[elem]": newUsername
+            }
+          }, {
+            arrayFilters: [{
+              elem: oldUsername
+            }]
+          });
+        case 9:
+          _context0.n = 10;
+          return discussionCollection.updateMany({
+            sender: oldUsername
+          }, {
+            $set: {
+              sender: newUsername
+            }
+          });
+        case 10:
+          _context0.n = 11;
+          return userCollection.updateMany({
+            friends: oldUsername
+          }, {
+            $addToSet: {
+              friends: newUsername
+            }
+          });
+        case 11:
+          _context0.n = 12;
+          return userCollection.updateMany({
+            friendRequests: oldUsername
+          }, {
+            $addToSet: {
+              friendRequests: newUsername
+            }
+          });
+        case 12:
+          _context0.n = 13;
+          return userCollection.updateMany({
+            sentRequests: oldUsername
+          }, {
+            $addToSet: {
+              sentRequests: newUsername
+            }
+          });
+        case 13:
+          _context0.n = 14;
+          return userCollection.updateMany({}, {
+            $pull: {
+              friends: oldUsername,
+              friendRequests: oldUsername,
+              sentRequests: oldUsername
+            }
+          });
+        case 14:
+          _context0.n = 15;
+          return userCollection.updateOne({
+            _id: new _mongodb.ObjectId(userId)
+          }, {
+            $set: updateFields
+          });
+        case 15:
+          _context0.n = 16;
           return userCollection.findOne({
             _id: new _mongodb.ObjectId(userId)
           });
-        case 3:
+        case 16:
           updatedUser = _context0.v;
           return _context0.a(2, updatedUser);
-        case 4:
-          _context0.p = 4;
+        case 17:
+          _context0.p = 17;
           _t9 = _context0.v;
           console.error("Error updating user:", _t9);
           throw _t9;
-        case 5:
+        case 18:
           return _context0.a(2);
       }
-    }, _callee0, null, [[0, 4]]);
+    }, _callee0, null, [[0, 17]]);
   }));
   return _updateUser.apply(this, arguments);
 }
@@ -1990,4 +2115,114 @@ function _fuzzySearchHashtags() {
     }, _callee34);
   }));
   return _fuzzySearchHashtags.apply(this, arguments);
+}
+function canModifyProject(_x69, _x70) {
+  return _canModifyProject.apply(this, arguments);
+}
+function _canModifyProject() {
+  _canModifyProject = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee35(requestingUsername, projectId) {
+    var reqUser, project;
+    return _regenerator().w(function (_context35) {
+      while (1) switch (_context35.n) {
+        case 0:
+          if (requestingUsername) {
+            _context35.n = 1;
+            break;
+          }
+          return _context35.a(2, false);
+        case 1:
+          _context35.n = 2;
+          return getUser(requestingUsername);
+        case 2:
+          reqUser = _context35.v;
+          if (!(reqUser && reqUser.role === 'admin')) {
+            _context35.n = 3;
+            break;
+          }
+          return _context35.a(2, true);
+        case 3:
+          _context35.n = 4;
+          return getProjectById(projectId);
+        case 4:
+          project = _context35.v;
+          if (project) {
+            _context35.n = 5;
+            break;
+          }
+          return _context35.a(2, false);
+        case 5:
+          return _context35.a(2, project.owner === requestingUsername);
+      }
+    }, _callee35);
+  }));
+  return _canModifyProject.apply(this, arguments);
+}
+function canModifyUser(_x71, _x72) {
+  return _canModifyUser.apply(this, arguments);
+}
+function _canModifyUser() {
+  _canModifyUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee36(requestingUsername, targetUserIdOrUsername) {
+    var reqUser, targetUser, _t29;
+    return _regenerator().w(function (_context36) {
+      while (1) switch (_context36.p = _context36.n) {
+        case 0:
+          _context36.p = 0;
+          _context36.n = 1;
+          return client.connect();
+        case 1:
+          if (requestingUsername) {
+            _context36.n = 2;
+            break;
+          }
+          return _context36.a(2, false);
+        case 2:
+          _context36.n = 3;
+          return userCollection.findOne({
+            username: requestingUsername
+          });
+        case 3:
+          reqUser = _context36.v;
+          if (!((reqUser === null || reqUser === void 0 ? void 0 : reqUser.role) === 'admin')) {
+            _context36.n = 4;
+            break;
+          }
+          return _context36.a(2, true);
+        case 4:
+          targetUser = null;
+          if (!/^[a-fA-F0-9]{24}$/.test(targetUserIdOrUsername)) {
+            _context36.n = 6;
+            break;
+          }
+          _context36.n = 5;
+          return userCollection.findOne({
+            _id: new _mongodb.ObjectId(targetUserIdOrUsername)
+          });
+        case 5:
+          targetUser = _context36.v;
+          _context36.n = 8;
+          break;
+        case 6:
+          _context36.n = 7;
+          return userCollection.findOne({
+            username: targetUserIdOrUsername
+          });
+        case 7:
+          targetUser = _context36.v;
+        case 8:
+          if (targetUser) {
+            _context36.n = 9;
+            break;
+          }
+          return _context36.a(2, false);
+        case 9:
+          return _context36.a(2, targetUser.username === requestingUsername);
+        case 10:
+          _context36.p = 10;
+          _t29 = _context36.v;
+          console.error("canModifyUser error:", _t29);
+          return _context36.a(2, false);
+      }
+    }, _callee36, null, [[0, 10]]);
+  }));
+  return _canModifyUser.apply(this, arguments);
 }

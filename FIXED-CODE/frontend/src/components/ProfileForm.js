@@ -15,7 +15,8 @@ const ProfileForm = ({ userObj, onCancel, onProfileUpdated, onImageUploaded }) =
         bio: userObj.bio || "",
         socials: userObj.socials || "",
         friends: userObj.friends || "",
-        image: userObj.image || ""
+        image: userObj.image || "",
+        
     });
     const navigate = useNavigate();
 
@@ -26,13 +27,24 @@ const ProfileForm = ({ userObj, onCancel, onProfileUpdated, onImageUploaded }) =
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        const payload = {
+            username: formData.username,
+            birthday: formData.birthday,
+            occupation: formData.occupation,
+            bio: formData.bio,
+            socials: formData.socials,
+            image: formData.image,
+            requestingUser: currentUser?.username
+        };
+        console.log("Submitting profile update with formData:", payload);
         try {
             const { _id, ...updateData } = formData;
             console.log("Submitting profile update with formData:", updateData);
             const response = await fetch(`http://localhost:3000/api/profile/${userObj._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updateData)
+                body: JSON.stringify(payload)
             });
             const data = await response.json();
             if(data.success) {
@@ -56,7 +68,8 @@ const ProfileForm = ({ userObj, onCancel, onProfileUpdated, onImageUploaded }) =
             return;
         }
         try {
-            const response = await fetch(`http://localhost:3000/api/profile/${userObj._id}`, {
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            const response = await fetch(`http://localhost:3000/api/profile/${userObj._id}?requestingUser=${encodeURIComponent(currentUser?.username || "")}`, {
                 method: "DELETE"
             });
             const data = await response.json();

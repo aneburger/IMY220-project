@@ -194,29 +194,46 @@ section #quickDiv a {
     border-bottom: 1px solid #ffffff71;
 }
 
+
+#quickDiv span {
+    font-family: 'Albert Sans';
+    font-size: 1.1em;
+    color: #ffffffb7;
+    /* border-bottom: 1px solid #ffffff52; */
+    border-bottom: 1px solid transparent;
+    padding-bottom: 7px;
+    font-weight: 400;
+    margin-left: 1em;
+    width: 6.4em;
+    transition: border-color 0.4s ease;
+    display: flex;
+    margin-top: 1.1em;
+}
+
+#quickDiv span:hover {
+    cursor: pointer;
+    border-bottom: 1px solid #ffffff71;
+}
+
 .quickLink {
     display: inline-block;
-    position: absolute;
-    margin-top: 0em;
+    margin-top: 1.2em;
     margin-left: 1.5em;
 }
 
 .quickLink2 {
     display: inline-block;
-    position: absolute;
-    margin-top: 0em;
+    margin-top: 1.2em;
     margin-left: 1.3em;
 }
 .quickLink3 {
     display: inline-block;
-    position: absolute;
-    margin-top: 0em;
+    margin-top: 1.2em;
     margin-left: 1.3em;
 }
 .quickLink4 {
     display: inline-block;
-    position: absolute;
-    margin-top: 0em;
+    margin-top: 1.2em;
     margin-left: 1.3em;
 }
 
@@ -232,6 +249,11 @@ section #quickDiv a {
     border-radius: 20px;
     width: 61em;
     height: 27.3em;
+}
+
+#quickDiv div {
+    display: flex
+;
 }
 
 

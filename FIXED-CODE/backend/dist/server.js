@@ -9,15 +9,15 @@ var _fs = _interopRequireDefault(require("fs"));
 var _archiver = _interopRequireDefault(require("archiver"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -47,13 +47,17 @@ app.use(_express["default"].json());
 // app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
 app.use(_express["default"]["static"](_path["default"].join(__dirname, "../../frontend/public")));
+app.use('/uploadedImages', _express["default"]["static"](_path["default"].join(__dirname, '../uploadedImages')));
+app.use('/uploadedFiles', _express["default"]["static"](_path["default"].join(__dirname, '../uploadedFiles')));
 
-//app.use('/uploadedImages', express.static(path.join(__dirname, '../uploadedImages')));
-//app.use('/uploadedFiles', express.static(path.join(__dirname, '../uploadedFiles')));
-
+// PROFILE IMAGES
 var storage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
-    cb(null, _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'images'));
+    var dir = _path["default"].join(__dirname, '..', 'uploadedImages', 'profiles');
+    _fs["default"].mkdirSync(dir, {
+      recursive: true
+    });
+    cb(null, dir);
   },
   filename: function filename(req, file, cb) {
     var ext = _path["default"].extname(file.originalname);
@@ -63,9 +67,15 @@ var storage = _multer["default"].diskStorage({
 var upload = (0, _multer["default"])({
   storage: storage
 });
+
+// PROJECT IMAGES
 var projectImageStorage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
-    cb(null, _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'images'));
+    var dir = _path["default"].join(__dirname, '..', 'uploadedImages', 'projects');
+    _fs["default"].mkdirSync(dir, {
+      recursive: true
+    });
+    cb(null, dir);
   },
   filename: function filename(req, file, cb) {
     var ext = _path["default"].extname(file.originalname);
@@ -78,9 +88,11 @@ var uploadProjectImage = (0, _multer["default"])({
     fileSize: 5 * 1024 * 1024
   } // limit images to 5MB
 });
+
+// PROJECT FILES UPLOAD
 var filesStorage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
-    var dir = _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', req.params.projectId);
+    var dir = _path["default"].join(__dirname, '..', 'uploadedFiles', req.params.projectId);
     _fs["default"].mkdirSync(dir, {
       recursive: true
     });
@@ -93,9 +105,11 @@ var filesStorage = _multer["default"].diskStorage({
 var uploadFiles = (0, _multer["default"])({
   storage: filesStorage
 });
+
+// UPLOAD NEW PROJECT FILES
 var newFilesStorage = _multer["default"].diskStorage({
   destination: function destination(req, file, cb) {
-    var tempDir = _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', 'temp');
+    var tempDir = _path["default"].join(__dirname, '..', 'uploadedFiles', 'temp');
     _fs["default"].mkdirSync(tempDir, {
       recursive: true
     });
@@ -594,7 +608,7 @@ app.get('/api/project/:projectId/download', /*#__PURE__*/function () {
             message: "No files to download."
           }));
         case 3:
-          filesDir = info.dir;
+          filesDir = info.dir && _fs["default"].existsSync(info.dir) ? info.dir : _path["default"].join(__dirname, '..', 'uploadedFiles', projectId);
           if (_fs["default"].existsSync(filesDir)) {
             _context12.n = 4;
             break;
@@ -645,7 +659,7 @@ app.get('/api/project/:projectId/download-file/:filename', /*#__PURE__*/function
       while (1) switch (_context13.n) {
         case 0:
           _req$params = req.params, projectId = _req$params.projectId, filename = _req$params.filename;
-          filePath = _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', projectId, filename);
+          filePath = _path["default"].join(__dirname, '..', 'uploadedFiles', projectId, filename);
           if (_fs["default"].existsSync(filePath)) {
             _context13.n = 1;
             break;
@@ -724,35 +738,50 @@ app.get('/api/search', /*#__PURE__*/function () {
 }());
 app.put('/api/profile/:userId', /*#__PURE__*/function () {
   var _ref15 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee15(req, res) {
-    var userId, updateFields, updatedUser, _t13;
+    var userId, updateFields, requestingUser, allowed, updatedUser, _t13;
     return _regenerator().w(function (_context15) {
       while (1) switch (_context15.p = _context15.n) {
         case 0:
           userId = req.params.userId;
-          updateFields = req.body;
+          updateFields = _objectSpread({}, req.body);
+          requestingUser = updateFields.requestingUser;
+          delete updateFields.requestingUser;
           _context15.p = 1;
           _context15.n = 2;
-          return (0, _database.updateUser)(userId, updateFields);
+          return (0, _database.canModifyUser)(requestingUser, userId);
         case 2:
+          allowed = _context15.v;
+          if (allowed) {
+            _context15.n = 3;
+            break;
+          }
+          return _context15.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 3:
+          _context15.n = 4;
+          return (0, _database.updateUser)(userId, updateFields);
+        case 4:
           updatedUser = _context15.v;
           res.json({
             success: true,
             user: updatedUser
           });
-          _context15.n = 4;
+          _context15.n = 6;
           break;
-        case 3:
-          _context15.p = 3;
+        case 5:
+          _context15.p = 5;
           _t13 = _context15.v;
           console.error("Error updating profile:", _t13);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 6:
           return _context15.a(2);
       }
-    }, _callee15, null, [[1, 3]]);
+    }, _callee15, null, [[1, 5]]);
   }));
   return function (_x31, _x32) {
     return _ref15.apply(this, arguments);
@@ -760,35 +789,62 @@ app.put('/api/profile/:userId', /*#__PURE__*/function () {
 }());
 app.put('/api/project/:projectId', /*#__PURE__*/function () {
   var _ref16 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee16(req, res) {
-    var projectId, updateFields, updatedProject, _t14;
+    var projectId, updateFields, requestingUser, project, allowed, updatedProject, _t14;
     return _regenerator().w(function (_context16) {
       while (1) switch (_context16.p = _context16.n) {
         case 0:
           projectId = req.params.projectId;
           updateFields = req.body;
+          requestingUser = req.body.requestingUser;
           _context16.p = 1;
           _context16.n = 2;
-          return (0, _database.updateProject)(projectId, updateFields);
+          return (0, _database.getProjectById)(projectId);
         case 2:
+          project = _context16.v;
+          if (project) {
+            _context16.n = 3;
+            break;
+          }
+          return _context16.a(2, res.status(404).json({
+            success: false,
+            message: "Project not found."
+          }));
+        case 3:
+          _context16.n = 4;
+          return (0, _database.canModifyProject)(requestingUser, projectId);
+        case 4:
+          allowed = _context16.v;
+          if (allowed) {
+            _context16.n = 5;
+            break;
+          }
+          return _context16.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 5:
+          _context16.n = 6;
+          return (0, _database.updateProject)(projectId, updateFields);
+        case 6:
           updatedProject = _context16.v;
           res.json({
             success: true,
             project: updatedProject
           });
-          _context16.n = 4;
+          _context16.n = 8;
           break;
-        case 3:
-          _context16.p = 3;
+        case 7:
+          _context16.p = 7;
           _t14 = _context16.v;
           console.error("Error updating project:", _t14);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 8:
           return _context16.a(2);
       }
-    }, _callee16, null, [[1, 3]]);
+    }, _callee16, null, [[1, 7]]);
   }));
   return function (_x33, _x34) {
     return _ref16.apply(this, arguments);
@@ -796,37 +852,50 @@ app.put('/api/project/:projectId', /*#__PURE__*/function () {
 }());
 app.put('/api/project/:projectId/files', /*#__PURE__*/function () {
   var _ref17 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(req, res) {
-    var projectId, files, updatedProject, _t15;
+    var projectId, _req$body, files, requestingUser, allowed, updatedProject, _t15;
     return _regenerator().w(function (_context17) {
       while (1) switch (_context17.p = _context17.n) {
         case 0:
           projectId = req.params.projectId;
-          files = req.body.files;
+          _req$body = req.body, files = _req$body.files, requestingUser = _req$body.requestingUser;
           _context17.p = 1;
           _context17.n = 2;
+          return (0, _database.canModifyProject)(requestingUser, projectId);
+        case 2:
+          allowed = _context17.v;
+          if (allowed) {
+            _context17.n = 3;
+            break;
+          }
+          return _context17.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 3:
+          _context17.n = 4;
           return (0, _database.updateProject)(projectId, {
             files: files
           });
-        case 2:
+        case 4:
           updatedProject = _context17.v;
           res.json({
             success: true,
             project: updatedProject
           });
-          _context17.n = 4;
+          _context17.n = 6;
           break;
-        case 3:
-          _context17.p = 3;
+        case 5:
+          _context17.p = 5;
           _t15 = _context17.v;
           console.error("Error adding files:", _t15);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 6:
           return _context17.a(2);
       }
-    }, _callee17, null, [[1, 3]]);
+    }, _callee17, null, [[1, 5]]);
   }));
   return function (_x35, _x36) {
     return _ref17.apply(this, arguments);
@@ -834,12 +903,12 @@ app.put('/api/project/:projectId/files', /*#__PURE__*/function () {
 }());
 app.put('/api/project/:projectId/owner', /*#__PURE__*/function () {
   var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(req, res) {
-    var projectId, _req$body, newOwnerUsername, previousOwnerUsername, result, updatedProject, _t16;
+    var projectId, _req$body2, newOwnerUsername, previousOwnerUsername, result, updatedProject, _t16;
     return _regenerator().w(function (_context18) {
       while (1) switch (_context18.p = _context18.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body = req.body, newOwnerUsername = _req$body.newOwnerUsername, previousOwnerUsername = _req$body.previousOwnerUsername;
+          _req$body2 = req.body, newOwnerUsername = _req$body2.newOwnerUsername, previousOwnerUsername = _req$body2.previousOwnerUsername;
           _context18.p = 1;
           _context18.n = 2;
           return (0, _database.changeProjectOwner)(projectId, newOwnerUsername, previousOwnerUsername);
@@ -879,51 +948,64 @@ app.put('/api/project/:projectId/owner', /*#__PURE__*/function () {
 }());
 app.put('/api/profile/:userId/languages', /*#__PURE__*/function () {
   var _ref19 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(req, res) {
-    var userId, language, user, updatedLanguages, updatedUser, _t17;
+    var userId, _req$body3, language, requestingUser, allowed, user, updatedLanguages, updatedUser, _t17;
     return _regenerator().w(function (_context19) {
       while (1) switch (_context19.p = _context19.n) {
         case 0:
           userId = req.params.userId;
-          language = req.body.language;
+          _req$body3 = req.body, language = _req$body3.language, requestingUser = _req$body3.requestingUser;
           _context19.p = 1;
           _context19.n = 2;
-          return (0, _database.getUserById)(userId);
+          return (0, _database.canModifyUser)(requestingUser, userId);
         case 2:
+          allowed = _context19.v;
+          if (allowed) {
+            _context19.n = 3;
+            break;
+          }
+          return _context19.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 3:
+          _context19.n = 4;
+          return (0, _database.getUserById)(userId);
+        case 4:
           user = _context19.v;
           if (user) {
-            _context19.n = 3;
+            _context19.n = 5;
             break;
           }
           return _context19.a(2, res.status(404).json({
             success: false,
             message: "User not found."
           }));
-        case 3:
+        case 5:
           updatedLanguages = user.languages ? _toConsumableArray(user.languages) : [];
           if (!updatedLanguages.includes(language)) updatedLanguages.push(language);
-          _context19.n = 4;
+          _context19.n = 6;
           return (0, _database.updateUser)(userId, {
             languages: updatedLanguages
           });
-        case 4:
+        case 6:
           updatedUser = _context19.v;
           res.json({
             success: true,
             user: updatedUser
           });
-          _context19.n = 6;
+          _context19.n = 8;
           break;
-        case 5:
-          _context19.p = 5;
+        case 7:
+          _context19.p = 7;
           _t17 = _context19.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 6:
+        case 8:
           return _context19.a(2);
       }
-    }, _callee19, null, [[1, 5]]);
+    }, _callee19, null, [[1, 7]]);
   }));
   return function (_x39, _x40) {
     return _ref19.apply(this, arguments);
@@ -931,11 +1013,11 @@ app.put('/api/profile/:userId/languages', /*#__PURE__*/function () {
 }());
 app.post('/api/signup', /*#__PURE__*/function () {
   var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(req, res) {
-    var _req$body2, username, surname, email, password, user, _t18;
+    var _req$body4, username, surname, email, password, user, _t18;
     return _regenerator().w(function (_context20) {
       while (1) switch (_context20.p = _context20.n) {
         case 0:
-          _req$body2 = req.body, username = _req$body2.username, surname = _req$body2.surname, email = _req$body2.email, password = _req$body2.password;
+          _req$body4 = req.body, username = _req$body4.username, surname = _req$body4.surname, email = _req$body4.email, password = _req$body4.password;
           console.log("Signup attempt: ", username, surname, email, password);
           _context20.p = 1;
           _context20.n = 2;
@@ -969,11 +1051,11 @@ app.post('/api/signup', /*#__PURE__*/function () {
 }());
 app.post('/api/login', /*#__PURE__*/function () {
   var _ref21 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21(req, res) {
-    var _req$body3, username, password, user, _t19;
+    var _req$body5, username, password, user, _t19;
     return _regenerator().w(function (_context21) {
       while (1) switch (_context21.p = _context21.n) {
         case 0:
-          _req$body3 = req.body, username = _req$body3.username, password = _req$body3.password;
+          _req$body5 = req.body, username = _req$body5.username, password = _req$body5.password;
           console.log("Login attempt: ", username, password);
           _context21.p = 1;
           _context21.n = 2;
@@ -1025,11 +1107,11 @@ app.post('/api/login', /*#__PURE__*/function () {
 }());
 app.post('/api/project', /*#__PURE__*/function () {
   var _ref22 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee22(req, res) {
-    var _req$body4, projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId, project, _t20;
+    var _req$body6, projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId, project, _t20;
     return _regenerator().w(function (_context22) {
       while (1) switch (_context22.p = _context22.n) {
         case 0:
-          _req$body4 = req.body, projectName = _req$body4.projectName, createdOn = _req$body4.createdOn, description = _req$body4.description, type = _req$body4.type, files = _req$body4.files, members = _req$body4.members, owner = _req$body4.owner, version = _req$body4.version, status = _req$body4.status, projectImage = _req$body4.projectImage, checkedOutBy = _req$body4.checkedOutBy, checkInMessages = _req$body4.checkInMessages, userId = _req$body4.userId;
+          _req$body6 = req.body, projectName = _req$body6.projectName, createdOn = _req$body6.createdOn, description = _req$body6.description, type = _req$body6.type, files = _req$body6.files, members = _req$body6.members, owner = _req$body6.owner, version = _req$body6.version, status = _req$body6.status, projectImage = _req$body6.projectImage, checkedOutBy = _req$body6.checkedOutBy, checkInMessages = _req$body6.checkInMessages, userId = _req$body6.userId;
           _context22.p = 1;
           _context22.n = 2;
           return (0, _database.addProject)(projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId);
@@ -1061,45 +1143,58 @@ app.post('/api/project', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/member', /*#__PURE__*/function () {
   var _ref23 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee23(req, res) {
-    var projectId, memberUsername, result, updatedProject, _t21;
+    var projectId, _req$body7, memberUsername, requestingUser, allowed, result, updatedProject, _t21;
     return _regenerator().w(function (_context23) {
       while (1) switch (_context23.p = _context23.n) {
         case 0:
           projectId = req.params.projectId;
-          memberUsername = req.body.memberUsername;
+          _req$body7 = req.body, memberUsername = _req$body7.memberUsername, requestingUser = _req$body7.requestingUser;
           _context23.p = 1;
           _context23.n = 2;
-          return (0, _database.addProjectMember)(projectId, memberUsername);
+          return (0, _database.canModifyProject)(requestingUser, projectId);
         case 2:
-          result = _context23.v;
-          if (result.success) {
+          allowed = _context23.v;
+          if (allowed) {
             _context23.n = 3;
             break;
           }
-          return _context23.a(2, res.status(400).json(result));
+          return _context23.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
         case 3:
           _context23.n = 4;
-          return (0, _database.getProjectById)(projectId);
+          return (0, _database.addProjectMember)(projectId, memberUsername);
         case 4:
+          result = _context23.v;
+          if (result.success) {
+            _context23.n = 5;
+            break;
+          }
+          return _context23.a(2, res.status(400).json(result));
+        case 5:
+          _context23.n = 6;
+          return (0, _database.getProjectById)(projectId);
+        case 6:
           updatedProject = _context23.v;
           res.json({
             success: true,
             project: updatedProject
           });
-          _context23.n = 6;
+          _context23.n = 8;
           break;
-        case 5:
-          _context23.p = 5;
+        case 7:
+          _context23.p = 7;
           _t21 = _context23.v;
           console.error("Error adding member:", _t21);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 6:
+        case 8:
           return _context23.a(2);
       }
-    }, _callee23, null, [[1, 5]]);
+    }, _callee23, null, [[1, 7]]);
   }));
   return function (_x47, _x48) {
     return _ref23.apply(this, arguments);
@@ -1107,11 +1202,11 @@ app.post('/api/project/:projectId/member', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request', /*#__PURE__*/function () {
   var _ref24 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee24(req, res) {
-    var _req$body5, fromUsername, toUsername, _t22;
+    var _req$body8, fromUsername, toUsername, _t22;
     return _regenerator().w(function (_context24) {
       while (1) switch (_context24.p = _context24.n) {
         case 0:
-          _req$body5 = req.body, fromUsername = _req$body5.fromUsername, toUsername = _req$body5.toUsername;
+          _req$body8 = req.body, fromUsername = _req$body8.fromUsername, toUsername = _req$body8.toUsername;
           _context24.p = 1;
           _context24.n = 2;
           return (0, _database.sendFriendRequest)(fromUsername, toUsername);
@@ -1139,11 +1234,11 @@ app.post('/api/friend-request', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request/accept', /*#__PURE__*/function () {
   var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee25(req, res) {
-    var _req$body6, userUsername, friendUsername, _t23;
+    var _req$body9, userUsername, friendUsername, _t23;
     return _regenerator().w(function (_context25) {
       while (1) switch (_context25.p = _context25.n) {
         case 0:
-          _req$body6 = req.body, userUsername = _req$body6.userUsername, friendUsername = _req$body6.friendUsername;
+          _req$body9 = req.body, userUsername = _req$body9.userUsername, friendUsername = _req$body9.friendUsername;
           _context25.p = 1;
           _context25.n = 2;
           return (0, _database.acceptFriendRequest)(userUsername, friendUsername);
@@ -1171,11 +1266,11 @@ app.post('/api/friend-request/accept', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request/reject', /*#__PURE__*/function () {
   var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee26(req, res) {
-    var _req$body7, userUsername, friendUsername, _t24;
+    var _req$body0, userUsername, friendUsername, _t24;
     return _regenerator().w(function (_context26) {
       while (1) switch (_context26.p = _context26.n) {
         case 0:
-          _req$body7 = req.body, userUsername = _req$body7.userUsername, friendUsername = _req$body7.friendUsername;
+          _req$body0 = req.body, userUsername = _req$body0.userUsername, friendUsername = _req$body0.friendUsername;
           _context26.p = 1;
           _context26.n = 2;
           return (0, _database.rejectFriendRequest)(userUsername, friendUsername);
@@ -1203,31 +1298,44 @@ app.post('/api/friend-request/reject', /*#__PURE__*/function () {
 }());
 app.post('/api/friend/remove', /*#__PURE__*/function () {
   var _ref27 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee27(req, res) {
-    var _req$body8, userUsername, friendUsername, _t25;
+    var _req$body1, userUsername, friendUsername, requestingUser, allowed, _t25;
     return _regenerator().w(function (_context27) {
       while (1) switch (_context27.p = _context27.n) {
         case 0:
-          _req$body8 = req.body, userUsername = _req$body8.userUsername, friendUsername = _req$body8.friendUsername;
+          _req$body1 = req.body, userUsername = _req$body1.userUsername, friendUsername = _req$body1.friendUsername, requestingUser = _req$body1.requestingUser;
           _context27.p = 1;
           _context27.n = 2;
-          return (0, _database.removeFriend)(userUsername, friendUsername);
+          return (0, _database.canModifyUser)(requestingUser, userUsername);
         case 2:
+          allowed = _context27.v;
+          if (allowed) {
+            _context27.n = 3;
+            break;
+          }
+          return _context27.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 3:
+          _context27.n = 4;
+          return (0, _database.removeFriend)(userUsername, friendUsername);
+        case 4:
           res.json({
             success: true
           });
-          _context27.n = 4;
+          _context27.n = 6;
           break;
-        case 3:
-          _context27.p = 3;
+        case 5:
+          _context27.p = 5;
           _t25 = _context27.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 6:
           return _context27.a(2);
       }
-    }, _callee27, null, [[1, 3]]);
+    }, _callee27, null, [[1, 5]]);
   }));
   return function (_x55, _x56) {
     return _ref27.apply(this, arguments);
@@ -1235,34 +1343,63 @@ app.post('/api/friend/remove', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/discussion', /*#__PURE__*/function () {
   var _ref28 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee28(req, res) {
-    var projectId, _req$body9, sender, content, message, _t26;
+    var projectId, _req$body10, sender, content, project, user, isAdmin, isMember, isOwner, message, _t26;
     return _regenerator().w(function (_context28) {
       while (1) switch (_context28.p = _context28.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body9 = req.body, sender = _req$body9.sender, content = _req$body9.content;
+          _req$body10 = req.body, sender = _req$body10.sender, content = _req$body10.content;
           _context28.p = 1;
           _context28.n = 2;
-          return (0, _database.addDiscussionMessage)(projectId, sender, content);
+          return (0, _database.getProjectById)(projectId);
         case 2:
+          project = _context28.v;
+          if (project) {
+            _context28.n = 3;
+            break;
+          }
+          return _context28.a(2, res.status(404).json({
+            success: false,
+            message: "Project not found."
+          }));
+        case 3:
+          _context28.n = 4;
+          return (0, _database.getUser)(sender);
+        case 4:
+          user = _context28.v;
+          isAdmin = user && user.role === 'admin';
+          isMember = project.members && project.members.includes(sender);
+          isOwner = project.owner === sender;
+          if (isAdmin || isMember || isOwner) {
+            _context28.n = 5;
+            break;
+          }
+          return _context28.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied to post in discussion."
+          }));
+        case 5:
+          _context28.n = 6;
+          return (0, _database.addDiscussionMessage)(projectId, sender, content);
+        case 6:
           message = _context28.v;
           res.json({
             success: true,
             message: message
           });
-          _context28.n = 4;
+          _context28.n = 8;
           break;
-        case 3:
-          _context28.p = 3;
+        case 7:
+          _context28.p = 7;
           _t26 = _context28.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 8:
           return _context28.a(2);
       }
-    }, _callee28, null, [[1, 3]]);
+    }, _callee28, null, [[1, 7]]);
   }));
   return function (_x57, _x58) {
     return _ref28.apply(this, arguments);
@@ -1315,12 +1452,12 @@ app.post('/api/project/:projectId/checkout', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/checkin', /*#__PURE__*/function () {
   var _ref30 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee30(req, res) {
-    var projectId, _req$body0, username, files, checkInMessage, version, result, _t28;
+    var projectId, _req$body11, username, files, checkInMessage, version, result, _t28;
     return _regenerator().w(function (_context30) {
       while (1) switch (_context30.p = _context30.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body0 = req.body, username = _req$body0.username, files = _req$body0.files, checkInMessage = _req$body0.checkInMessage, version = _req$body0.version;
+          _req$body11 = req.body, username = _req$body11.username, files = _req$body11.files, checkInMessage = _req$body11.checkInMessage, version = _req$body11.version;
           _context30.p = 1;
           _context30.n = 2;
           return (0, _database.checkInProject)(projectId, username, files, checkInMessage, version);
@@ -1353,38 +1490,66 @@ app.post('/api/project/:projectId/checkin', /*#__PURE__*/function () {
 }());
 app.post('/api/profile/:userId/upload-image', upload.single('profileImage'), /*#__PURE__*/function () {
   var _ref31 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee31(req, res) {
-    var userId, username, imagePath, updatedUser, _t29;
+    var userId, username, requestingUser, imagePath, targetUser, requester, isAdmin, updatedUser, _t29;
     return _regenerator().w(function (_context31) {
       while (1) switch (_context31.p = _context31.n) {
         case 0:
           userId = req.params.userId;
           username = req.body.username;
-          imagePath = "/assets/images/".concat(req.file.filename);
+          requestingUser = req.body.requestingUser;
+          imagePath = "/uploadedImages/profiles/".concat(req.file.filename);
           _context31.p = 1;
           _context31.n = 2;
+          return (0, _database.getUserById)(userId);
+        case 2:
+          targetUser = _context31.v;
+          if (targetUser) {
+            _context31.n = 3;
+            break;
+          }
+          return _context31.a(2, res.status(404).json({
+            success: false,
+            message: "User not found."
+          }));
+        case 3:
+          _context31.n = 4;
+          return (0, _database.getUser)(requestingUser);
+        case 4:
+          requester = _context31.v;
+          isAdmin = requester && requester.role === 'admin';
+          if (isAdmin || requestingUser && requestingUser === targetUser.username) {
+            _context31.n = 5;
+            break;
+          }
+          return _context31.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 5:
+          _context31.n = 6;
           return (0, _database.updateUser)(userId, {
             image: imagePath
           });
-        case 2:
+        case 6:
           updatedUser = _context31.v;
           res.json({
             success: true,
             image: imagePath,
             user: updatedUser
           });
-          _context31.n = 4;
+          _context31.n = 8;
           break;
-        case 3:
-          _context31.p = 3;
+        case 7:
+          _context31.p = 7;
           _t29 = _context31.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 8:
           return _context31.a(2);
       }
-    }, _callee31, null, [[1, 3]]);
+    }, _callee31, null, [[1, 7]]);
   }));
   return function (_x63, _x64) {
     return _ref31.apply(this, arguments);
@@ -1392,37 +1557,51 @@ app.post('/api/profile/:userId/upload-image', upload.single('profileImage'), /*#
 }());
 app.post('/api/project/:projectId/upload-image', uploadProjectImage.single('projectImage'), /*#__PURE__*/function () {
   var _ref32 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee32(req, res) {
-    var projectId, imagePath, updatedProject, _t30;
+    var projectId, requestingUser, imagePath, allowed, updatedProject, _t30;
     return _regenerator().w(function (_context32) {
       while (1) switch (_context32.p = _context32.n) {
         case 0:
           projectId = req.params.projectId;
-          imagePath = "/assets/images/".concat(req.file.filename);
+          requestingUser = req.body.requestingUser;
+          imagePath = "/uploadedImages/projects/".concat(req.file.filename);
           _context32.p = 1;
           _context32.n = 2;
+          return (0, _database.canModifyProject)(requestingUser, projectId);
+        case 2:
+          allowed = _context32.v;
+          if (allowed) {
+            _context32.n = 3;
+            break;
+          }
+          return _context32.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 3:
+          _context32.n = 4;
           return (0, _database.updateProject)(projectId, {
             projectImage: imagePath
           });
-        case 2:
+        case 4:
           updatedProject = _context32.v;
           res.json({
             success: true,
             image: imagePath,
             project: updatedProject
           });
-          _context32.n = 4;
+          _context32.n = 6;
           break;
-        case 3:
-          _context32.p = 3;
+        case 5:
+          _context32.p = 5;
           _t30 = _context32.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 6:
           return _context32.a(2);
       }
-    }, _callee32, null, [[1, 3]]);
+    }, _callee32, null, [[1, 5]]);
   }));
   return function (_x65, _x66) {
     return _ref32.apply(this, arguments);
@@ -1430,38 +1609,68 @@ app.post('/api/project/:projectId/upload-image', uploadProjectImage.single('proj
 }());
 app.post('/api/project/:projectId/upload-files', uploadFiles.array('files'), /*#__PURE__*/function () {
   var _ref33 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee33(req, res) {
-    var projectId, filesList, updatedProject, _t31;
+    var projectId, requestingUser, project, user, isAdmin, isMember, isOwner, filesList, updatedProject, _t31;
     return _regenerator().w(function (_context33) {
       while (1) switch (_context33.p = _context33.n) {
         case 0:
           projectId = req.params.projectId;
+          requestingUser = req.body.requestingUser;
           _context33.p = 1;
+          _context33.n = 2;
+          return (0, _database.getProjectById)(projectId);
+        case 2:
+          project = _context33.v;
+          if (project) {
+            _context33.n = 3;
+            break;
+          }
+          return _context33.a(2, res.status(404).json({
+            success: false,
+            message: "Project not found."
+          }));
+        case 3:
+          _context33.n = 4;
+          return (0, _database.getUser)(requestingUser);
+        case 4:
+          user = _context33.v;
+          isAdmin = user && user.role === 'admin';
+          isMember = project.members && project.members.includes(requestingUser);
+          isOwner = project.owner === requestingUser;
+          if (isAdmin || isMember || isOwner) {
+            _context33.n = 5;
+            break;
+          }
+          return _context33.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied to upload files."
+          }));
+        case 5:
           filesList = req.body.filesList ? JSON.parse(req.body.filesList) : req.files.map(function (f) {
             return f.originalname;
           });
-          _context33.n = 2;
+          _context33.n = 6;
           return (0, _database.updateProject)(projectId, {
             files: filesList
           });
-        case 2:
+        case 6:
           updatedProject = _context33.v;
           res.json({
             success: true,
             project: updatedProject
           });
-          _context33.n = 4;
+          _context33.n = 8;
           break;
-        case 3:
-          _context33.p = 3;
+        case 7:
+          _context33.p = 7;
           _t31 = _context33.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 8:
           return _context33.a(2);
       }
-    }, _callee33, null, [[1, 3]]);
+    }, _callee33, null, [[1, 7]]);
   }));
   return function (_x67, _x68) {
     return _ref33.apply(this, arguments);
@@ -1498,7 +1707,7 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), /*#__P
           _t32 = _context34.v;
         case 4:
           projectId = _t32;
-          projectDir = _path["default"].join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', projectId);
+          projectDir = _path["default"].join(__dirname, '..', 'uploadedFiles', projectId);
           _fs["default"].mkdirSync(projectDir, {
             recursive: true
           });
@@ -1515,8 +1724,6 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), /*#__P
             success: true,
             project: createdProject
           });
-
-          // res.json({ success: true, project: newProject });
           _context34.n = 7;
           break;
         case 6:
@@ -1579,12 +1786,12 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), /*#__P
 
 app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), /*#__PURE__*/function () {
   var _ref35 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee35(req, res) {
-    var projectId, _req$body1, username, checkInMessage, version, newFileNames, project, updatedFiles, updatedMessages, updatedProject, _t34;
+    var projectId, _req$body12, username, checkInMessage, version, newFileNames, project, updatedFiles, updatedMessages, updatedProject, _t34;
     return _regenerator().w(function (_context35) {
       while (1) switch (_context35.p = _context35.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body1 = req.body, username = _req$body1.username, checkInMessage = _req$body1.checkInMessage, version = _req$body1.version;
+          _req$body12 = req.body, username = _req$body12.username, checkInMessage = _req$body12.checkInMessage, version = _req$body12.version;
           _context35.p = 1;
           newFileNames = req.files ? req.files.map(function (f) {
             return f.originalname;
@@ -1655,35 +1862,63 @@ app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), /*
 }());
 app["delete"]('/api/project/:projectId', /*#__PURE__*/function () {
   var _ref36 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee36(req, res) {
-    var projectId, result, _t35;
+    var _req$body13, _req$query;
+    var projectId, requestingUser, project, allowed, result, _t35;
     return _regenerator().w(function (_context36) {
       while (1) switch (_context36.p = _context36.n) {
         case 0:
-          projectId = req.params.projectId;
+          projectId = req.params.projectId; //const { requestingUser } = req.body;
+          requestingUser = ((_req$body13 = req.body) === null || _req$body13 === void 0 ? void 0 : _req$body13.requestingUser) || ((_req$query = req.query) === null || _req$query === void 0 ? void 0 : _req$query.requestingUser);
           _context36.p = 1;
           _context36.n = 2;
-          return (0, _database.deleteProject)(projectId);
+          return (0, _database.getProjectById)(projectId);
         case 2:
+          project = _context36.v;
+          if (project) {
+            _context36.n = 3;
+            break;
+          }
+          return _context36.a(2, res.status(404).json({
+            success: false,
+            message: "Project not found."
+          }));
+        case 3:
+          _context36.n = 4;
+          return (0, _database.canModifyProject)(requestingUser, projectId);
+        case 4:
+          allowed = _context36.v;
+          if (allowed) {
+            _context36.n = 5;
+            break;
+          }
+          return _context36.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
+        case 5:
+          _context36.n = 6;
+          return (0, _database.deleteProject)(projectId);
+        case 6:
           result = _context36.v;
           res.json({
             success: true,
             message: "Project deleted successfully.",
             result: result
           });
-          _context36.n = 4;
+          _context36.n = 8;
           break;
-        case 3:
-          _context36.p = 3;
+        case 7:
+          _context36.p = 7;
           _t35 = _context36.v;
           console.error("Error deleting project:", _t35);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 4:
+        case 8:
           return _context36.a(2);
       }
-    }, _callee36, null, [[1, 3]]);
+    }, _callee36, null, [[1, 7]]);
   }));
   return function (_x73, _x74) {
     return _ref36.apply(this, arguments);
@@ -1691,45 +1926,58 @@ app["delete"]('/api/project/:projectId', /*#__PURE__*/function () {
 }());
 app["delete"]('/api/project/:projectId/member', /*#__PURE__*/function () {
   var _ref37 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee37(req, res) {
-    var projectId, memberUsername, result, updatedProject, _t36;
+    var projectId, _req$body14, memberUsername, requestingUser, allowed, result, updatedProject, _t36;
     return _regenerator().w(function (_context37) {
       while (1) switch (_context37.p = _context37.n) {
         case 0:
           projectId = req.params.projectId;
-          memberUsername = req.body.memberUsername;
+          _req$body14 = req.body, memberUsername = _req$body14.memberUsername, requestingUser = _req$body14.requestingUser;
           _context37.p = 1;
           _context37.n = 2;
-          return (0, _database.removeProjectMember)(projectId, memberUsername);
+          return (0, _database.canModifyProject)(requestingUser, projectId);
         case 2:
-          result = _context37.v;
-          if (result.success) {
+          allowed = _context37.v;
+          if (allowed) {
             _context37.n = 3;
             break;
           }
-          return _context37.a(2, res.status(400).json(result));
+          return _context37.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
         case 3:
           _context37.n = 4;
-          return (0, _database.getProjectById)(projectId);
+          return (0, _database.removeProjectMember)(projectId, memberUsername);
         case 4:
+          result = _context37.v;
+          if (result.success) {
+            _context37.n = 5;
+            break;
+          }
+          return _context37.a(2, res.status(400).json(result));
+        case 5:
+          _context37.n = 6;
+          return (0, _database.getProjectById)(projectId);
+        case 6:
           updatedProject = _context37.v;
           res.json({
             success: true,
             project: updatedProject
           });
-          _context37.n = 6;
+          _context37.n = 8;
           break;
-        case 5:
-          _context37.p = 5;
+        case 7:
+          _context37.p = 7;
           _t36 = _context37.v;
           console.error("Error deleting member:", _t36);
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 6:
+        case 8:
           return _context37.a(2);
       }
-    }, _callee37, null, [[1, 5]]);
+    }, _callee37, null, [[1, 7]]);
   }));
   return function (_x75, _x76) {
     return _ref37.apply(this, arguments);
@@ -1737,36 +1985,51 @@ app["delete"]('/api/project/:projectId/member', /*#__PURE__*/function () {
 }());
 app["delete"]('/api/profile/:userId', /*#__PURE__*/function () {
   var _ref38 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee38(req, res) {
-    var userId, result, _t37;
+    var _req$body15, _req$query2;
+    var userId, requestingUser, allowed, result, _t37;
     return _regenerator().w(function (_context38) {
       while (1) switch (_context38.p = _context38.n) {
         case 0:
           userId = req.params.userId;
+          requestingUser = ((_req$body15 = req.body) === null || _req$body15 === void 0 ? void 0 : _req$body15.requestingUser) || ((_req$query2 = req.query) === null || _req$query2 === void 0 ? void 0 : _req$query2.requestingUser);
           _context38.p = 1;
           _context38.n = 2;
-          return (0, _database.deleteUser)(userId);
+          return (0, _database.canModifyUser)(requestingUser, userId);
         case 2:
-          result = _context38.v;
-          if (result.success) {
+          allowed = _context38.v;
+          if (allowed) {
             _context38.n = 3;
             break;
           }
-          return _context38.a(2, res.status(404).json(result));
+          return _context38.a(2, res.status(403).json({
+            success: false,
+            message: "Permission denied."
+          }));
         case 3:
-          res.json(result);
-          _context38.n = 5;
-          break;
+          _context38.n = 4;
+          return (0, _database.deleteUser)(userId);
         case 4:
-          _context38.p = 4;
+          result = _context38.v;
+          if (result.success) {
+            _context38.n = 5;
+            break;
+          }
+          return _context38.a(2, res.status(404).json(result));
+        case 5:
+          res.json(result);
+          _context38.n = 7;
+          break;
+        case 6:
+          _context38.p = 6;
           _t37 = _context38.v;
           res.status(500).json({
             success: false,
             message: "Server error"
           });
-        case 5:
+        case 7:
           return _context38.a(2);
       }
-    }, _callee38, null, [[1, 4]]);
+    }, _callee38, null, [[1, 6]]);
   }));
   return function (_x77, _x78) {
     return _ref38.apply(this, arguments);

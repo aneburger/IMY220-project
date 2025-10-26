@@ -101,11 +101,19 @@ const Profile = () => {
     }
 
     const handleProfileUpdated = (updatedUser) => {
-        setUserObj(updatedUser);
-        setUserData(updatedUser);
+        // setUserObj(updatedUser);
+        // setUserData(updatedUser);
+        if (userObj && updatedUser && updatedUser._id === userObj._id) {
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            setUserObj(updatedUser);
+        }
+        if (updatedUser && (userData && updatedUser._id === userData._id)) {
+            setUserData(updatedUser);
+        }
     };
 
     const isOwnProfile = userObj && (userObj._id === userId || userObj.username === userId);
+    const canEditThisProfile = isOwnProfile || (userObj && userObj.role === 'admin');
 
     const handleSendRequest = async () => {
         try {
@@ -162,14 +170,14 @@ const Profile = () => {
                     <h1 id="uAct">{userData.username}'s Profile</h1>
                 </div>
 
-                {isOwnProfile && (
+                {canEditThisProfile && (
                     <>
                         <p className="reposLink" onClick={toggleNotifs}>Notifications</p>
                         {isNotifOpen && <NotifsList onCancel={toggleNotifs} onUserUpdated={setUserObj} />}
                     </>
                 )}
 
-                {!isOwnProfile && (
+                {!isOwnProfile && !canEditThisProfile && (
                     <div>
                         <button
                             className="connectedLink"
@@ -193,22 +201,22 @@ const Profile = () => {
                 <p className="friendsLink" onClick={toggle}>Friends</p>
                 {isOpen && <FriendsList onCancel={toggle} onFriendRemoved={handleFriendRemoved} profileUsername={userData.username}/>}
                 
-                <ProfileTemplate userObj={userData} hideInfoCard={!isOwnProfile && !isFriend}/>
+                <ProfileTemplate userObj={userData} hideInfoCard={!canEditThisProfile && !isFriend}/>
 
-                {isOwnProfile && (
+                {canEditThisProfile && (
                     <>
-                        <EditProfile userObj={userObj} onProfileUpdated={handleProfileUpdated}/>
+                        <EditProfile userObj={isOwnProfile ? userObj : userData} onProfileUpdated={handleProfileUpdated}/>
                         <Logout/>
                     </>
                 )}
 
-                {(isOwnProfile || isFriend) && <TagCloud userId={userData._id || userData.userId}/>}
+                {(canEditThisProfile || isFriend) && <TagCloud userId={userData._id || userData.userId}/>}
 
                 <div id="projectsHead"> 
                     <h1 id="uAct">Projects</h1>
                 </div>
 
-                {(isOwnProfile || isFriend) && (
+                {(canEditThisProfile || isFriend) && (
                     <>
                         <div id="sortE2">
                             <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)}>
@@ -221,7 +229,7 @@ const Profile = () => {
                     </>
                 )}
 
-                {isOwnProfile && (
+                {canEditThisProfile && (
                     <>
                         <div id="profileCreateProject">
                             <CreateProject onProjectCreated={refreshProjects}/>
@@ -231,14 +239,14 @@ const Profile = () => {
 
                 <div id="projectFeedDiv">
                     <div>
-                         {(isOwnProfile || isFriend)
+                         {(canEditThisProfile || isFriend)
                             ? <ProjectsList projects={projects} sort={sort}/>
                             : <p id="notFriendMessage">Connect with {userData.username} to view their projects! <span id="clickOn">(Click on the 'Connect' button to send a friend request)</span></p>
                         }
                     </div>
                 </div>
 
-                {(isOwnProfile || isFriend) && (
+                {(canEditThisProfile || isFriend) && (
                     <>
                         <div id="activityHead"> 
                             <h1 id="uAct">Activity</h1>

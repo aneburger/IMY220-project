@@ -202,12 +202,13 @@
     background-color: transparent;
     border: 1px solid #ffffff96;
     border-radius: 7px;
-    padding: 5px 8px 6px 8px;
+    padding: 3px 8px 3px 8px;
     font-family: 'Albert Sans';
     color: #ffffff9c;
     font-weight: 300;
     float: inline-end;
-    margin-top: 1.1em;
+    margin-top: 1.2em;
+    height: 2em;
 }
 
 #friendsListDiv #friendForm #friendList .ol div button:hover {

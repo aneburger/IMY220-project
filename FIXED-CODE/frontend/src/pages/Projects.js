@@ -1,6 +1,6 @@
 /* Ane' Burger 24565068, 33 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import '../../public/assets/style/css/projects.css';
 // import '../../public/assets/style/css/home.css';
@@ -15,6 +15,54 @@ const Projects = () => {
         const user = localStorage.getItem('user');
         return user ? JSON.parse(user) : null;
     });
+
+    const removeProjectFromState = useCallback((id) => {
+        const idStr = id ? id.toString() : "";
+        setProjects(prev => prev.filter(p => {
+            const pid = (p._id && p._id.toString()) || (p.projectId && p.projectId.toString()) || "";
+            return pid !== idStr;
+        }));
+    }, []);
+
+    
+    // const refreshProjects = async () => {
+    //     const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${userObj._id}`);
+    //     const updatedUser = await updatedUserRes.json();
+    //     localStorage.setItem('user', JSON.stringify(updatedUser));
+    //     setUserObj(updatedUser);
+
+    //     const projectsRes = await fetch("http://localhost:3000/api/projects");
+    //     const allProjects = await projectsRes.json();
+    //     if (updatedUser && updatedUser.projects) {
+    //         const userProjectIds = updatedUser.projects.map(id => id.toString());
+    //         const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
+    //         setProjects(filtered);
+    //     } else {
+    //         setProjects([]);
+    //     }
+    // };
+
+    const refreshProjects = useCallback(async () => {
+        if (!userObj || !userObj._id) return;
+        try {
+            const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${userObj._id}`);
+            const updatedUser = await updatedUserRes.json();
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            setUserObj(updatedUser);
+
+            const projectsRes = await fetch("http://localhost:3000/api/projects");
+            const allProjects = await projectsRes.json();
+            if (updatedUser && updatedUser.projects) {
+                const userProjectIds = updatedUser.projects.map(id => id.toString());
+                const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
+                setProjects(filtered);
+            } else {
+                setProjects([]);
+            }
+        } catch (err) {
+            console.error("refreshProjects error", err);
+        }
+    }, [userObj]);
 
     useEffect(() => {
         fetch("http://localhost:3000/api/projects")
@@ -33,36 +81,97 @@ const Projects = () => {
             });
     }, [userObj]);
 
-    const refreshProjects = async () => {
-        const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${userObj._id}`);
-        const updatedUser = await updatedUserRes.json();
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUserObj(updatedUser);
+//    useEffect(() => {
+//         const handler = (e) => {
+//             const deletedId = e?.detail?.projectId;
+//             console.debug('projectDeleted event received for', deletedId);
+//             if (deletedId) {
+//                 const idStr = deletedId.toString();
+//                 setProjects(prev => prev.filter(p => {
+//                     const pid = (p._id && p._id.toString()) || (p.projectId && p.projectId.toString()) || "";
+//                     return pid !== idStr;
+//                 }));
+//                 (async () => {
+//                     try {
+//                         const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+//                         if (storedUser && storedUser._id) {
+//                             const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${storedUser._id}`);
+//                             const updatedUser = await updatedUserRes.json();
+//                             localStorage.setItem('user', JSON.stringify(updatedUser));
+//                             setUserObj(updatedUser);
+//                         }
+//                         const projectsRes = await fetch("http://localhost:3000/api/projects");
+//                         const allProjects = await projectsRes.json();
+//                         const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+//                         if (currentUser && currentUser.projects) {
+//                             const userProjectIds = currentUser.projects.map(id => id.toString());
+//                             const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
+//                             setProjects(filtered);
+//                         }
+//                     } catch (err) {
+//                         console.error("refresh after event failed", err);
+//                     }
+//                 })();
+//             } else {
+//                 refreshProjects().catch(err => console.error("refresh after event failed", err));
+//             }
+//         };
+//         window.addEventListener('projectDeleted', handler);
+//         return () => window.removeEventListener('projectDeleted', handler);
+//     }, []);
 
-        const projectsRes = await fetch("http://localhost:3000/api/projects");
-        const allProjects = await projectsRes.json();
-        if (updatedUser && updatedUser.projects) {
-            const userProjectIds = updatedUser.projects.map(id => id.toString());
-            const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
-            setProjects(filtered);
-        } else {
-            setProjects([]);
+    useEffect(() => {
+        const requestHandler = (e) => {
+            const { projectId, requestingUser } = e?.detail || {};
+            if (!projectId) return;
+            handleDeleteProject(projectId, requestingUser);
+        };
+        window.addEventListener('requestProjectDelete', requestHandler);
+        return () => window.removeEventListener('requestProjectDelete', requestHandler);
+    }, []); 
+
+
+   useEffect(() => {
+        const deletedHandler = (e) => {
+            const deletedId = e?.detail?.projectId;
+            if (!deletedId) return;
+            removeProjectFromState(deletedId); // immediate UI update
+            refreshProjects().catch(() => {});
+        };
+        window.addEventListener('projectDeleted', deletedHandler);
+        return () => window.removeEventListener('projectDeleted', deletedHandler);
+    }, [removeProjectFromState, refreshProjects]);
+
+
+    const handleDeleteProject = async (projectId, requestingUsernameParam) => {
+        const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+        const requestingUsername = requestingUsernameParam || (loggedInUser ? loggedInUser.username : null);
+        
+        if (!requestingUsername) {
+            alert("Not authenticated to delete project.");
+            return;
         }
-    };
 
-    const handleDeleteProject = async (projectId) => {
+        removeProjectFromState(projectId);
+
         try {
+            console.log('handleDeleteProject called with', projectId, requestingUsername);
             const response = await fetch(`http://localhost:3000/api/project/${projectId}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ requestingUser: requestingUsername })
             });
             const data = await response.json();
             if (data.success) {
+                //removeProjectFromState(projectId);
+                refreshProjects().catch(err => console.error("refresh after delete failed", err));
                 alert("Project deleted successfully.");
-                refreshProjects();
             } else {
-                alert("Failed to delete project.");
+                await refreshProjects();
+                alert(data.message || "Failed to delete project.");
             }
         } catch (err) {
+            await refreshProjects();
             alert("Error deleting project.");
             console.error(err);
         }
