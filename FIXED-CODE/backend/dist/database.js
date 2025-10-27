@@ -494,6 +494,16 @@ function _deleteProject() {
         case 2:
           result = _context9.v;
           _context9.n = 3;
+          return activityCollection.deleteMany({
+            projectId: projectId
+          });
+        case 3:
+          _context9.n = 4;
+          return discussionCollection.deleteMany({
+            projectId: projectId
+          });
+        case 4:
+          _context9.n = 5;
           return userCollection.updateMany({
             projects: projectId.toString()
           }, {
@@ -501,17 +511,17 @@ function _deleteProject() {
               projects: projectId.toString()
             }
           });
-        case 3:
+        case 5:
           return _context9.a(2, result);
-        case 4:
-          _context9.p = 4;
+        case 6:
+          _context9.p = 6;
           _t8 = _context9.v;
           console.error("Error deleting project:", _t8);
           throw _t8;
-        case 5:
+        case 7:
           return _context9.a(2);
       }
-    }, _callee9, null, [[0, 4]]);
+    }, _callee9, null, [[0, 6]]);
   }));
   return _deleteProject.apply(this, arguments);
 }
@@ -1265,7 +1275,7 @@ function deleteUser(_x47) {
 }
 function _deleteUser() {
   _deleteUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21(userId) {
-    var user, ownedProjects, _iterator, _step, project, _t15, _t16;
+    var user, ownedProjects, _iterator, _step, project, projIdStr, _t15, _t16;
     return _regenerator().w(function (_context21) {
       while (1) switch (_context21.p = _context21.n) {
         case 0:
@@ -1308,14 +1318,15 @@ function _deleteUser() {
             _id: project._id
           });
         case 7:
+          projIdStr = project._id.toString();
           _context21.n = 8;
           return activityCollection.deleteMany({
-            projectId: project.projectId
+            projectId: projIdStr
           });
         case 8:
           _context21.n = 9;
           return discussionCollection.deleteMany({
-            projectId: project.projectId
+            projectId: projIdStr
           });
         case 9:
           _context21.n = 6;

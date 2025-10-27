@@ -5,7 +5,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import path from 'path';
 import Fuse from 'fuse.js';
 
-const uri = "mongodb+srv://<<username>>:<<password>>@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
+const uri = "mongodb+srv://test-user:test-password@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
 const client = new MongoClient(uri);
 
 const dbName = 'projectDB';
@@ -274,6 +274,12 @@ async function deleteProject(projectId) {
     try {
         await client.connect();
         const result = await projectCollection.deleteOne({_id: new ObjectId(projectId)});
+
+        // Also remove any activity entries (and related discussion) tied to this project
+        // Activities store projectId as the string form of the ObjectId
+        await activityCollection.deleteMany({ projectId: projectId });
+        await discussionCollection.deleteMany({ projectId: projectId });
+
         await userCollection.updateMany(
             { projects: projectId.toString() },
             { $pull: { projects: projectId.toString() } }
@@ -614,8 +620,10 @@ async function deleteUser(userId) {
         const ownedProjects = await projectCollection.find({ owner: user.username }).toArray();
         for (const project of ownedProjects) {
             await projectCollection.deleteOne({ _id: project._id });
-            await activityCollection.deleteMany({ projectId: project.projectId });
-            await discussionCollection.deleteMany({ projectId: project.projectId });
+            
+            const projIdStr = project._id.toString();
+            await activityCollection.deleteMany({ projectId: projIdStr });
+            await discussionCollection.deleteMany({ projectId: projIdStr });
         }
 
         await projectCollection.updateMany(

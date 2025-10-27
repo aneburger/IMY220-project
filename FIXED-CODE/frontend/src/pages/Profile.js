@@ -219,7 +219,7 @@ const Profile = () => {
                 {(canEditThisProfile || isFriend) && (
                     <>
                         <div id="sortE2">
-                            <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)}>
+                            <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)} >
                                 <option value="">Sort</option>
                                 <option value="Alphabetically">Alphabetically</option>
                                 <option value="Newest to oldest">Newest to oldest</option>

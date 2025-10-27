@@ -1,0 +1,7 @@
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: a small helper for a compact select */
+.tw-select-compact {
+  @apply tw-py-2 tw-pl-3 tw-pr-8 tw-text-sm;
+}
