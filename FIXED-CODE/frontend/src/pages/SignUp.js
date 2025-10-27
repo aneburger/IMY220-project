@@ -115,7 +115,7 @@ const SignUp = () => {
                 <h1 id="signUpHead">Sign Up</h1>
                 <form onSubmit={handleSubmit} action="/home" method="post">
                     <label htmlFor="username">Username: *</label>
-                    <input type="text" name="username" id="username2" placeholder="Username" autoComplete="username"
+                    <input type="text" name="username" id="username" placeholder="Username" autoComplete="username"
                             value={formData.username}
                             onChange={handleChange}
                             onBlur={handleUsernameBlur}/>
@@ -136,7 +136,7 @@ const SignUp = () => {
                     {errors.email && <p id="emailError">{errors.email}</p>}
 
                     <label htmlFor="password">Password: *</label>
-                    <input type="password" id="password2" name="password" placeholder="Password"
+                    <input type="password" id="password" name="password" placeholder="Password"
                             value={formData.password}
                             onChange={handleChange}
                             onBlur={handleChange}/>

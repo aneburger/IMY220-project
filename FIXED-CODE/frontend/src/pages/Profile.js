@@ -198,7 +198,7 @@ const Profile = () => {
                     </div>
                 )}
 
-                <p className="friendsLink" onClick={toggle}>Friends</p>
+                {(canEditThisProfile || isFriend) && <p className="friendsLink" onClick={toggle}>Friends</p>}
                 {isOpen && <FriendsList onCancel={toggle} onFriendRemoved={handleFriendRemoved} profileUsername={userData.username}/>}
                 
                 <ProfileTemplate userObj={userData} hideInfoCard={!canEditThisProfile && !isFriend}/>
@@ -219,7 +219,7 @@ const Profile = () => {
                 {(canEditThisProfile || isFriend) && (
                     <>
                         <div id="sortE2">
-                            <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)} >
+                            <select id="sortDrop2" name="sort" value={sort} onChange={e => setSort(e.target.value)}>
                                 <option value="">Sort</option>
                                 <option value="Alphabetically">Alphabetically</option>
                                 <option value="Newest to oldest">Newest to oldest</option>
