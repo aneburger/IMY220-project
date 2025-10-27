@@ -1373,7 +1373,7 @@
     border-bottom: 1px solid #ffffff77;
     margin-bottom: 1em;
     margin-top: 0em;
-    grid-template-columns: 11em 1fr 1fr;
+    grid-template-columns: 11em 7em 13.5em;
     grid-template-rows: 1fr;
     height: 2em;
     padding-bottom: 0.2em;
@@ -1388,6 +1388,7 @@
     color: #53c4fd;
     padding-right: 0em;
     margin-top: 0em;
+    margin-left: 3.5em;
 }
 
 #activityProjectDiv #activityListDiv .actProjectCard .actChecked {
