@@ -2,7 +2,7 @@
 
 
 import express from 'express';
-import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags, canModifyProject, canModifyUser } from './database.js';
+import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags, canModifyProject, canModifyUser, canModifyProjectFiles } from './database.js';
 import multer from 'multer';
 import path from 'path';
 import cors from 'cors';
@@ -362,10 +362,13 @@ app.put('/api/project/:projectId', async (req, res) => {
 
 app.put('/api/project/:projectId/files', async (req, res) => {
    const { projectId } = req.params;
-   const { files, requestingUser } = req.body;
+   const { files } = req.body;
+   const requestingUser = req.body.requestingUser || req.body.requestingUsername;
    try {
-        const allowed = await canModifyProject(requestingUser, projectId);
-        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+        const allowed = await canModifyProjectFiles(requestingUser, projectId);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
 
         const updatedProject = await updateProject(projectId, { files });
         res.json({ success: true, project: updatedProject });
@@ -619,7 +622,7 @@ app.post('/api/project/:projectId/upload-image', uploadProjectImage.single('proj
 
 app.post('/api/project/:projectId/upload-files', uploadFiles.array('files'), async (req, res) => {
     const { projectId } = req.params;
-    const requestingUser = req.body.requestingUser;
+    const requestingUser = req.body.requestingUser || req.body.requestingUsername;
     try {
         const project = await getProjectById(projectId);
         if (!project) return res.status(404).json({ success: false, message: "Project not found." });

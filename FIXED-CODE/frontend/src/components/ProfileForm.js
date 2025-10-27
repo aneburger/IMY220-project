@@ -47,14 +47,18 @@ const ProfileForm = ({ userObj, onCancel, onProfileUpdated, onImageUploaded }) =
                 body: JSON.stringify(payload)
             });
             const data = await response.json();
-            if(data.success) {
-                localStorage.setItem('user', JSON.stringify(data.user));
-                if(onProfileUpdated) {
-                    onProfileUpdated(data.user);
+            if (data.success) {
+                const isEditingSelf =
+                    currentUser &&
+                    (currentUser._id === data.user._id || currentUser.username === data.user.username);
+
+                if (isEditingSelf) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
                 }
-                onCancel();
+                if (onProfileUpdated) onProfileUpdated(data.user);
+                onCancel?.();
             } else {
-                alert("Failed to update profile.");
+                alert(data.message || "Failed to update profile.");
             }
         } catch (error) {
             alert("Error updating profile.");
@@ -74,10 +78,19 @@ const ProfileForm = ({ userObj, onCancel, onProfileUpdated, onImageUploaded }) =
             });
             const data = await response.json();
             if (data.success) {
-                localStorage.removeItem('user');
-                navigate("/");
+                const isDeletingSelf =
+                    currentUser &&
+                    (currentUser._id === userObj._id || currentUser.username === userObj.username);
+
+                if (isDeletingSelf) {
+                    localStorage.removeItem('user');
+                    navigate("/");
+                } else {
+                    onCancel?.();
+                    navigate("/home"); 
+                }
             } else {
-                alert("Failed to delete profile.");
+                alert(data.message || "Failed to delete profile.");
             }
         } catch (error) {
             alert("Error deleting profile.");

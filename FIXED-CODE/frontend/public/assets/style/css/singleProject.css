@@ -66,11 +66,12 @@
     font-family: 'Albert Sans';
     font-size: 1em;
     font-weight: 400;
-    padding: 6px 10px 6px 10px;
+    padding: 8px 10px 9px 10px;
     border-radius: 8px;
     transition: background-color 0.4s ease-in-out;
     margin-top: 1.6em;
-    margin-left: 5.4em;
+    margin-left: 0.6em;
+    width: 9em;
 }
 
 #filesAdd div #downloadFilesB:hover {
@@ -1050,9 +1051,14 @@
 }
 
 #filesAdd {
-    grid-column: 2/3;
-    grid-row: 4/5;
-    margin-left: 20em;
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    margin-left: 19em;
+    display: grid;
+    height: 4em;
+    width: 15em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
 }
 
 #filesAdd .filesAddB {
@@ -1065,15 +1071,19 @@
     font-size: 1.1em;
     font-weight: 500;
     margin-top: 1.5em;
-    margin-left: 0em;
+    margin-left: 0.7em;
     font-family: 'Albert Sans';
     transition: background-color 0.4s ease-in-out;
-    position: absolute;
+    
 }
 
 #filesAdd .filesAddB:hover {
     cursor: pointer;
     background-color: #45c1ffde;
+}
+
+#downloadFilesDiv {
+    grid-column: 2 / 3;
 }
 
 /* #filesDiv #filesListDiv .fileCard {

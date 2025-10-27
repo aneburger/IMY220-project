@@ -1013,7 +1013,19 @@ async function canModifyUser(requestingUsername, targetUserIdOrUsername) {
 }
 
 
+async function canModifyProjectFiles(requestingUsername, projectId) {
+    await client.connect();
+    if (!requestingUsername) return false;
 
+    const reqUser = await userCollection.findOne({ username: requestingUsername });
+    if (reqUser?.role === 'admin') return true;
+
+    const project = await projectCollection.findOne({ _id: new ObjectId(projectId) });
+    if (!project) return false;
+
+    if (project.owner === requestingUsername) return true;
+    return project.checkedOutBy === requestingUsername;
+}
 
 
 export { getUser };
@@ -1053,3 +1065,4 @@ export { fuzzySearchProjects };
 export { fuzzySearchHashtags };
 export { canModifyProject };
 export { canModifyUser };
+export { canModifyProjectFiles };

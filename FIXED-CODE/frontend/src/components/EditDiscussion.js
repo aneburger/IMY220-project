@@ -14,7 +14,7 @@ const EditDiscussion = ({ projectId, onMessageAdded }) => {
 
     return (
         <div id="discussEditButtonDiv">
-            <button onClick={toggle}>Add +</button>
+            <button onClick={toggle} style={{ cursor: "pointer" }}>Add +</button>
             {isOpen && <DiscussionForm onCancel={toggle} projectId={projectId} onMessageAdded={onMessageAdded} />}
         </div>
     );

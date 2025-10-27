@@ -10,6 +10,7 @@ exports.addProject = addProject;
 exports.addProjectMember = addProjectMember;
 exports.addUser = addUser;
 exports.canModifyProject = canModifyProject;
+exports.canModifyProjectFiles = canModifyProjectFiles;
 exports.canModifyUser = canModifyUser;
 exports.changeProjectOwner = changeProjectOwner;
 exports.checkInProject = checkInProject;
@@ -2236,4 +2237,58 @@ function _canModifyUser() {
     }, _callee36, null, [[0, 10]]);
   }));
   return _canModifyUser.apply(this, arguments);
+}
+function canModifyProjectFiles(_x73, _x74) {
+  return _canModifyProjectFiles.apply(this, arguments);
+}
+function _canModifyProjectFiles() {
+  _canModifyProjectFiles = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee37(requestingUsername, projectId) {
+    var reqUser, project;
+    return _regenerator().w(function (_context37) {
+      while (1) switch (_context37.n) {
+        case 0:
+          _context37.n = 1;
+          return client.connect();
+        case 1:
+          if (requestingUsername) {
+            _context37.n = 2;
+            break;
+          }
+          return _context37.a(2, false);
+        case 2:
+          _context37.n = 3;
+          return userCollection.findOne({
+            username: requestingUsername
+          });
+        case 3:
+          reqUser = _context37.v;
+          if (!((reqUser === null || reqUser === void 0 ? void 0 : reqUser.role) === 'admin')) {
+            _context37.n = 4;
+            break;
+          }
+          return _context37.a(2, true);
+        case 4:
+          _context37.n = 5;
+          return projectCollection.findOne({
+            _id: new _mongodb.ObjectId(projectId)
+          });
+        case 5:
+          project = _context37.v;
+          if (project) {
+            _context37.n = 6;
+            break;
+          }
+          return _context37.a(2, false);
+        case 6:
+          if (!(project.owner === requestingUsername)) {
+            _context37.n = 7;
+            break;
+          }
+          return _context37.a(2, true);
+        case 7:
+          return _context37.a(2, project.checkedOutBy === requestingUsername);
+      }
+    }, _callee37);
+  }));
+  return _canModifyProjectFiles.apply(this, arguments);
 }

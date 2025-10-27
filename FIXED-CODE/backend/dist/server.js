@@ -852,15 +852,16 @@ app.put('/api/project/:projectId', /*#__PURE__*/function () {
 }());
 app.put('/api/project/:projectId/files', /*#__PURE__*/function () {
   var _ref17 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(req, res) {
-    var projectId, _req$body, files, requestingUser, allowed, updatedProject, _t15;
+    var projectId, files, requestingUser, allowed, updatedProject, _t15;
     return _regenerator().w(function (_context17) {
       while (1) switch (_context17.p = _context17.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body = req.body, files = _req$body.files, requestingUser = _req$body.requestingUser;
+          files = req.body.files;
+          requestingUser = req.body.requestingUser || req.body.requestingUsername;
           _context17.p = 1;
           _context17.n = 2;
-          return (0, _database.canModifyProject)(requestingUser, projectId);
+          return (0, _database.canModifyProjectFiles)(requestingUser, projectId);
         case 2:
           allowed = _context17.v;
           if (allowed) {
@@ -903,12 +904,12 @@ app.put('/api/project/:projectId/files', /*#__PURE__*/function () {
 }());
 app.put('/api/project/:projectId/owner', /*#__PURE__*/function () {
   var _ref18 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(req, res) {
-    var projectId, _req$body2, newOwnerUsername, previousOwnerUsername, result, updatedProject, _t16;
+    var projectId, _req$body, newOwnerUsername, previousOwnerUsername, result, updatedProject, _t16;
     return _regenerator().w(function (_context18) {
       while (1) switch (_context18.p = _context18.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body2 = req.body, newOwnerUsername = _req$body2.newOwnerUsername, previousOwnerUsername = _req$body2.previousOwnerUsername;
+          _req$body = req.body, newOwnerUsername = _req$body.newOwnerUsername, previousOwnerUsername = _req$body.previousOwnerUsername;
           _context18.p = 1;
           _context18.n = 2;
           return (0, _database.changeProjectOwner)(projectId, newOwnerUsername, previousOwnerUsername);
@@ -948,12 +949,12 @@ app.put('/api/project/:projectId/owner', /*#__PURE__*/function () {
 }());
 app.put('/api/profile/:userId/languages', /*#__PURE__*/function () {
   var _ref19 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(req, res) {
-    var userId, _req$body3, language, requestingUser, allowed, user, updatedLanguages, updatedUser, _t17;
+    var userId, _req$body2, language, requestingUser, allowed, user, updatedLanguages, updatedUser, _t17;
     return _regenerator().w(function (_context19) {
       while (1) switch (_context19.p = _context19.n) {
         case 0:
           userId = req.params.userId;
-          _req$body3 = req.body, language = _req$body3.language, requestingUser = _req$body3.requestingUser;
+          _req$body2 = req.body, language = _req$body2.language, requestingUser = _req$body2.requestingUser;
           _context19.p = 1;
           _context19.n = 2;
           return (0, _database.canModifyUser)(requestingUser, userId);
@@ -1013,11 +1014,11 @@ app.put('/api/profile/:userId/languages', /*#__PURE__*/function () {
 }());
 app.post('/api/signup', /*#__PURE__*/function () {
   var _ref20 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(req, res) {
-    var _req$body4, username, surname, email, password, user, _t18;
+    var _req$body3, username, surname, email, password, user, _t18;
     return _regenerator().w(function (_context20) {
       while (1) switch (_context20.p = _context20.n) {
         case 0:
-          _req$body4 = req.body, username = _req$body4.username, surname = _req$body4.surname, email = _req$body4.email, password = _req$body4.password;
+          _req$body3 = req.body, username = _req$body3.username, surname = _req$body3.surname, email = _req$body3.email, password = _req$body3.password;
           console.log("Signup attempt: ", username, surname, email, password);
           _context20.p = 1;
           _context20.n = 2;
@@ -1051,11 +1052,11 @@ app.post('/api/signup', /*#__PURE__*/function () {
 }());
 app.post('/api/login', /*#__PURE__*/function () {
   var _ref21 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21(req, res) {
-    var _req$body5, username, password, user, _t19;
+    var _req$body4, username, password, user, _t19;
     return _regenerator().w(function (_context21) {
       while (1) switch (_context21.p = _context21.n) {
         case 0:
-          _req$body5 = req.body, username = _req$body5.username, password = _req$body5.password;
+          _req$body4 = req.body, username = _req$body4.username, password = _req$body4.password;
           console.log("Login attempt: ", username, password);
           _context21.p = 1;
           _context21.n = 2;
@@ -1107,11 +1108,11 @@ app.post('/api/login', /*#__PURE__*/function () {
 }());
 app.post('/api/project', /*#__PURE__*/function () {
   var _ref22 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee22(req, res) {
-    var _req$body6, projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId, project, _t20;
+    var _req$body5, projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId, project, _t20;
     return _regenerator().w(function (_context22) {
       while (1) switch (_context22.p = _context22.n) {
         case 0:
-          _req$body6 = req.body, projectName = _req$body6.projectName, createdOn = _req$body6.createdOn, description = _req$body6.description, type = _req$body6.type, files = _req$body6.files, members = _req$body6.members, owner = _req$body6.owner, version = _req$body6.version, status = _req$body6.status, projectImage = _req$body6.projectImage, checkedOutBy = _req$body6.checkedOutBy, checkInMessages = _req$body6.checkInMessages, userId = _req$body6.userId;
+          _req$body5 = req.body, projectName = _req$body5.projectName, createdOn = _req$body5.createdOn, description = _req$body5.description, type = _req$body5.type, files = _req$body5.files, members = _req$body5.members, owner = _req$body5.owner, version = _req$body5.version, status = _req$body5.status, projectImage = _req$body5.projectImage, checkedOutBy = _req$body5.checkedOutBy, checkInMessages = _req$body5.checkInMessages, userId = _req$body5.userId;
           _context22.p = 1;
           _context22.n = 2;
           return (0, _database.addProject)(projectName, createdOn, description, type, files, members, owner, version, status, projectImage, checkedOutBy, checkInMessages, userId);
@@ -1143,12 +1144,12 @@ app.post('/api/project', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/member', /*#__PURE__*/function () {
   var _ref23 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee23(req, res) {
-    var projectId, _req$body7, memberUsername, requestingUser, allowed, result, updatedProject, _t21;
+    var projectId, _req$body6, memberUsername, requestingUser, allowed, result, updatedProject, _t21;
     return _regenerator().w(function (_context23) {
       while (1) switch (_context23.p = _context23.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body7 = req.body, memberUsername = _req$body7.memberUsername, requestingUser = _req$body7.requestingUser;
+          _req$body6 = req.body, memberUsername = _req$body6.memberUsername, requestingUser = _req$body6.requestingUser;
           _context23.p = 1;
           _context23.n = 2;
           return (0, _database.canModifyProject)(requestingUser, projectId);
@@ -1202,11 +1203,11 @@ app.post('/api/project/:projectId/member', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request', /*#__PURE__*/function () {
   var _ref24 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee24(req, res) {
-    var _req$body8, fromUsername, toUsername, _t22;
+    var _req$body7, fromUsername, toUsername, _t22;
     return _regenerator().w(function (_context24) {
       while (1) switch (_context24.p = _context24.n) {
         case 0:
-          _req$body8 = req.body, fromUsername = _req$body8.fromUsername, toUsername = _req$body8.toUsername;
+          _req$body7 = req.body, fromUsername = _req$body7.fromUsername, toUsername = _req$body7.toUsername;
           _context24.p = 1;
           _context24.n = 2;
           return (0, _database.sendFriendRequest)(fromUsername, toUsername);
@@ -1234,11 +1235,11 @@ app.post('/api/friend-request', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request/accept', /*#__PURE__*/function () {
   var _ref25 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee25(req, res) {
-    var _req$body9, userUsername, friendUsername, _t23;
+    var _req$body8, userUsername, friendUsername, _t23;
     return _regenerator().w(function (_context25) {
       while (1) switch (_context25.p = _context25.n) {
         case 0:
-          _req$body9 = req.body, userUsername = _req$body9.userUsername, friendUsername = _req$body9.friendUsername;
+          _req$body8 = req.body, userUsername = _req$body8.userUsername, friendUsername = _req$body8.friendUsername;
           _context25.p = 1;
           _context25.n = 2;
           return (0, _database.acceptFriendRequest)(userUsername, friendUsername);
@@ -1266,11 +1267,11 @@ app.post('/api/friend-request/accept', /*#__PURE__*/function () {
 }());
 app.post('/api/friend-request/reject', /*#__PURE__*/function () {
   var _ref26 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee26(req, res) {
-    var _req$body0, userUsername, friendUsername, _t24;
+    var _req$body9, userUsername, friendUsername, _t24;
     return _regenerator().w(function (_context26) {
       while (1) switch (_context26.p = _context26.n) {
         case 0:
-          _req$body0 = req.body, userUsername = _req$body0.userUsername, friendUsername = _req$body0.friendUsername;
+          _req$body9 = req.body, userUsername = _req$body9.userUsername, friendUsername = _req$body9.friendUsername;
           _context26.p = 1;
           _context26.n = 2;
           return (0, _database.rejectFriendRequest)(userUsername, friendUsername);
@@ -1298,11 +1299,11 @@ app.post('/api/friend-request/reject', /*#__PURE__*/function () {
 }());
 app.post('/api/friend/remove', /*#__PURE__*/function () {
   var _ref27 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee27(req, res) {
-    var _req$body1, userUsername, friendUsername, requestingUser, allowed, _t25;
+    var _req$body0, userUsername, friendUsername, requestingUser, allowed, _t25;
     return _regenerator().w(function (_context27) {
       while (1) switch (_context27.p = _context27.n) {
         case 0:
-          _req$body1 = req.body, userUsername = _req$body1.userUsername, friendUsername = _req$body1.friendUsername, requestingUser = _req$body1.requestingUser;
+          _req$body0 = req.body, userUsername = _req$body0.userUsername, friendUsername = _req$body0.friendUsername, requestingUser = _req$body0.requestingUser;
           _context27.p = 1;
           _context27.n = 2;
           return (0, _database.canModifyUser)(requestingUser, userUsername);
@@ -1343,12 +1344,12 @@ app.post('/api/friend/remove', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/discussion', /*#__PURE__*/function () {
   var _ref28 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee28(req, res) {
-    var projectId, _req$body10, sender, content, project, user, isAdmin, isMember, isOwner, message, _t26;
+    var projectId, _req$body1, sender, content, project, user, isAdmin, isMember, isOwner, message, _t26;
     return _regenerator().w(function (_context28) {
       while (1) switch (_context28.p = _context28.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body10 = req.body, sender = _req$body10.sender, content = _req$body10.content;
+          _req$body1 = req.body, sender = _req$body1.sender, content = _req$body1.content;
           _context28.p = 1;
           _context28.n = 2;
           return (0, _database.getProjectById)(projectId);
@@ -1452,12 +1453,12 @@ app.post('/api/project/:projectId/checkout', /*#__PURE__*/function () {
 }());
 app.post('/api/project/:projectId/checkin', /*#__PURE__*/function () {
   var _ref30 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee30(req, res) {
-    var projectId, _req$body11, username, files, checkInMessage, version, result, _t28;
+    var projectId, _req$body10, username, files, checkInMessage, version, result, _t28;
     return _regenerator().w(function (_context30) {
       while (1) switch (_context30.p = _context30.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body11 = req.body, username = _req$body11.username, files = _req$body11.files, checkInMessage = _req$body11.checkInMessage, version = _req$body11.version;
+          _req$body10 = req.body, username = _req$body10.username, files = _req$body10.files, checkInMessage = _req$body10.checkInMessage, version = _req$body10.version;
           _context30.p = 1;
           _context30.n = 2;
           return (0, _database.checkInProject)(projectId, username, files, checkInMessage, version);
@@ -1614,7 +1615,7 @@ app.post('/api/project/:projectId/upload-files', uploadFiles.array('files'), /*#
       while (1) switch (_context33.p = _context33.n) {
         case 0:
           projectId = req.params.projectId;
-          requestingUser = req.body.requestingUser;
+          requestingUser = req.body.requestingUser || req.body.requestingUsername;
           _context33.p = 1;
           _context33.n = 2;
           return (0, _database.getProjectById)(projectId);
@@ -1786,12 +1787,12 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), /*#__P
 
 app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), /*#__PURE__*/function () {
   var _ref35 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee35(req, res) {
-    var projectId, _req$body12, username, checkInMessage, version, newFileNames, project, updatedFiles, updatedMessages, updatedProject, _t34;
+    var projectId, _req$body11, username, checkInMessage, version, newFileNames, project, updatedFiles, updatedMessages, updatedProject, _t34;
     return _regenerator().w(function (_context35) {
       while (1) switch (_context35.p = _context35.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body12 = req.body, username = _req$body12.username, checkInMessage = _req$body12.checkInMessage, version = _req$body12.version;
+          _req$body11 = req.body, username = _req$body11.username, checkInMessage = _req$body11.checkInMessage, version = _req$body11.version;
           _context35.p = 1;
           newFileNames = req.files ? req.files.map(function (f) {
             return f.originalname;
@@ -1862,13 +1863,13 @@ app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), /*
 }());
 app["delete"]('/api/project/:projectId', /*#__PURE__*/function () {
   var _ref36 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee36(req, res) {
-    var _req$body13, _req$query;
+    var _req$body12, _req$query;
     var projectId, requestingUser, project, allowed, result, _t35;
     return _regenerator().w(function (_context36) {
       while (1) switch (_context36.p = _context36.n) {
         case 0:
           projectId = req.params.projectId; //const { requestingUser } = req.body;
-          requestingUser = ((_req$body13 = req.body) === null || _req$body13 === void 0 ? void 0 : _req$body13.requestingUser) || ((_req$query = req.query) === null || _req$query === void 0 ? void 0 : _req$query.requestingUser);
+          requestingUser = ((_req$body12 = req.body) === null || _req$body12 === void 0 ? void 0 : _req$body12.requestingUser) || ((_req$query = req.query) === null || _req$query === void 0 ? void 0 : _req$query.requestingUser);
           _context36.p = 1;
           _context36.n = 2;
           return (0, _database.getProjectById)(projectId);
@@ -1926,12 +1927,12 @@ app["delete"]('/api/project/:projectId', /*#__PURE__*/function () {
 }());
 app["delete"]('/api/project/:projectId/member', /*#__PURE__*/function () {
   var _ref37 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee37(req, res) {
-    var projectId, _req$body14, memberUsername, requestingUser, allowed, result, updatedProject, _t36;
+    var projectId, _req$body13, memberUsername, requestingUser, allowed, result, updatedProject, _t36;
     return _regenerator().w(function (_context37) {
       while (1) switch (_context37.p = _context37.n) {
         case 0:
           projectId = req.params.projectId;
-          _req$body14 = req.body, memberUsername = _req$body14.memberUsername, requestingUser = _req$body14.requestingUser;
+          _req$body13 = req.body, memberUsername = _req$body13.memberUsername, requestingUser = _req$body13.requestingUser;
           _context37.p = 1;
           _context37.n = 2;
           return (0, _database.canModifyProject)(requestingUser, projectId);
@@ -1985,13 +1986,13 @@ app["delete"]('/api/project/:projectId/member', /*#__PURE__*/function () {
 }());
 app["delete"]('/api/profile/:userId', /*#__PURE__*/function () {
   var _ref38 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee38(req, res) {
-    var _req$body15, _req$query2;
+    var _req$body14, _req$query2;
     var userId, requestingUser, allowed, result, _t37;
     return _regenerator().w(function (_context38) {
       while (1) switch (_context38.p = _context38.n) {
         case 0:
           userId = req.params.userId;
-          requestingUser = ((_req$body15 = req.body) === null || _req$body15 === void 0 ? void 0 : _req$body15.requestingUser) || ((_req$query2 = req.query) === null || _req$query2 === void 0 ? void 0 : _req$query2.requestingUser);
+          requestingUser = ((_req$body14 = req.body) === null || _req$body14 === void 0 ? void 0 : _req$body14.requestingUser) || ((_req$query2 = req.query) === null || _req$query2 === void 0 ? void 0 : _req$query2.requestingUser);
           _context38.p = 1;
           _context38.n = 2;
           return (0, _database.canModifyUser)(requestingUser, userId);
