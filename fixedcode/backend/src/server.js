@@ -2,14 +2,14 @@
 
 
 import express from 'express';
-import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags } from './database.js';
+import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags, canModifyProject, canModifyUser, canModifyProjectFiles } from './database.js';
 import multer from 'multer';
 import path from 'path';
 import cors from 'cors';
 import fs from 'fs';
 import archiver from 'archiver'; 
 
-import { fileURLToPath } from 'url';
+//import { fileURLToPath } from 'url';
 
 
 
@@ -17,8 +17,8 @@ const app = express();
 const port = 3000;
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 // const __dirname = path.resolve();
 
@@ -30,10 +30,16 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "../../frontend/public")));
 
+app.use('/uploadedImages', express.static(path.join(__dirname, '../uploadedImages')));
+app.use('/uploadedFiles', express.static(path.join(__dirname, '../uploadedFiles')));
 
+
+// PROFILE IMAGES
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'frontend', 'public', 'assets', 'images'));
+        const dir = path.join(__dirname, '..', 'uploadedImages', 'profiles');
+        fs.mkdirSync(dir, { recursive: true });
+        cb(null, dir);
     },
     filename: function (req, file, cb) {
         const ext = path.extname(file.originalname);
@@ -42,9 +48,15 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
+
+
+// PROJECT IMAGES
 const projectImageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'frontend', 'public', 'assets', 'images'));
+        const dir = path.join(__dirname, '..', 'uploadedImages', 'projects');
+        fs.mkdirSync(dir, { recursive: true });
+        cb(null, dir);
     },
     filename: function (req, file, cb) {
         const ext = path.extname(file.originalname);
@@ -56,9 +68,12 @@ const uploadProjectImage = multer({
     limits: { fileSize: 5 * 1024 * 1024 } // limit images to 5MB
 });
 
+
+
+// PROJECT FILES UPLOAD
 const filesStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const dir = path.join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', req.params.projectId);
+        const dir = path.join(__dirname, '..', 'uploadedFiles', req.params.projectId);
         fs.mkdirSync(dir, { recursive: true });
         cb(null, dir);
     },
@@ -69,9 +84,10 @@ const filesStorage = multer.diskStorage({
 const uploadFiles = multer({ storage: filesStorage });
 
 
+// UPLOAD NEW PROJECT FILES
 const newFilesStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const tempDir = path.join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', 'temp');
+        const tempDir = path.join(__dirname, '..', 'uploadedFiles', 'temp');
         fs.mkdirSync(tempDir, { recursive: true });
         cb(null, tempDir);
     },
@@ -239,7 +255,8 @@ app.get('/api/project/:projectId/download', async (req, res) => {
         if (!info || !info.files || info.files.length === 0) {
             return res.status(404).json({ success: false, message: "No files to download." });
         }
-        const filesDir = info.dir;
+
+        const filesDir = (info.dir && fs.existsSync(info.dir)) ? info.dir : path.join(__dirname, '..', 'uploadedFiles', projectId);
 
         if (!fs.existsSync(filesDir)) {
             return res.status(404).json({ success: false, message: "Files not found." });
@@ -268,7 +285,7 @@ app.get('/api/project/:projectId/download', async (req, res) => {
 
 app.get('/api/project/:projectId/download-file/:filename', async (req, res) => {
     const { projectId, filename } = req.params;
-    const filePath = path.join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', projectId, filename);
+    const filePath = path.join(__dirname, '..', 'uploadedFiles', projectId, filename);
 
     if (!fs.existsSync(filePath)) {
         return res.status(404).json({ success: false, message: "File not found." });
@@ -303,22 +320,38 @@ app.get('/api/search', async (req, res) => {
 
 
 
+
+
 app.put('/api/profile/:userId', async (req, res) => {
    const { userId } = req.params;
-   const updateFields = req.body;
+   const updateFields = { ...req.body };
+   const requestingUser = updateFields.requestingUser;
+   delete updateFields.requestingUser;
    try {
-      const updatedUser = await updateUser(userId, updateFields);
-      res.json({ success: true, user: updatedUser });
-   } catch (error) {
-      console.error("Error updating profile:", error);
-      res.status(500).json({ success: false, message: "Server error" });
-   }
+        const allowed = await canModifyUser(requestingUser, userId);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
+        const updatedUser = await updateUser(userId, updateFields);
+        res.json({ success: true, user: updatedUser });
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
 });
 
 app.put('/api/project/:projectId', async (req, res) => {
    const { projectId } = req.params;
    const updateFields = req.body;
+   const requestingUser = req.body.requestingUser;
    try {
+        const project = await getProjectById(projectId);
+        if (!project) return res.status(404).json({ success: false, message: "Project not found." });
+
+        const allowed = await canModifyProject(requestingUser, projectId);
+        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+
         const updatedProject = await updateProject(projectId, updateFields);
         res.json({ success: true, project: updatedProject });
     } catch (error) {
@@ -330,13 +363,19 @@ app.put('/api/project/:projectId', async (req, res) => {
 app.put('/api/project/:projectId/files', async (req, res) => {
    const { projectId } = req.params;
    const { files } = req.body;
+   const requestingUser = req.body.requestingUser || req.body.requestingUsername;
    try {
-      const updatedProject = await updateProject(projectId, { files });
-      res.json({ success: true, project: updatedProject });
-   } catch (error) {
-      console.error("Error adding files:", error);
-      res.status(500).json({ success: false, message: "Server error" });
-   }
+        const allowed = await canModifyProjectFiles(requestingUser, projectId);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
+        const updatedProject = await updateProject(projectId, { files });
+        res.json({ success: true, project: updatedProject });
+    } catch (error) {
+        console.error("Error adding files:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
 });
 
 app.put('/api/project/:projectId/owner', async (req, res) => {
@@ -356,8 +395,13 @@ app.put('/api/project/:projectId/owner', async (req, res) => {
 
 app.put('/api/profile/:userId/languages', async (req, res) => {
     const { userId } = req.params;
-    const { language } = req.body;
+    const { language, requestingUser } = req.body;
     try {
+        const allowed = await canModifyUser(requestingUser, userId);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
         const user = await getUserById(userId);
         if (!user) return res.status(404).json({ success: false, message: "User not found." });
 
@@ -423,19 +467,22 @@ app.post('/api/project', async (req, res) => {
 
 app.post('/api/project/:projectId/member', async (req, res) => {
    const { projectId } = req.params;
-   const { memberUsername } = req.body;
+   const { memberUsername, requestingUser } = req.body;
    try {
-      const result = await addProjectMember(projectId, memberUsername);
-      if (!result.success) {
-         return res.status(400).json(result);
-      }
-        
-      const updatedProject = await getProjectById(projectId);
-      res.json({ success: true, project: updatedProject });
-   } catch (error) {
-      console.error("Error adding member:", error);
-      res.status(500).json({ success: false, message: "Server error" });
-   }
+        const allowed = await canModifyProject(requestingUser, projectId);
+        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+
+        const result = await addProjectMember(projectId, memberUsername);
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+            
+        const updatedProject = await getProjectById(projectId);
+        res.json({ success: true, project: updatedProject });
+    } catch (error) {
+        console.error("Error adding member:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
 });  
 
 app.post('/api/friend-request', async (req, res) => {
@@ -469,8 +516,13 @@ app.post('/api/friend-request/reject', async (req, res) => {
 });
 
 app.post('/api/friend/remove', async (req, res) => {
-    const { userUsername, friendUsername } = req.body;
+    const { userUsername, friendUsername, requestingUser } = req.body;
     try {
+        const allowed = await canModifyUser(requestingUser, userUsername);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
         await removeFriend(userUsername, friendUsername);
         res.json({ success: true });
     } catch (error) {
@@ -482,6 +534,18 @@ app.post('/api/project/:projectId/discussion', async (req, res) => {
     const { projectId } = req.params;
     const { sender, content } = req.body;
     try {
+        const project = await getProjectById(projectId);
+        if (!project) return res.status(404).json({ success: false, message: "Project not found." });
+
+        const user = await getUser(sender);
+        const isAdmin = user && user.role === 'admin';
+        const isMember = project.members && project.members.includes(sender);
+        const isOwner = project.owner === sender;
+
+        if (!(isAdmin || isMember || isOwner)) {
+            return res.status(403).json({ success: false, message: "Permission denied to post in discussion." });
+        }
+
         const message = await addDiscussionMessage(projectId, sender, content);
         res.json({ success: true, message });
     } catch (error) {
@@ -522,8 +586,18 @@ app.post('/api/project/:projectId/checkin', async (req, res) => {
 app.post('/api/profile/:userId/upload-image', upload.single('profileImage'), async (req, res) => {
     const { userId } = req.params;
     const username = req.body.username;
-    const imagePath = `/assets/images/${req.file.filename}`;
+    const requestingUser = req.body.requestingUser;
+    const imagePath = `/uploadedImages/profiles/${req.file.filename}`;
     try {
+        const targetUser = await getUserById(userId);
+        if (!targetUser) return res.status(404).json({ success: false, message: "User not found." });
+
+        const requester = await getUser(requestingUser);
+        const isAdmin = requester && requester.role === 'admin';
+        if (!(isAdmin || (requestingUser && requestingUser === targetUser.username))) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
         const updatedUser = await updateUser(userId, { image: imagePath });
         res.json({ success: true, image: imagePath, user: updatedUser });
     } catch (error) {
@@ -533,8 +607,12 @@ app.post('/api/profile/:userId/upload-image', upload.single('profileImage'), asy
 
 app.post('/api/project/:projectId/upload-image', uploadProjectImage.single('projectImage'), async (req, res) => {
     const { projectId } = req.params;
-    const imagePath = `/assets/images/${req.file.filename}`;
+    const requestingUser = req.body.requestingUser;
+    const imagePath = `/uploadedImages/projects/${req.file.filename}`;
     try {
+        const allowed = await canModifyProject(requestingUser, projectId);
+        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+
         const updatedProject = await updateProject(projectId, { projectImage: imagePath });
         res.json({ success: true, image: imagePath, project: updatedProject });
     } catch (error) {
@@ -544,7 +622,20 @@ app.post('/api/project/:projectId/upload-image', uploadProjectImage.single('proj
 
 app.post('/api/project/:projectId/upload-files', uploadFiles.array('files'), async (req, res) => {
     const { projectId } = req.params;
+    const requestingUser = req.body.requestingUser || req.body.requestingUsername;
     try {
+        const project = await getProjectById(projectId);
+        if (!project) return res.status(404).json({ success: false, message: "Project not found." });
+
+        const user = await getUser(requestingUser);
+        const isAdmin = user && user.role === 'admin';
+        const isMember = project.members && project.members.includes(requestingUser);
+        const isOwner = project.owner === requestingUser;
+
+        if (!(isAdmin || isMember || isOwner)) {
+            return res.status(403).json({ success: false, message: "Permission denied to upload files." });
+        }
+
         const filesList = req.body.filesList ? JSON.parse(req.body.filesList) : req.files.map(f => f.originalname);
         const updatedProject = await updateProject(projectId, { files: filesList });
 
@@ -563,7 +654,6 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), async 
         projectData.checkInMessages = Array.isArray(projectData.checkInMessages)
             ? projectData.checkInMessages
             : (projectData.checkInMessages ? JSON.parse(projectData.checkInMessages) : []);
-
 
         const newProject = await addProject(
             projectData.projectName,
@@ -591,7 +681,7 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), async 
         
         const projectId = newProject._id ? newProject._id.toString() : await getProjectIdByNameAndOwner(projectData.projectName, projectData.owner);
 
-        const projectDir = path.join(__dirname, 'frontend', 'public', 'assets', 'projectFiles', projectId);
+        const projectDir = path.join(__dirname, '..', 'uploadedFiles', projectId);
         fs.mkdirSync(projectDir, { recursive: true });
         req.files.forEach(file => {
             const oldPath = file.path;
@@ -602,8 +692,6 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), async 
         const createdProject = await getProjectById(projectId);
 
         res.json({ success: true, project: createdProject });
-
-        // res.json({ success: true, project: newProject });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: "Server error" });
@@ -706,35 +794,52 @@ app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), as
 
 app.delete('/api/project/:projectId', async (req, res) => {
    const { projectId } = req.params;
+   //const { requestingUser } = req.body;
+   const requestingUser = req.body?.requestingUser || req.query?.requestingUser;
    try {
-      const result = await deleteProject(projectId);
-      res.json({ success: true, message: "Project deleted successfully.", result });
-   } catch (error) {
-      console.error("Error deleting project:", error);
-      res.status(500).json({ success: false, message: "Server error" });
-   }
+        const project = await getProjectById(projectId);
+        if (!project) return res.status(404).json({ success: false, message: "Project not found." });
+
+        const allowed = await canModifyProject(requestingUser, projectId);
+        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+
+        const result = await deleteProject(projectId);
+        res.json({ success: true, message: "Project deleted successfully.", result });
+    } catch (error) {
+        console.error("Error deleting project:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
 });
 
 app.delete('/api/project/:projectId/member', async (req, res) => {
    const { projectId } = req.params;
-   const { memberUsername } = req.body;
+   const { memberUsername, requestingUser } = req.body;
    try {
-      const result = await removeProjectMember(projectId, memberUsername);
-      if (!result.success) {
-         return res.status(400).json(result);
-      }
-        
-      const updatedProject = await getProjectById(projectId);
-      res.json({ success: true, project: updatedProject });
-   } catch (error) {
-      console.error("Error deleting member:", error);
-      res.status(500).json({ success: false, message: "Server error" });
-   }
+        const allowed = await canModifyProject(requestingUser, projectId);
+        if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
+
+        const result = await removeProjectMember(projectId, memberUsername);
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+            
+        const updatedProject = await getProjectById(projectId);
+        res.json({ success: true, project: updatedProject });
+    } catch (error) {
+        console.error("Error deleting member:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
 });
 
 app.delete('/api/profile/:userId', async (req, res) => {
     const { userId } = req.params;
+    const requestingUser = req.body?.requestingUser || req.query?.requestingUser;
     try {
+        const allowed = await canModifyUser(requestingUser, userId);
+        if (!allowed) {
+            return res.status(403).json({ success: false, message: "Permission denied." });
+        }
+
         const result = await deleteUser(userId);
         if (!result.success) {
             return res.status(404).json(result);
@@ -761,8 +866,12 @@ app.delete('/api/profile/:userId', async (req, res) => {
 //   res.sendFile(path.resolve('frontend', 'public', 'index.html'));
 // });
 
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
+// app.get("/*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../../frontend/public", "index.html"));
+// });
+
+app.get(/.*/, (req, res) =>{
+    res.sendFile(path.resolve(__dirname, '../../frontend/public', 'index.html'));
 });
 
 

@@ -81,6 +81,11 @@ const AddFiles = ({ projectFiles, projectId, onFilesAdded, onCancel }) => {
         formData.append("projectId", projectId);
         formData.append("filesList", JSON.stringify(newFiles)); 
 
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        if (currentUser?.username) {
+            formData.append("requestingUser", currentUser.username);
+        }
+
         const response = await fetch(`http://localhost:3000/api/project/${projectId}/upload-files`, {
             method: "POST",
             body: formData
@@ -89,6 +94,8 @@ const AddFiles = ({ projectFiles, projectId, onFilesAdded, onCancel }) => {
         if (data.success) {
             onFilesAdded(data.project.files);
             onCancel();
+        } else {
+            alert(data.message || "Failed to upload files.");
         }
     };
 

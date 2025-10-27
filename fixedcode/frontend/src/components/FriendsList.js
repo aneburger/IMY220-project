@@ -15,14 +15,14 @@ const FriendsList = ({ onCancel, onFriendRemoved, profileUsername }) => {
             .then(data => {
                 if (data.success) setFriends(data.friends);
             });
-    }, [user.username]);
+    }, [user.username, profileUsername]);
 
     const handleRemoveFriend = async (friendUsername) => {
         try {
             const response = await fetch("http://localhost:3000/api/friend/remove", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userUsername: user.username, friendUsername })
+                body: JSON.stringify({ userUsername: profileUsername, friendUsername, requestingUser: user.username })
             });
             const data = await response.json();
             if (response.ok && data.success) {
@@ -49,7 +49,7 @@ const FriendsList = ({ onCancel, onFriendRemoved, profileUsername }) => {
                             .map(friend => (
                                 <div key={friend}>
                                     <Link to={`/profile/${friend}`}><p style={{ cursor: "pointer"}}>{friend}</p></Link>
-                                    {user.username === profileUsername && (
+                                    {(user.username === profileUsername || user.role == 'admin') && (
                                         <button onClick={() => handleRemoveFriend(friend)}>
                                             Remove
                                         </button>

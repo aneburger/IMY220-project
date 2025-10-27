@@ -34,8 +34,13 @@ const ProjectImageUpload = ({ project, onImageUploaded }) => {
             return;
         }
         setPreview(URL.createObjectURL(file));
+
+        const loggedInUser = JSON.parse(localStorage.getItem('user'));
+        const requestingUsername = loggedInUser ? loggedInUser.username : null;
+
         const formData = new FormData();
         formData.append("projectImage", file);
+        formData.append("requestingUser", requestingUsername);
 
         fetch(`http://localhost:3000/api/project/${project._id}/upload-image`, {
             method: "POST",

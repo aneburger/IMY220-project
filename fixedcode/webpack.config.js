@@ -1,29 +1,27 @@
-const path = require("path");
+/* Anica Ferreira u24581802 */
+
+const path = require('path');
 
 module.exports = {
     entry: "./frontend/src/index.js",
     output: {
-        path: path.resolve("./frontend/public"),
-        filename: "bundle.js"
+        path: path.resolve('frontend', 'public'),
+        filename: 'bundle.js',
     },
-    mode: "development",
+    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader'
                 }
             },
             {
-                // eg import "./css/main.css";
-                test: /\.css$/i,
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
-            }
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+            },
         ]
     }
 };

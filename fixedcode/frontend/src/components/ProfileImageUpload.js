@@ -36,6 +36,11 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
         formData.append("profileImage", file);
         formData.append("userId", userObj._id);
 
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        if (currentUser?.username) {
+            formData.append("requestingUser", currentUser.username);
+        }
+
         fetch(`http://localhost:3000/api/profile/${userObj._id}/upload-image`, {
             method: "POST",
             body: formData

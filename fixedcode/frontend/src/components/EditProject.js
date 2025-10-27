@@ -13,10 +13,13 @@ const EditProject = ({ project, onProjectUpdated }) => {
         setIsOpen((isOpen) => !isOpen);
     }
 
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    const requestingUsername = loggedInUser ? loggedInUser.username : null; 
+
     return (
         <div id="editProjectButtonDiv">
             <button onClick={toggle} id="editImg">Edit Project</button>
-            {isOpen && <EditProjectForm project={project} onCancel={toggle} onProjectUpdated={onProjectUpdated}/>}
+            {isOpen && <EditProjectForm project={project} onCancel={toggle} onProjectUpdated={onProjectUpdated} requestingUser={requestingUsername}/>}
         </div>
     );
 }

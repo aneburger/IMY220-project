@@ -65,6 +65,8 @@ const SingleProject = () => {
     };
     
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    const requestingUsername = loggedInUser ? loggedInUser.username : null;
+    const isAdmin = loggedInUser && loggedInUser.role === 'admin';
 
     useEffect(() => {
             fetch(`http://localhost:3000/api/project/${projectId}`)
@@ -96,6 +98,7 @@ const SingleProject = () => {
     if (!project) return <div>Loading project...</div>;
 
     const isOwner = loggedInUser && project.owner === loggedInUser.username;
+    const canEditProject = isOwner || isAdmin;
             
     const toggleFileDiv = () => {
         setIsFilesOpen((isFilesOpen) => !isFilesOpen);
@@ -125,10 +128,13 @@ const SingleProject = () => {
     };
 
     const handleDelete = async () => {
+        if (!requestingUsername) { alert("Not authenticated."); return; }
         if (window.confirm("Are you sure you want to delete this project?")) {
             try {
                 const response = await fetch(`http://localhost:3000/api/project/${projectId}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ requestingUser: requestingUsername })
                 });
                 const data = await response.json();
                 if (data.success) {
@@ -159,11 +165,12 @@ const SingleProject = () => {
     };
 
     const handleDescriptionSave = async (newDescription) => {
+        if (!requestingUsername) { alert("Not authenticated."); return; }
         try {
             const response = await fetch(`http://localhost:3000/api/project/${projectId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ description: newDescription })
+                body: JSON.stringify({ description: newDescription, requestingUser: requestingUsername })
             });
             const data = await response.json();
             if (data.success) {
@@ -183,11 +190,12 @@ const SingleProject = () => {
     };
 
     const handleDeleteMember = async (memberUsername) => {
+        if (!requestingUsername) { alert("Not authenticated."); return; }
         try {
             const response = await fetch(`http://localhost:3000/api/project/${projectId}/member`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ memberUsername })
+                body: JSON.stringify({ memberUsername, requestingUser: requestingUsername })
             });
             const data = await response.json();
             if (data.success) {
@@ -205,11 +213,12 @@ const SingleProject = () => {
     };
 
     const handleDeleteFile = async (filename) => {
+        if (!requestingUsername) { alert("Not authenticated."); return; }
         const newFiles = project.files.filter(f => f !== filename);
         const response = await fetch(`http://localhost:3000/api/project/${projectId}/files`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ files: newFiles })
+            body: JSON.stringify({ files: newFiles, requestingUser: requestingUsername })
         });
         const data = await response.json();
         if (data.success) {
@@ -257,9 +266,9 @@ const SingleProject = () => {
 
                 <p id="createdDate">Created: {new Date(project.createdOn).toLocaleString()}</p>
 
-                {(isOwner || isMember) && (
+                {(canEditProject || isMember) && (
                     <div id="downloadDelete">
-                        {isOwner && <DeleteProject onDelete={handleDelete}/>}
+                        {canEditProject && <DeleteProject onDelete={handleDelete} requestingUser={requestingUsername}/>}
                         <CheckIn project={project} onProjectUpdated={handleProjectUpdated} isCheckedOutByMe={isCheckedOutByMe} isCheckedOut={isCheckedOut}/>
                     </div>
                 )}
@@ -291,8 +300,8 @@ const SingleProject = () => {
                 {/* )} */}
 
                 <div id="editImgDiv">
-                    {isOwner && (
-                        <EditProject project={project} onProjectUpdated={handleProjectUpdated}/>
+                    {canEditProject && (
+                        <EditProject project={project} onProjectUpdated={handleProjectUpdated} requestingUser={requestingUsername}/>
                     )}
                 </div>
 
@@ -333,9 +342,9 @@ const SingleProject = () => {
                     <h1 id="memName">Members</h1>
                 </div>
 
-                {(isOwner || isMember) && (
+                {(canEditProject || isMember) && (
                     <div id="addMember">
-                        <AddProjectMember projectId={projectId} onMemberAdded={handleMemberAdded} members={project.members || []}/>
+                        <AddProjectMember projectId={projectId} onMemberAdded={handleMemberAdded} members={project.members || []} requestingUser={requestingUsername}/>
                     </div>
                 )}
 
@@ -351,7 +360,7 @@ const SingleProject = () => {
                                                 {member} {isMemberOwner && <span style={{ color: "#63c9fcff", fontSize: "0.8em", marginLeft: "0.3em", fontWeight: "400" }}>(owner)</span>}
                                             </p>
                                         </Link>
-                                        {isOwner && !isMemberOwner && (
+                                        {(canEditProject && !isMemberOwner) && (
                                             <button className="deleteFriend" onClick={() => handleDeleteMember(member)}>
                                                 Delete
                                             </button>
@@ -363,7 +372,7 @@ const SingleProject = () => {
                     </div>
                 </div>
 
-                {(isOwner || isMember) && (
+                {(canEditProject || isMember) && (
                     <>
                     <div id="discussionHead"> 
                         <h1 id="discussionName">Discussion Board</h1>
@@ -381,10 +390,10 @@ const SingleProject = () => {
                 </div>
 
                 <div id="discriptionEdit">
-                    {isOwner && (
+                    {canEditProject && (
                         <button onClick={toggle} className="editDescriptionB">Edit</button>
                     )}
-                    {isOpen && isOwner && (
+                    {isOpen && canEditProject && (
                         <EditDescription 
                                 currentDescription={project.description}
                                 onSave={handleDescriptionSave}
@@ -412,7 +421,8 @@ const SingleProject = () => {
                                         projectFiles={project.files || []}
                                         projectId={projectId}
                                         onFilesAdded={handleFilesAdded} 
-                                        onCancel={toggleFileDiv}/>
+                                        onCancel={toggleFileDiv}
+                                        requestingUser={requestingUsername} />
                     )}
                     
                     <DownloadFiles/>
