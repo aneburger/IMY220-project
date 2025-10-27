@@ -1,12 +1,53 @@
 /* Ane' Burger 24565068, 33 */
 
 import React from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import '../../public/assets/style/css/singleProject.css';
 import '../../public/assets/style/css/search.css';
+import HashtagProjects from "./HashtagProjects";
 
 const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) => {
     const navigate = useNavigate();
+
+    const [viewingHashtag, setViewingHashtag] = useState(null);
+    const [hashtagProjects, setHashtagProjects] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleHashtagClick = async (lang, excludeProjectId) => {
+        try {
+            setLoading(true);
+            setError("");
+            const res = await fetch(`http://localhost:3000/api/projects/hashtag/${encodeURIComponent(lang)}`);
+            const data = await res.json();
+            if (!data.success) {
+                setError(data.message || "Failed to load hashtag projects.");
+                return;
+            }
+            let list = Array.isArray(data.projects) ? data.projects : [];
+            if (excludeProjectId) {
+                list = list.filter(p => (p._id || p.projectId) !== excludeProjectId);
+            }
+            setHashtagProjects(list);
+            setViewingHashtag(lang);
+        } catch (e) {
+            console.error(e);
+            setError("Failed to load hashtag projects.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (viewingHashtag) {
+        return (
+            <HashtagProjects
+                projects={hashtagProjects}
+                hashtag={viewingHashtag}
+                onCancel={() => setViewingHashtag(null)}
+            />
+        );
+    }
 
     return (
         <div id="searchResultsListDiv">
@@ -56,9 +97,17 @@ const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) =
                             Hashtags:{" "}
                             {Array.isArray(project.languages) && project.languages.length > 0
                                 ? project.languages.map(lang => (
-                                    <Link key={lang} to={`/hashtag/${lang}`}>
-                                        <span style={{ cursor: "pointer", marginRight: "0.3em" }}>#{lang}</span>
-                                    </Link>
+                                    // <Link key={lang} >
+                                    //     <span style={{ marginRight: "0.3em" }}>#{lang}</span>
+                                    // </Link>
+                                    <span
+                                        key={lang}
+                                        onClick={() => handleHashtagClick(lang, project._id || project.projectId)}
+                                        style={{ marginRight: "0.3em", cursor: "pointer", color: "#71ccf9", textDecoration: "underline" }}
+                                        title={`View projects using #${lang}`}
+                                    >
+                                        #{lang}
+                                    </span>
                                 ))
                                 : <span style={{ color: "#888" }}>None</span>
                             }

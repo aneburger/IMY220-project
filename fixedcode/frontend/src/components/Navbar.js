@@ -5,6 +5,7 @@ import { Link }  from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import '../../public/assets/style/css/nav.css';
 import SearchBar from "./SearchBar";
+import RandomPlaceholderImage from "./RandomPlaceholder";
 
 const Navbar = () => {
     const user = localStorage.getItem('user');
@@ -23,7 +24,25 @@ const Navbar = () => {
                     <NavLink to="/home" id="homeNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Home</NavLink>
                     <NavLink to="/projects" id="projectsNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Projects</NavLink>
                     <NavLink to={profileUrl} id="profileNav" className={({ isActive }) => (isActive ? 'active-link' : '')}>Profile</NavLink>
-                    <img alt="profile" id="profileB" src={profileImage} style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover" }}/>
+                    {/* <img alt="profile" id="profileB" src={profileImage} style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover" }}/> */}
+                    {userObj?.image ? (
+                        <img
+                            alt="profile"
+                            id="profileB"
+                            src={userObj.image}
+                            style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover" }}
+                        />
+                    ) : (
+                        <RandomPlaceholderImage
+                            userKey={userObj?._id || userObj?.username || "guest"}
+                            size={60}
+                            style={{ width: 60, height: 60, borderRadius: "50%", objectFit: "cover", alignSelf: "flex-end",
+                                        position: "relative",
+                                        marginRight: "4em",
+                                        marginTop: "3em",
+                                        paddingBottom: "5px" }}
+                        />
+                    )}
                 </div>
             </div>
         </nav>

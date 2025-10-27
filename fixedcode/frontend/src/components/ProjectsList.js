@@ -6,8 +6,9 @@ import React from "react";
 import '../../public/assets/style/css/projects.css';
 import ProjectView from "./ProjectView";
 
-const ProjectsList = ({ projects, onDelete, sort }) => {
+const ProjectsList = ({ projects = [], onDelete, sort }) => {
     const user = JSON.parse(localStorage.getItem('user'));
+    const requestingUsername = user ? user.username : null;
 
     let sortedProjects = [...projects];
     if (sort === "Alphabetically") {
@@ -18,13 +19,14 @@ const ProjectsList = ({ projects, onDelete, sort }) => {
         sortedProjects.sort((a, b) => new Date(a.createdOn) - new Date(b.createdOn));
     }
 
+
     return (
         <div className="projectsListGrid">
             {sortedProjects.length === 0 ? (
                     <p id="vision"><span><img alt="rocket" src="/assets/images/rocket.png"/></span><span id="com" style={{color: "#90d9fd", fontWeight: "550"}}>Commit</span> to your vision. Launch your first project right here!</p>
                 ):(
             sortedProjects.map(project => (
-                <ProjectView key={project.projectId || project._id} project={project} onDelete={onDelete} loggedInUsername={user.username}/>
+                <ProjectView key={project.projectId || project._id} project={project} onDelete={onDelete} loggedInUsername={requestingUsername}/>
             )))}
         </div>
     );

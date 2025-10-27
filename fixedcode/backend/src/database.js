@@ -5,7 +5,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import path from 'path';
 import Fuse from 'fuse.js';
 
-const uri = "mongodb+srv://<<name>>:<<password>>@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
+const uri = "mongodb+srv://test-user:test-password@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
 const client = new MongoClient(uri);
 
 const dbName = 'projectDB';
@@ -274,6 +274,12 @@ async function deleteProject(projectId) {
     try {
         await client.connect();
         const result = await projectCollection.deleteOne({_id: new ObjectId(projectId)});
+
+        // Also remove any activity entries (and related discussion) tied to this project
+        // Activities store projectId as the string form of the ObjectId
+        await activityCollection.deleteMany({ projectId: projectId });
+        await discussionCollection.deleteMany({ projectId: projectId });
+
         await userCollection.updateMany(
             { projects: projectId.toString() },
             { $pull: { projects: projectId.toString() } }
@@ -288,6 +294,85 @@ async function deleteProject(projectId) {
 async function updateUser(userId, updateFields) {
     try {
         await client.connect();
+
+        const user = await userCollection.findOne({ _id: new ObjectId(userId) });
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const oldUsername = user.username;
+        const newUsername = updateFields.username;
+
+
+         if (newUsername && newUsername !== oldUsername) {
+            // 1) Update the user document first (set all fields including username)
+            await userCollection.updateOne(
+                { _id: new ObjectId(userId) },
+                { $set: updateFields }
+            );
+
+            // 2) Projects: owner, members, checkedOutBy
+            await projectCollection.updateMany(
+                { owner: oldUsername },
+                { $set: { owner: newUsername } }
+            );
+            await projectCollection.updateMany(
+                { members: oldUsername },
+                {
+                    $set: { "members.$[elem]": newUsername }
+                },
+                {
+                    arrayFilters: [{ elem: oldUsername }]
+                }
+            );
+            await projectCollection.updateMany(
+                { checkedOutBy: oldUsername },
+                { $set: { checkedOutBy: newUsername } }
+            );
+
+            // 3) Activities: user, members snapshot array
+            await activityCollection.updateMany(
+                { user: oldUsername },
+                { $set: { user: newUsername } }
+            );
+
+             await activityCollection.updateMany(
+                { members: oldUsername },
+                {
+                    $set: { "members.$[elem]": newUsername }
+                },
+                {
+                    arrayFilters: [{ elem: oldUsername }]
+                }
+            );
+
+            // 4) Discussions: sender
+            await discussionCollection.updateMany(
+                { sender: oldUsername },
+                { $set: { sender: newUsername } }
+            );
+
+            // 5) Other users' friend arrays and request arrays
+            await userCollection.updateMany(
+                { friends: oldUsername },
+                { $addToSet: { friends: newUsername } }
+            );
+            await userCollection.updateMany(
+                { friendRequests: oldUsername },
+                { $addToSet: { friendRequests: newUsername } }
+            );
+            await userCollection.updateMany(
+                { sentRequests: oldUsername },
+                { $addToSet: { sentRequests: newUsername } }
+            );
+
+            await userCollection.updateMany(
+                {},
+                { $pull: { friends: oldUsername, friendRequests: oldUsername, sentRequests: oldUsername } }
+            );
+
+        }
+
         await userCollection.updateOne(
             { _id: new ObjectId(userId) },
             { $set: updateFields }
@@ -535,8 +620,10 @@ async function deleteUser(userId) {
         const ownedProjects = await projectCollection.find({ owner: user.username }).toArray();
         for (const project of ownedProjects) {
             await projectCollection.deleteOne({ _id: project._id });
-            await activityCollection.deleteMany({ projectId: project.projectId });
-            await discussionCollection.deleteMany({ projectId: project.projectId });
+            
+            const projIdStr = project._id.toString();
+            await activityCollection.deleteMany({ projectId: projIdStr });
+            await discussionCollection.deleteMany({ projectId: projIdStr });
         }
 
         await projectCollection.updateMany(
@@ -893,7 +980,52 @@ async function fuzzySearchHashtags(searchTerm) {
     return fuse.search(cleanTerm).map(result => result.item);
 }
 
+async function canModifyProject(requestingUsername, projectId) {
+    if (!requestingUsername) return false;
+    const reqUser = await getUser(requestingUsername);
+    if (reqUser && reqUser.role === 'admin') return true;
+    const project = await getProjectById(projectId);
+    if (!project) return false;
+    return project.owner === requestingUsername;
+}
 
+async function canModifyUser(requestingUsername, targetUserIdOrUsername) {
+   try {
+        await client.connect();
+        if (!requestingUsername) return false;
+
+        const reqUser = await userCollection.findOne({ username: requestingUsername });
+        if (reqUser?.role === 'admin') return true;
+
+        let targetUser = null;
+        if (/^[a-fA-F0-9]{24}$/.test(targetUserIdOrUsername)) {
+            targetUser = await userCollection.findOne({ _id: new ObjectId(targetUserIdOrUsername) });
+        } else {
+            targetUser = await userCollection.findOne({ username: targetUserIdOrUsername });
+        }
+        if (!targetUser) return false;
+
+        return targetUser.username === requestingUsername;
+    } catch (e) {
+        console.error("canModifyUser error:", e);
+        return false;
+    }
+}
+
+
+async function canModifyProjectFiles(requestingUsername, projectId) {
+    await client.connect();
+    if (!requestingUsername) return false;
+
+    const reqUser = await userCollection.findOne({ username: requestingUsername });
+    if (reqUser?.role === 'admin') return true;
+
+    const project = await projectCollection.findOne({ _id: new ObjectId(projectId) });
+    if (!project) return false;
+
+    if (project.owner === requestingUsername) return true;
+    return project.checkedOutBy === requestingUsername;
+}
 
 
 export { getUser };
@@ -931,3 +1063,6 @@ export { getProjectFilesInfo };
 export { fuzzySearchUsers };
 export { fuzzySearchProjects };
 export { fuzzySearchHashtags };
+export { canModifyProject };
+export { canModifyUser };
+export { canModifyProjectFiles };

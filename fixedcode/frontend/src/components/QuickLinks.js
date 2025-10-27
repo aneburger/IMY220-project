@@ -102,10 +102,10 @@ const QuickLinks = () => {
                 <h1 id="quickHead">Quick Links</h1>
             </div>
             <div id="quickDiv">
-                <img alt="home" className="quickLink2" src="/assets/images/home.png" height="23"/><Link to="/home"><p>Home</p></Link>
-                <img alt="friends" className="quickLink" src="/assets/images/friends.png" height="23"/><p onClick={toggle}>Friends</p>
+                <div><img alt="home" className="quickLink2" src="/assets/images/home.png" height="23"/><Link to="/home"><span style={{ marginLeft: "1.1em" }}>Home</span></Link></div>
+                <div><img alt="friends" className="quickLink" src="/assets/images/friends.png" height="23"/><span onClick={toggle} style={{ marginLeft: "0.95em" }}>Friends</span></div>
                 {isOpen && <FriendsList onCancel={toggle} onFriendRemoved={handleFriendRemoved} profileUsername={userData.username}/>}
-                <img alt="projects" className="quickLink4" src="/assets/images/projects.png" height="23"/><Link to="/projects"><p>Projects</p></Link>
+                <div><img alt="projects" className="quickLink4" src="/assets/images/projects.png" height="23"/><Link to="/projects"><span style={{ marginLeft: "1.15em" }}>Projects</span></Link></div>
             </div>
         </section>
     );

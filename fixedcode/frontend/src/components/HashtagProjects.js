@@ -12,7 +12,7 @@ const HashtagProjects = ({ projects, hashtag, onCancel }) => {
             <h2>Projects using <span>#{hashtag}</span></h2>
             <div id="hashList">
                 {projects.length === 0 ? (
-                    <p>No projects found for #{hashtag}</p>
+                    <p style={{marginLeft: "1em"}}>No projects found for #{hashtag}</p>
                 ) : (
                     projects.map(project => (
                         <div className="hashProjectCard" key={project._id || project.projectId}>

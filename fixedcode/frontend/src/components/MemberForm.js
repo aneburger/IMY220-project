@@ -50,7 +50,7 @@ const MemberForm = ({ projectId, members = [], onCancel, onMemberAdded }) => {
             const response = await fetch(`http://localhost:3000/api/project/${projectId}/member`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ memberUsername: member })
+                body: JSON.stringify({ memberUsername: member, requestingUser: user.username })
             });
             const data = await response.json();
             if (data.success) {

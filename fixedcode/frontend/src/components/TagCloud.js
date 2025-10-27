@@ -8,6 +8,10 @@ const TagCloud = ({ userId }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [languages, setLanguages] = useState([]);
 
+    const userStr = localStorage.getItem('user');
+    const currentUser = userStr ? JSON.parse(userStr) : null;
+    const canEdit = currentUser && (currentUser.role === 'admin' || currentUser._id === userId || currentUser.username === userId);
+
     useEffect(() => {
         fetch(`http://localhost:3000/api/profile/${userId}`)
             .then(res => res.json())
@@ -22,7 +26,7 @@ const TagCloud = ({ userId }) => {
         const res = await fetch(`http://localhost:3000/api/profile/${userId}/languages`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ language: lang })
+            body: JSON.stringify({ language: lang, requestingUser: currentUser?.username })
         });
         const data = await res.json();
         if (data.success) {
@@ -37,8 +41,8 @@ const TagCloud = ({ userId }) => {
             {languages.map(lang => (
                 <p key={lang} className={lang.toLowerCase().replace(/[^a-z0-9]/g, "")}>#{lang}</p>
             ))}
-            <p className="addHash" onClick={toggle}>#Add+</p>
-            {isOpen && <ILoveList onCancel={toggle} onAddLanguage={handleAddLanguage} />}
+            {canEdit && <p className="addHash" onClick={toggle}>#Add+</p>}
+            {isOpen && canEdit && <ILoveList onCancel={toggle} onAddLanguage={handleAddLanguage} />}
         </div>
     );
 }

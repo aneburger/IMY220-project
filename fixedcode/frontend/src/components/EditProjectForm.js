@@ -5,14 +5,15 @@ import { useState } from "react";
 import '../../public/assets/style/css/editProfile.css';
 import ProjectImageUpload from "./ProjectImageUpload";
 
-const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
+const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }) => {
     const [ownerInput, setOwnerInput] = useState(project.owner);
     const [ownerError, setOwnerError] = useState("");
     const [formData, setFormData] = useState({
         projectName: project.projectName || "",
-        owner: project.owner || "",
+        //owner: project.owner || "",
         version: project.version || "",
-        status: project.status || ""
+        status: project.status || "",
+        projectImage: project.projectImage || "/assets/images/project.png"
     });
     const [projectImage, setProjectImage] = useState(project.projectImage || "/assets/images/project.png");
 
@@ -21,53 +22,122 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated }) => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+    const requestingUsername = requestingUser || (loggedInUser ? loggedInUser.username : null);
+
+
+    const buildNonOwnerPatch = () => {
+        const patch = {};
+        if (formData.projectName !== project.projectName) patch.projectName = formData.projectName;
+        if (formData.version !== project.version) patch.version = formData.version;
+        if (formData.status !== project.status) patch.status = formData.status;
+        if (formData.type !== project.type) patch.type = formData.type;
+        if (formData.projectImage !== project.projectImage) patch.projectImage = formData.projectImage;
+        return patch;
+    };
+
+
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     if (ownerError) return;
+    //     let updatedProject = { ...project };
+
+    //     if (ownerInput !== project.owner) {
+    //         try {
+    //             const ownerResponse = await fetch(`http://localhost:3000/api/project/${project._id}/owner`, {
+    //                 method: "PUT",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 body: JSON.stringify({
+    //                     newOwnerUsername: ownerInput,
+    //                     previousOwnerUsername: project.owner,
+    //                     requestingUser: requestingUsername
+    //                 })
+    //             });
+    //             const ownerData = await ownerResponse.json();
+    //             if (!ownerData.success) {
+    //                 setOwnerError(ownerData.message || "Failed to change owner.");
+    //                 return;
+    //             }
+    //             updatedProject = ownerData.project;
+    //             if (onProjectUpdated) onProjectUpdated(updatedProject);
+    //         } catch (err) {
+    //             setOwnerError("Error changing owner.");
+    //             return;
+    //         }
+    //         updatedProject = ownerData.project || { ...updatedProject, owner: ownerInput };
+    //     }
+
+    //     try {
+    //         const response = await fetch(`http://localhost:3000/api/project/${project._id}`, {
+    //             method: "PUT",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({ ...formData, owner: ownerInput, requestingUser: requestingUsername })
+    //         });
+    //         const data = await response.json();
+    //         if (data.success) {
+    //             const finalProject = { ...updatedProject, ...data.project };
+    //             if (onProjectUpdated) onProjectUpdated(finalProject);
+    //             onCancel();
+    //         } else {
+    //             alert("Failed to update project.");
+    //         }
+    //     } catch (err) {
+    //         alert("Error updating project.");
+    //         console.error(err);
+    //     }
+    // };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (ownerError) return;
-        let updatedProject = project;
 
-        if (ownerInput !== project.owner) {
-            try {
+        let updatedProject = { ...project };
+
+        try {
+            const nonOwnerPatch = buildNonOwnerPatch();
+            if (Object.keys(nonOwnerPatch).length > 0) {
+                const response = await fetch(`http://localhost:3000/api/project/${project._id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...nonOwnerPatch, requestingUser: requestingUsername })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.success) {
+                    alert(data.message || "Failed to update project.");
+                    return;
+                }
+                updatedProject = { ...updatedProject, ...data.project };
+            }
+
+            if (ownerInput !== project.owner) {
                 const ownerResponse = await fetch(`http://localhost:3000/api/project/${project._id}/owner`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         newOwnerUsername: ownerInput,
-                        previousOwnerUsername: project.owner
+                        previousOwnerUsername: project.owner,
+                        requestingUser: requestingUsername
                     })
                 });
                 const ownerData = await ownerResponse.json();
-                if (!ownerData.success) {
+                if (!ownerResponse.ok || !ownerData.success) {
                     setOwnerError(ownerData.message || "Failed to change owner.");
                     return;
                 }
-                updatedProject = ownerData.project;
-                if (onProjectUpdated) onProjectUpdated(updatedProject);
-            } catch (err) {
-                setOwnerError("Error changing owner.");
-                return;
+             updatedProject = ownerData.project || { ...updatedProject, owner: ownerInput };
             }
-        }
 
-        try {
-            const response = await fetch(`http://localhost:3000/api/project/${project._id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, owner: ownerInput })
-            });
-            const data = await response.json();
-            if (data.success) {
-                const finalProject = { ...updatedProject, ...data.project };
-                if (onProjectUpdated) onProjectUpdated(finalProject);
-                onCancel();
-            } else {
-                alert("Failed to update project.");
-            }
+            if (onProjectUpdated) onProjectUpdated(updatedProject);
+            onCancel();
         } catch (err) {
             alert("Error updating project.");
             console.error(err);
         }
     };
+
+
 
     const handleOwnerBlur = async () => {
         if (!ownerInput) return;

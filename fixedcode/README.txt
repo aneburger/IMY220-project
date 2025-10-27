@@ -23,3 +23,21 @@ npm start
 
 // run in a separate terminal for auto-rebundling on changes
 npx webpack -w
+
+
+===============================================================
+
+IMY220 - Project
+Ané Burger - 24565068
+
+GitHub repository URL:
+https://github.com/aneburger/IMY220-project
+
+
+// URL
+http://localhost:3000
+
+docker build -t imy-project .
+
+docker run -p 3000:3000 imy-project
+

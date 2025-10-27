@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Projects from "./pages/Projects";
 import Profile from "./pages/Profile";
 import SingleProject from "./pages/SingleProject";
+import Footer from "./components/Footer";
 
 const App = () => {
     const user = localStorage.getItem('user');
@@ -28,6 +29,7 @@ const App = () => {
                     <Route path="/project/:projectId" element={<SingleProject />} />
                 </Routes>
             </div>
+            <Footer/>
         </BrowserRouter>
     );
 }
