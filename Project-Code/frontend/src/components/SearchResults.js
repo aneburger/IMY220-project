@@ -1,0 +1,128 @@
+/* Ane' Burger 24565068, 33 */
+
+import React from "react";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import '../../public/assets/style/css/singleProject.css';
+import '../../public/assets/style/css/search.css';
+import HashtagProjects from "./HashtagProjects";
+
+const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) => {
+    const navigate = useNavigate();
+
+    const [viewingHashtag, setViewingHashtag] = useState(null);
+    const [hashtagProjects, setHashtagProjects] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleHashtagClick = async (lang, excludeProjectId) => {
+        try {
+            setLoading(true);
+            setError("");
+            const res = await fetch(`http://localhost:3000/api/projects/hashtag/${encodeURIComponent(lang)}`);
+            const data = await res.json();
+            if (!data.success) {
+                setError(data.message || "Failed to load hashtag projects.");
+                return;
+            }
+            let list = Array.isArray(data.projects) ? data.projects : [];
+            if (excludeProjectId) {
+                list = list.filter(p => (p._id || p.projectId) !== excludeProjectId);
+            }
+            setHashtagProjects(list);
+            setViewingHashtag(lang);
+        } catch (e) {
+            console.error(e);
+            setError("Failed to load hashtag projects.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (viewingHashtag) {
+        return (
+            <HashtagProjects
+                projects={hashtagProjects}
+                hashtag={viewingHashtag}
+                onCancel={() => setViewingHashtag(null)}
+            />
+        );
+    }
+
+    return (
+        <div id="searchResultsListDiv">
+            <h2>Search Results:</h2>
+            <div id="resultsList">
+                { users.length === 0 ? (
+                    <p style={{ marginLeft: "1em" }}>No results found for users.</p>
+                ) : (
+                users.map(user => (
+                    <div className="userProjectCard" key={user._id || user.userId}>
+                        <img alt="profile" className="profileBFeed" src={user.image || "/assets/images/profile.png"} style={{ width: 45, height: 45, borderRadius: "50%", objectFit: "cover" }}/>
+                        <Link to={`/profile/${user._id || user.userId}`} ><h1>{user.username}</h1></Link>
+                        <p>Email: {user.email}</p>
+                    </div>
+                )))}
+                { projects.length === 0 ? (
+                    <p style={{ marginLeft: "1em" }}>No results found for projects.</p>
+                ) : (
+                projects.map(project => (
+                    <div className="hashProjectCard" key={project._id || project.projectId}>
+                        <h1>{project.projectName}</h1>
+                        <p>
+                            Owner:{" "}
+                            <Link to={`/profile/${project.owner}`}>
+                                <span style={{ cursor: "pointer", textDecoration: "underline" }}>{project.owner}</span>
+                            </Link>
+                        </p>
+                        <div>
+                            <button onClick={() => navigate(`/project/${project._id || project.projectId}`)}>View</button>
+                        </div>
+                        <p style={{marginLeft: "1.3em", marginTop: "0em"}}>Type: <span>{project.type}</span></p>
+                        <p style={{marginTop: "0em"}}>
+                            Check-in Messages: {
+                                Array.isArray(project.checkInMessages)
+                                ? project.checkInMessages.join(", ")
+                                : (typeof project.checkInMessages === "object" && project.checkInMessages !== null)
+                                    ? Object.values(project.checkInMessages).join(", ")
+                                    : (typeof project.checkInMessages === "string" ? project.checkInMessages : "")
+                            }
+                        </p>
+                    </div>
+                )))}
+                {hashtags.map(project => (
+                    <div className="hashProjectCard" key={project._id || project.projectId}>
+                        <h1>{project.projectName}</h1>
+                        <p>
+                            Hashtags:{" "}
+                            {Array.isArray(project.languages) && project.languages.length > 0
+                                ? project.languages.map(lang => (
+                                    // <Link key={lang} >
+                                    //     <span style={{ marginRight: "0.3em" }}>#{lang}</span>
+                                    // </Link>
+                                    <span
+                                        key={lang}
+                                        onClick={() => handleHashtagClick(lang, project._id || project.projectId)}
+                                        style={{ marginRight: "0.3em", cursor: "pointer", textDecoration: "underline" }}
+                                        title={`View projects using #${lang}`}
+                                    >
+                                        #{lang}
+                                    </span>
+                                ))
+                                : <span style={{ color: "#888" }}>None</span>
+                            }
+                        </p>
+                        <div>
+                            <button onClick={() => navigate(`/project/${project._id || project.projectId}`)}>View</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div id="resultsButtons">
+                <button id="cancel" type="button" onClick={onCancel}>Cancel</button>
+            </div>
+        </div>
+    );
+}
+
+export default SearchResults;

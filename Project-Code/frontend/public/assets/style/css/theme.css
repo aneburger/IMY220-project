@@ -1,0 +1,62 @@
+/* Ane' Burger 24565068, 33 */
+
+:root {
+  --bg: #0B9EE9;   /* #0B9EE9, home-body: #2298f6 */ 
+  --quick-bg: #0B9EE9; 
+  --quick-border: #ffffffbd;
+  --text: #111827;
+  --muted-text: #475569;
+  --card-bg: #ffffff;
+  --link: #007cbb;
+  --accent: #007cbb;
+  --border: #ffffffbd;
+  --footer-bg: #33baff;
+  --search-h2: white;
+  --inout: #007cbb;
+  --desc: #4eb8ee;
+  --create-new: #0075af;
+  --blue-text: #001841;
+  --info-text: white;
+}
+
+[data-theme="dark"] {
+  --bg: #001841;
+  --quick-bg: #1f314f; 
+  --quick-border: #ffffff52;
+  --text: #e5e7eb;
+  --muted-text: #94a3b8;
+  --card-bg: #0f172a;
+  --link: #71ccf9;
+  --accent: #60a5fa;
+  --border: #1f2937;
+  --footer-bg: #122751;
+  --search-h2: #cdcdcd;
+  --inout: #4bc2fe;
+  --desc: #1f314f;
+  --create-new: #0b9fe9c4;
+  --blue-text: #47befa
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+
+[data-theme="light"] #light-mode { opacity: 1; }
+[data-theme="light"] #dark-mode  { opacity: 0.6; }
+[data-theme="dark"]  #light-mode { opacity: 0.6; }
+[data-theme="dark"]  #dark-mode  { opacity: 1; }
+
+#logo-light { display: inline-block; }
+#logo-dark  { display: none; }
+
+[data-theme="light"] #logo-light { display: inline-block; }
+[data-theme="light"] #logo-dark  { display: none; }
+
+[data-theme="dark"]  #logo-light { display: none; }
+[data-theme="dark"]  #logo-dark  { display: inline-block; }
+
+.nav-logo { width: 350px; height: auto; }
+
