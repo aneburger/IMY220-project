@@ -3,12 +3,21 @@
 
 /* Ane' Burger 24565068, 33 */
 
-nav {
+/* nav {
     position: fixed;
     top: 0;
     width: 100vw;
     height: 12em;
     background-color: #001841;
+    z-index: 2;
+} */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 12em;
+    background-color: var(--bg);
     z-index: 2;
 }
 

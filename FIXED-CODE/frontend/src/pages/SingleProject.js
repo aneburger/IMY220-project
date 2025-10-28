@@ -357,7 +357,7 @@ const SingleProject = () => {
                                     <div key={member}>
                                         <Link to={`/profile/${member}`}>
                                             <p style={{ cursor: "pointer" }}>
-                                                {member} {isMemberOwner && <span style={{ color: "#63c9fcff", fontSize: "0.8em", marginLeft: "0.3em", fontWeight: "400" }}>(owner)</span>}
+                                                {member} {isMemberOwner && <span style={{color: "var(--blue-text)", fontSize: "0.8em", marginLeft: "0.3em", fontWeight: "400" }}>(owner)</span>}
                                             </p>
                                         </Link>
                                         {(canEditProject && !isMemberOwner) && (

@@ -280,8 +280,15 @@ h2 {
     margin-left: 1em;
 }
 
-.inOut {
+/* .inOut {
     color: #4bc2fe;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding-left: 5px;
+} */
+
+.inOut {
+    color: var(--inout);
     font-weight: 600;
     font-size: 1.2em;
     padding-left: 5px;

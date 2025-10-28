@@ -5,7 +5,8 @@
 
 
 .singleProjectBody {
-    background-color: #001841;
+    /* background-color: #001841; */
+    background-color: var(--bg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -392,7 +393,8 @@
 
 #projectInfoCard label span {
     margin-left: 1em;
-    color: #47befa;
+    /* color: #47befa; */
+    color: var(--blue-text);
     font-weight: 500;
     font-size: 0.85em;
 }
@@ -1127,7 +1129,8 @@
 
 #filesDiv #filesListDiv .fileCard .checkInMsg {
     font-size: 1em;
-    color: #7ccbf3;
+    /* color: #47befa; */
+    color: var(--blue-text);
     margin-top: 0em;
     margin-left: 1em;
 }
@@ -1395,7 +1398,8 @@
 
 #activityProjectDiv #activityListDiv .actProjectCard .acttimeSt {
     font-size: 0.9em;
-    color: #53c4fd;
+    /* color: #47befa; */
+    color: var(--blue-text);
     padding-right: 0em;
     margin-top: 0em;
     margin-left: 3.5em;
