@@ -3,8 +3,17 @@
 
 /* Ane' Burger 24565068, 33 */
 
-.homeBody {
+/* .homeBody {
     background-color: #001841;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-top: 7em;
+} */
+
+.homeBody {
+    background-color: var(--bg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -154,12 +163,23 @@ section #quickHdiv {
     width: 12em;
 }
 
-section #quickDiv {
+/* section #quickDiv {
     grid-column: 3/4;
     grid-row: 3/5;
     width: 13em;
     background-color: #1f314f;
     border: 1px solid #ffffff52;
+    border-radius: 15px;
+    margin-left: 2em;
+    height: 27em;
+} */
+
+section #quickDiv {
+    grid-column: 3/4;
+    grid-row: 3/5;
+    width: 13em;
+    background-color: var(--quick-bg);
+    border: 1px solid var(--quick-border);
     border-radius: 15px;
     margin-left: 2em;
     height: 27em;

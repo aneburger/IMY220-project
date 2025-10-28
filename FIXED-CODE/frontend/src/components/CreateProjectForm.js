@@ -35,31 +35,6 @@ const CreateProjectForm = ({ onCancel, onProjectCreated }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const payload = { ...formData, userId: userObj._id, members: membersList, files: filesList };
-    //     try {
-    //         const response = await fetch('http://localhost:3000/api/project', {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify(payload)
-    //         });
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${userObj._id}`);
-    //             const updatedUser = await updatedUserRes.json();
-    //             localStorage.setItem('user', JSON.stringify(updatedUser));
-    //             if (onProjectCreated) onProjectCreated();
-    //             alert('Project created!');
-    //             onCancel();
-    //         } else {
-    //             alert('Error creating project');
-    //         }
-    //     } catch (err) {
-    //         console.error('Error:', err);
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -181,14 +156,14 @@ const CreateProjectForm = ({ onCancel, onProjectCreated }) => {
                             placeholder="Owner of the project" 
                             autoComplete="owner"/>
                 
-                    {/* <label htmlFor="version">Version:</label>
+                    <label htmlFor="version">Version:</label>
                     <input type="text" 
                             name="version" 
                             id="version"
                             value={formData.version}
                             onChange={handleChange} 
                             placeholder="E.g. 'v.1.2.3'" 
-                            autoComplete="version"/> */}
+                            autoComplete="version"/>
                 
                     {/*                     
                     <label htmlFor="projectImage">Project Image:</label>

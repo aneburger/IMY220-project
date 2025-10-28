@@ -139,6 +139,9 @@
     width: 19.7em;
     height: 31.5em;
     border-radius: 15px;
+    min-height: 31.5em;
+    max-height: 34em;
+    overflow-y: scroll;
 }
 
 

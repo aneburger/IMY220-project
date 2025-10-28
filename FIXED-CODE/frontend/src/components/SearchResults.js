@@ -59,7 +59,7 @@ const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) =
                 users.map(user => (
                     <div className="userProjectCard" key={user._id || user.userId}>
                         <img alt="profile" className="profileBFeed" src={user.image || "/assets/images/profile.png"} style={{ width: 45, height: 45, borderRadius: "50%", objectFit: "cover" }}/>
-                        <Link to={`/profile/${user._id || user.userId}`} style={{ color: "#71ccf9" }}><h1>{user.username}</h1></Link>
+                        <Link to={`/profile/${user._id || user.userId}`} ><h1>{user.username}</h1></Link>
                         <p>Email: {user.email}</p>
                     </div>
                 )))}
@@ -72,13 +72,13 @@ const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) =
                         <p>
                             Owner:{" "}
                             <Link to={`/profile/${project.owner}`}>
-                                <span style={{ cursor: "pointer", textDecoration: "underline", color: "#71ccf9" }}>{project.owner}</span>
+                                <span style={{ cursor: "pointer", textDecoration: "underline" }}>{project.owner}</span>
                             </Link>
                         </p>
                         <div>
                             <button onClick={() => navigate(`/project/${project._id || project.projectId}`)}>View</button>
                         </div>
-                        <p style={{marginLeft: "1.3em", marginTop: "0em"}}>Type: <span style={{color: "#71ccf9"}}>{project.type}</span></p>
+                        <p style={{marginLeft: "1.3em", marginTop: "0em"}}>Type: <span>{project.type}</span></p>
                         <p style={{marginTop: "0em"}}>
                             Check-in Messages: {
                                 Array.isArray(project.checkInMessages)
@@ -103,7 +103,7 @@ const SearchResults = ({ users = [], projects = [], hashtags = [], onCancel }) =
                                     <span
                                         key={lang}
                                         onClick={() => handleHashtagClick(lang, project._id || project.projectId)}
-                                        style={{ marginRight: "0.3em", cursor: "pointer", color: "#71ccf9", textDecoration: "underline" }}
+                                        style={{ marginRight: "0.3em", cursor: "pointer", textDecoration: "underline" }}
                                         title={`View projects using #${lang}`}
                                     >
                                         #{lang}

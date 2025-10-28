@@ -133,7 +133,8 @@
 }
 
 #searchResultsListDiv #resultsList .hashProjectCard p span {
-    color: #71ccf9;
+    /* color: #71ccf9; */
+    color: var(--link);
     font-weight: 450;
     margin-left: 0.4em;
 }
@@ -174,6 +175,7 @@
     margin-top: 0em;
     font-weight: 300;
     text-align: center;
+    color: var(--search-h2);
 }
 
 #searchResultsListDiv h2 span {
@@ -197,7 +199,8 @@
 
 #searchResultsListDiv #resultsList .userProjectCard h1 {
     font-family: 'Albert Sans';
-    color: #71ccf9;
+    /* color: #71ccf9; */
+    color: var(--link);
     font-weight: 550;
     font-size: 1.2em;
     margin-left: 1em;
@@ -214,14 +217,16 @@
 }
 
 #searchResultsListDiv #resultsList .userProjectCard p span {
-    color: #71ccf9;
+    /* color: #71ccf9; */
+    color: var(--link);
     font-weight: 450;
     margin-left: 0.4em;
 }
 
 #searchResultsListDiv #resultsList .userProjectCard a {
     text-decoration: underline;
-    color: #71ccf9;
+    /* color: #71ccf9; */
+    color: var(--link);
     cursor: pointer;
 }
 

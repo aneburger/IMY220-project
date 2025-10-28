@@ -37,58 +37,6 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }
     };
 
 
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (ownerError) return;
-    //     let updatedProject = { ...project };
-
-    //     if (ownerInput !== project.owner) {
-    //         try {
-    //             const ownerResponse = await fetch(`http://localhost:3000/api/project/${project._id}/owner`, {
-    //                 method: "PUT",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({
-    //                     newOwnerUsername: ownerInput,
-    //                     previousOwnerUsername: project.owner,
-    //                     requestingUser: requestingUsername
-    //                 })
-    //             });
-    //             const ownerData = await ownerResponse.json();
-    //             if (!ownerData.success) {
-    //                 setOwnerError(ownerData.message || "Failed to change owner.");
-    //                 return;
-    //             }
-    //             updatedProject = ownerData.project;
-    //             if (onProjectUpdated) onProjectUpdated(updatedProject);
-    //         } catch (err) {
-    //             setOwnerError("Error changing owner.");
-    //             return;
-    //         }
-    //         updatedProject = ownerData.project || { ...updatedProject, owner: ownerInput };
-    //     }
-
-    //     try {
-    //         const response = await fetch(`http://localhost:3000/api/project/${project._id}`, {
-    //             method: "PUT",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({ ...formData, owner: ownerInput, requestingUser: requestingUsername })
-    //         });
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             const finalProject = { ...updatedProject, ...data.project };
-    //             if (onProjectUpdated) onProjectUpdated(finalProject);
-    //             onCancel();
-    //         } else {
-    //             alert("Failed to update project.");
-    //         }
-    //     } catch (err) {
-    //         alert("Error updating project.");
-    //         console.error(err);
-    //     }
-    // };
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (ownerError) return;
@@ -173,15 +121,6 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }
                         onBlur={handleOwnerBlur}/>
                 {ownerError && <p>{ownerError}</p>}
             
-                {/* <label htmlFor="version">Version:</label>
-                <input type="text" name="version" id="version" placeholder="E.g. 'v.1.2.3'" autoComplete="version"
-                        value={formData.version}
-                        onChange={handleChange}/> */}
-            
-                {/* <label htmlFor="status">Status:</label>
-                <input type="text" id="status" name="status" placeholder="Checked 'In' / 'Out'"
-                        value={formData.status}
-                        onChange={handleChange}/> */}
             
                 <label htmlFor="imgUpload">Project Image:</label>
                 {/* <input type="file" id="imgUpload" name="imgUpload"/> */}
@@ -200,6 +139,12 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }
                         <option value="Framework">Framework</option>
                     </select>
                 </div>
+
+                {/* <label htmlFor="addType">Add a new type:</label>
+                <input type="text" name="addType" id="addType" placeholder="E.g. 'Framework'" autoComplete="type"
+                        // value={formData.version}
+                        // onChange={handleChange}
+                /> */}
             
                 <div id="editProjectFormButtons">
                     <button type="submit">Save</button>

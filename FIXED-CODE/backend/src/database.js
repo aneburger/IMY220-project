@@ -241,6 +241,20 @@ async function addProject(projectName, createdOn, description, type, files, memb
             membersArr = [ownerUsername, ...membersArr];
         }
 
+        const fileList = Array.isArray(files) ? files : [];
+        let messagesMap = {};
+        if (checkInMessages && typeof checkInMessages === "object" && !Array.isArray(checkInMessages)) {
+            messagesMap = { ...checkInMessages };
+        } else if (Array.isArray(checkInMessages) && checkInMessages.length) {
+            fileList.forEach((f, idx) => {
+                messagesMap[f] = checkInMessages[idx] || "Initial commit";
+            });
+        } else {
+            fileList.forEach((f) => {
+                messagesMap[f] = "Initial commit";
+            });
+        }
+
         const projectDoc = {
             projectName: projectName || "Untitled Project",
             createdOn: createdOn || new Date().toISOString(),
@@ -253,7 +267,7 @@ async function addProject(projectName, createdOn, description, type, files, memb
             status: status || "In",
             projectImage: projectImage || null,
             checkedOutBy: checkedOutBy || null,
-            checkInMessages: checkInMessages || []
+            checkInMessages: messagesMap
         };
         const result = await projectCollection.insertOne(projectDoc);
         const projectId = result.insertedId;
