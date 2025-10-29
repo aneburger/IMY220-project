@@ -161,7 +161,7 @@
     font-weight: 250;
     margin-top: 0.9em;
     margin-left: 1.1em;
-    color: #ffffff9e;
+    color: var(--check);
     border-left: 1px solid white;
     height: 1.9em;
     padding-top: 11px;

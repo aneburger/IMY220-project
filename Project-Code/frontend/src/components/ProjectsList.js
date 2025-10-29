@@ -23,7 +23,7 @@ const ProjectsList = ({ projects = [], onDelete, sort }) => {
     return (
         <div className="projectsListGrid">
             {sortedProjects.length === 0 ? (
-                    <p id="vision"><span><img alt="rocket" src="/assets/images/rocket.png"/></span><span id="com" style={{color: "#90d9fd", fontWeight: "550"}}>Commit</span> to your vision. Launch your first project right here!</p>
+                    <p id="vision"><span><img alt="rocket" src="/assets/images/rocket.png"/></span><span id="com" style={{color: "var(--commit)", fontWeight: "550"}}>Commit</span> to your vision. Launch your first project right here!</p>
                 ):(
             sortedProjects.map(project => (
                 <ProjectView key={project.projectId || project._id} project={project} onDelete={onDelete} loggedInUsername={requestingUsername}/>

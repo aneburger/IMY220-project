@@ -21,9 +21,7 @@ const Navbar = () => {
                 {/* <Link to="/home"><img id="commitedLogo" alt="commited" src={"/assets/images/commited.png"} width="350"/></Link> */}
 
                 <Link to="/home" id="commitedLogo">
-                    {/* Light-mode logo */}
                     <img id="logo-light" className="nav-logo" alt="Commited" src="/assets/images/dark-logo.png" width="350"/>
-                    {/* Dark-mode logo */}
                     <img id="logo-dark" className="nav-logo" alt="Commited (dark)" src="/assets/images/commited.png" width="350"/>
                 </Link>
                 

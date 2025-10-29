@@ -31,7 +31,7 @@
 
 #pName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 2.2em;
     font-weight: 400;
 }
@@ -43,7 +43,7 @@
     margin-top: 2.4em;
 
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.1em;
     font-weight: 300;
 }
@@ -62,8 +62,8 @@
 
 #filesAdd div #downloadFilesB {
     background-color: #ffffff52;
-    color: white;
-    border: 1px solid #ffffff8e;
+    color: var(--dark-text);
+    border: 1px solid var(--dark-text);
     font-family: 'Albert Sans';
     font-size: 1em;
     font-weight: 400;
@@ -82,8 +82,8 @@
 
 #downloadDelete div #deleteProjectB {
     background-color: transparent;
-    color: #ffffffc5;
-    border: 1px solid #ffffffc5;
+    color: var(--dark-text);
+    border: 1px solid var(--dark-text);
     font-family: 'Albert Sans';
     font-size: 1em;
     font-weight: 400;
@@ -294,7 +294,8 @@
 }
 
 #hashtagProjectsListDiv #hashList .hashProjectCard p span {
-    color: #71ccf9;
+    /* color: #71ccf9; */
+    color: var(--blue-text);
     font-weight: 450;
     margin-left: 0.4em;
 }
@@ -335,10 +336,12 @@
     margin-top: 0em;
     font-weight: 300;
     text-align: center;
+    color: var(--info-text);
 }
 
 #hashtagProjectsListDiv h2 span {
-    color: #82d5ff;
+    /* color: #82d5ff; */
+    color: var(--blue-text);
     font-weight: 350;
 }
 
@@ -465,7 +468,7 @@
 
 #memName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.8em;
     font-weight: 400;
 }
@@ -720,7 +723,7 @@
 
 #discussionName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.8em;
     font-weight: 400;
     display: inline-block;
@@ -782,7 +785,7 @@
 
 #descriptionName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.8em;
     font-weight: 400;
 }
@@ -1019,7 +1022,7 @@
 
 #filesName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.8em;
     font-weight: 400;
 }
@@ -1042,7 +1045,7 @@
 }
 
 #filesDiv #filesDivSmallHead {
-    color: #ffffff8c;
+    color: var(--light-head);
     border-bottom: 1px solid #ffffff8c;
     padding-bottom: 7px;
     padding-left: 0px;
@@ -1345,7 +1348,7 @@
 
 #activityProjectName {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.8em;
     font-weight: 400;
     width: 5em;
@@ -1371,7 +1374,7 @@
 
 
 #activityProjectDiv #activityDivSmallHead {
-    color: #ffffff8c;
+    color: var(--light-head);
     border-bottom: 1px solid #ffffff8c;
     padding-bottom: 7px;
     padding-left: 0px;

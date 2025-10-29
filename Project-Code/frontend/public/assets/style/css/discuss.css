@@ -149,7 +149,7 @@
 
 
 #discussionDiv #projectMessagesDiv .messageCard p span a {
-    color: #90d6f9;
+    color: var(--discuss-link);
     font-weight: 500;
 }
 

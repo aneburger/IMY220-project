@@ -34,7 +34,7 @@ nav {
 }
 
 .active-link {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--dark-text);
     transition: border-color 0.4s ease;
 }
 
@@ -51,30 +51,30 @@ nav {
     width: 20em;
     margin-top: 1.5em;
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.662);
+    border: 1px solid var(--dark-text);
     border-radius: 0.7em;
     padding: 14px 18px 14px 18px;
     font-family: 'Albert Sans';
     font-size: 0.85em;
-    color: rgb(255, 255, 255);
+    color: var(--dark-text);
     font-weight: 200;
 }
 
 #searchBarDiv label {
     margin-right: 0.8em;
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.4em;
     font-weight: 400;
 }
 
 #search:focus {
     outline: none;
-    border: 1px solid white;
+    border: 1px solid var(--dark-text);
 }
 
 #search:hover {
-    border: 1px solid white;
+    border: 1px solid var(--dark-text);
 }
 
 #search::placeholder {
@@ -86,7 +86,7 @@ nav {
 
 #homeNav, #projectsNav {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.4em;
     font-weight: 400;
     padding-bottom: 5px;
@@ -122,7 +122,7 @@ nav {
     margin-top: 5em;
     font-family: 'Albert Sans';
     /* border-bottom: 1px solid transparent; */
-    color: white;
+    color: var(--dark-text);
     font-size: 1.4em;
     font-weight: 200;
     transition: border-color 0.4s ease;
@@ -130,12 +130,12 @@ nav {
 
 #profileNav:hover {
     cursor: pointer;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--dark-text);
 }
 
 #homeNav:hover, #projectsNav:hover {
     cursor: pointer;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--dark-text);
 }
 
 nav a {
