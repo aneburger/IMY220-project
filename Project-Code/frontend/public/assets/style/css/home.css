@@ -133,6 +133,7 @@ select:open::picker-icon {
     color: var(--dark-text);
     font-size: 2.2em;
     font-weight: 400;
+    width: 20em;
 }
 
 #filterE, #sortE {

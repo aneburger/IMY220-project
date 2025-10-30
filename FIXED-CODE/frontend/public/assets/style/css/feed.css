@@ -22,7 +22,7 @@
 
 p {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 1.2em;
     font-weight: 300;
 }
@@ -114,7 +114,7 @@ h2 {
     text-align: center;
     margin-top: 7.3em;
     font-size: 1.5em;
-    color: #90d9fd;
+    color: var(--empty-div);
     font-weight: 340;
 }
 
@@ -122,14 +122,14 @@ h2 {
     display: block;
     font-size: 0.63em;
     font-weight: 200;
-    color: #ffffff91;
+    color: var(--empty-div-span);
 }
 
 #localGrid #noPersonalActDisplay {
     text-align: center;
     margin-top: 5.7em;
     font-size: 1.5em;
-    color: #90d9fd;
+    color: var(--empty-div);
     font-weight: 340;
 }
 
@@ -137,14 +137,14 @@ h2 {
     display: block;
     font-size: 0.63em;
     font-weight: 200;
-    color: #ffffff91;
+    color: var(--empty-div-span);
 }
 
 #globalGrid #noGlobalActDisplay {
     text-align: center;
     margin-top: 7.3em;
     font-size: 1.5em;
-    color: #90d9fd;
+    color: var(--empty-div);
     font-weight: 340;
 }
 
@@ -152,7 +152,7 @@ h2 {
     display: block;
     font-size: 0.63em;
     font-weight: 200;
-    color: #ffffff91;
+    color: var(--empty-div-span);
 }
 
 
@@ -303,10 +303,10 @@ h2 {
     font-size: 1.1em;
     font-weight: 300;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid var(--dark-text);
     padding: 8px 10px 8px 4px;
     border-radius: 7px;
-    color: white;
+    color: var(--dark-text);
     width: 95px;
     height: 43px;
     transition: background-color 0.4s ease;

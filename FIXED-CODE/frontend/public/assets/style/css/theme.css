@@ -1,8 +1,8 @@
 /* Ane' Burger 24565068, 33 */
 
 :root {
-  --bg: #0B9EE9;   /* #0B9EE9, home-body: #2298f6 */ 
-  --quick-bg: #0B9EE9; 
+  --bg: #afd0e1;   /* #0B9EE9, home-body: #2298f6, lighter: #3dbeff, light-grey: #afd0e1 */ 
+  --quick-bg: #a8c0cc; 
   --quick-border: #ffffffbd;
   --text: #111827;
   --muted-text: #475569;
@@ -10,13 +10,22 @@
   --link: #007cbb;
   --accent: #007cbb;
   --border: #ffffffbd;
-  --footer-bg: #33baff;
-  --search-h2: white;
-  --inout: #007cbb;
-  --desc: #4eb8ee;
-  --create-new: #0075af;
+  --footer-bg: #97b9ca;
+  --search-h2: #001841;
+  --inout: #0b9ee9;
+  --desc: #c9dfea;
+  --create-new: #a8c0cc;
+  --create-new-border: #a8c0cc;
   --blue-text: #001841;
   --info-text: white;
+  --div-border: white;
+  --dark-text: #001841;
+  --discuss-link: #06acff;
+  --check: #4d5f7f;
+  --light-head: #7394cc;
+  --empty-div: #001841;
+  --empty-div-span: #001841;
+  --commit: #001841;
 }
 
 [data-theme="dark"] {
@@ -34,7 +43,16 @@
   --inout: #4bc2fe;
   --desc: #1f314f;
   --create-new: #0b9fe9c4;
-  --blue-text: #47befa
+  --create-new-border: #0b9fe9c4;
+  --blue-text: #47befa;
+  --div-border: #ffffff8b;
+  --dark-text: white;
+  --discuss-link: #90d6f9;
+  --check: #ffffff9e;
+  --light-head: #ffffff8c;
+  --empty-div: #90d9fd;
+  --empty-div-span: #ffffff91;
+  --commit: #90d9fd
 }
 
 html, body {

@@ -35,10 +35,10 @@ select {
     font-size: 1.1em;
     font-weight: 300;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid var(--dark-text);
     padding: 5px 10px 5px 4px;
     border-radius: 7px;
-    color: white;
+    color: var(--dark-text);
     width: 130px;
 }
 
@@ -59,6 +59,11 @@ select option:hover {
 select option:focus {
     background-color: white;
     cursor: pointer;
+}
+
+#sortDrop, #filterDrop, #localGlobal {
+    border-color: var(--dark-text);
+    color: var(--dark-text);
 }
 
 /* 
@@ -125,9 +130,10 @@ select:open::picker-icon {
 
 #uAct {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-size: 2.2em;
     font-weight: 400;
+    width: 20em;
 }
 
 #filterE, #sortE {
@@ -191,7 +197,7 @@ section #quickDiv a {
 
 #quickHead {
     font-family: 'Albert Sans';
-    color: white;
+    color: var(--dark-text);
     font-weight: 400;
     margin-left: 0.6em;
 }
@@ -265,15 +271,14 @@ section #quickDiv a {
 
 #feedDiv {
     background-color: transparent;
-    border: 1px solid #ffffff8b;
+    border: 1px solid var(--div-border);
     border-radius: 20px;
     width: 61em;
     height: 27.3em;
 }
 
 #quickDiv div {
-    display: flex
-;
+    display: flex;
 }
 
 

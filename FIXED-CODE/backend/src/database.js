@@ -6,6 +6,7 @@ import path from 'path';
 import Fuse from 'fuse.js';
 
 const uri = "mongodb+srv://<<username>>:<<password>>@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
+const uri = "mongodb+srv://test-user:test-password@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
 const client = new MongoClient(uri);
 
 const dbName = 'projectDB';
