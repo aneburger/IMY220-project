@@ -17,8 +17,6 @@ const Navbar = () => {
     return (
         <nav>
             <div className="nav">
-                {/* <Link to="/">Splash</Link> */}
-                {/* <Link to="/home"><img id="commitedLogo" alt="commited" src={"/assets/images/commited.png"} width="350"/></Link> */}
 
                 <Link to="/home" id="commitedLogo">
                     <img id="logo-light" className="nav-logo" alt="Commited" src="/assets/images/dark-logo.png" width="350"/>

@@ -24,23 +24,6 @@ const Projects = () => {
         }));
     }, []);
 
-    
-    // const refreshProjects = async () => {
-    //     const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${userObj._id}`);
-    //     const updatedUser = await updatedUserRes.json();
-    //     localStorage.setItem('user', JSON.stringify(updatedUser));
-    //     setUserObj(updatedUser);
-
-    //     const projectsRes = await fetch("http://localhost:3000/api/projects");
-    //     const allProjects = await projectsRes.json();
-    //     if (updatedUser && updatedUser.projects) {
-    //         const userProjectIds = updatedUser.projects.map(id => id.toString());
-    //         const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
-    //         setProjects(filtered);
-    //     } else {
-    //         setProjects([]);
-    //     }
-    // };
 
     const refreshProjects = useCallback(async () => {
         if (!userObj || !userObj._id) return;
@@ -81,44 +64,6 @@ const Projects = () => {
             });
     }, [userObj]);
 
-//    useEffect(() => {
-//         const handler = (e) => {
-//             const deletedId = e?.detail?.projectId;
-//             console.debug('projectDeleted event received for', deletedId);
-//             if (deletedId) {
-//                 const idStr = deletedId.toString();
-//                 setProjects(prev => prev.filter(p => {
-//                     const pid = (p._id && p._id.toString()) || (p.projectId && p.projectId.toString()) || "";
-//                     return pid !== idStr;
-//                 }));
-//                 (async () => {
-//                     try {
-//                         const storedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-//                         if (storedUser && storedUser._id) {
-//                             const updatedUserRes = await fetch(`http://localhost:3000/api/profile/${storedUser._id}`);
-//                             const updatedUser = await updatedUserRes.json();
-//                             localStorage.setItem('user', JSON.stringify(updatedUser));
-//                             setUserObj(updatedUser);
-//                         }
-//                         const projectsRes = await fetch("http://localhost:3000/api/projects");
-//                         const allProjects = await projectsRes.json();
-//                         const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
-//                         if (currentUser && currentUser.projects) {
-//                             const userProjectIds = currentUser.projects.map(id => id.toString());
-//                             const filtered = allProjects.filter(project => userProjectIds.includes(project._id.toString()));
-//                             setProjects(filtered);
-//                         }
-//                     } catch (err) {
-//                         console.error("refresh after event failed", err);
-//                     }
-//                 })();
-//             } else {
-//                 refreshProjects().catch(err => console.error("refresh after event failed", err));
-//             }
-//         };
-//         window.addEventListener('projectDeleted', handler);
-//         return () => window.removeEventListener('projectDeleted', handler);
-//     }, []);
 
     useEffect(() => {
         const requestHandler = (e) => {

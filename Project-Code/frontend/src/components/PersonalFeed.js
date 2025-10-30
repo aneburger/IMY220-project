@@ -35,8 +35,7 @@ const PersonalFeed = () => {
                         <p className="checkedInOut">
                             Checked: <span className="inOut">{act.action === "checked in" ? "In" : "Out"}</span>
                         </p>
-                        {/* {act.details && <p className="checkMsgP">{act.details}</p>} */}
-                        {/* <button onClick={() => navigate(`/project/${act.projectId}`)}>View</button> */}
+                        
                         <button onClick={async () => {
                             const res = await fetch(`http://localhost:3000/api/project/${act.projectId}`);
                             if (res.ok) {

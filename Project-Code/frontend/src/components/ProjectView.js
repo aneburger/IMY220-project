@@ -63,30 +63,6 @@ const ProjectView = ({ project, onDelete, loggedInUsername }) => {
                 alert("Error deleting project.");
             }
 
-            //window.dispatchEvent(new CustomEvent('requestProjectDelete', { detail: { projectId: id, requestingUser: currentUsername } }));
-
-            // try {
-            //     if (!currentUsername) {
-            //         alert("Not authenticated to delete project.");
-            //         return;
-            //     }
-            //     const url = `http://localhost:3000/api/project/${id}?requestingUser=${encodeURIComponent(currentUsername)}`;
-            //     const res = await fetch(url, {
-            //         method: "DELETE",
-            //         headers: { "Content-Type": "application/json" },
-            //         body: JSON.stringify({ requestingUser: currentUsername })
-            //     });
-            //     const data = await res.json();
-            //     if (data.success) {
-            //         window.dispatchEvent(new CustomEvent('projectDeleted', { detail: { projectId: id } }));
-            //     } else {
-            //         alert(data.message || "Failed to delete project.");
-            //     }
-            // } catch (err) {
-            //     console.error("Direct delete failed:", err);
-            //     alert("Error deleting project.");
-            // }
-        //}
     };
 
     const handleImageClick = () => {

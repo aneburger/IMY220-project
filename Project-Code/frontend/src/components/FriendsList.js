@@ -58,10 +58,6 @@ const FriendsList = ({ onCancel, onFriendRemoved, profileUsername }) => {
                             ))}
                     </div>
                 </div>
-
-
-                {/* <input type="text" name="friend" id="friend" placeholder="Add a friend..." autoComplete="friend"/>
-                <button id="add">Add</button> */}
             
                 <div id="friendFormButtons">
                     {/* <button>Save</button> */}

@@ -1,0 +1,301 @@
+[{
+  "_id": {
+    "$oid": "6903185ce1d0791dd4797836"
+  },
+  "username": "Ethan",
+  "surname": "Cole",
+  "email": "ethan@cole.com",
+  "password": "ethan123@A",
+  "birthday": "2000-10-15",
+  "occupation": "Software Developer",
+  "bio": "A passionate full-stack developer",
+  "socials": "@ethan.cole",
+  "friends": [
+    "Liam"
+  ],
+  "image": "/uploadedImages/profiles/6903185ce1d0791dd4797836.jpg?t=1761834702231",
+  "projects": [
+    "69031dece1d0791dd4797837",
+    "69037dc49db3bc82daf7d696"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "69031dece1d0791dd4797837",
+    "690379859694c286fc73cbd4",
+    "69037dc49db3bc82daf7d696"
+  ],
+  "languages": [
+    "Java",
+    "C++",
+    "HTML"
+  ],
+  "sentRequests": []
+},
+{
+  "_id": {
+    "$oid": "690324cc57daa6bdd70fdc78"
+  },
+  "username": "Maya",
+  "surname": "Roberts",
+  "email": "maya@roberts.com",
+  "password": "maya123@A",
+  "birthday": "1998-05-23",
+  "occupation": "Graphic Designer",
+  "bio": "A creative professional with a love for visual storytelling!",
+  "socials": "@maya.roberts",
+  "friends": [],
+  "image": "/uploadedImages/profiles/690324cc57daa6bdd70fdc78.jpg?t=1761814248946",
+  "projects": [
+    "69032b042b6a516aceac74e5"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "69032b042b6a516aceac74e5"
+  ],
+  "languages": [
+    "CSS",
+    "HTML"
+  ]
+},
+{
+  "_id": {
+    "$oid": "69032c642b6a516aceac74eb"
+  },
+  "username": "Liam",
+  "surname": "Jacobs",
+  "email": "liam@jacobs.com",
+  "password": "liam123@A",
+  "birthday": "2005-02-12",
+  "occupation": "Mechanical Engineer",
+  "bio": "Designs innovative mechanical systems",
+  "socials": "@liam.jacobs",
+  "friends": [
+    "Ethan",
+    "Sofia"
+  ],
+  "image": "/uploadedImages/profiles/69032c642b6a516aceac74eb.jpg?t=1761815674949",
+  "projects": [
+    "69032d152b6a516aceac74ec",
+    "69037dc49db3bc82daf7d696"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "69032d152b6a516aceac74ec",
+    "69037dc49db3bc82daf7d696"
+  ],
+  "languages": [
+    "Python",
+    "C++",
+    "Java"
+  ],
+  "friendRequests": [],
+  "sentRequests": []
+},
+{
+  "_id": {
+    "$oid": "69032d7d2b6a516aceac74ef"
+  },
+  "username": "Sofia",
+  "surname": "Mendes",
+  "email": "sofia@mendes.com",
+  "password": "sofia123@A",
+  "birthday": "2002-07-23",
+  "occupation": "Designer",
+  "bio": "I love creating user interfaces!",
+  "socials": "@sofia.mendes",
+  "friends": [
+    "Liam"
+  ],
+  "image": "/uploadedImages/profiles/69032d7d2b6a516aceac74ef.jpg?t=1761839592078",
+  "projects": [
+    "69033e791fe6eb9dd9bd77ed",
+    "69032d152b6a516aceac74ec"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "69033e791fe6eb9dd9bd77ed"
+  ],
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "HTML"
+  ],
+  "friendRequests": []
+},
+{
+  "_id": {
+    "$oid": "6903326e51f48cdc10f7c958"
+  },
+  "username": "Daniel",
+  "surname": "Wright",
+  "email": "daniel@wright.com",
+  "password": "daniel123@A",
+  "birthday": "2001-02-06",
+  "occupation": "Web Developer",
+  "bio": "I lovee web stufff!",
+  "socials": "@daniel.wright",
+  "friends": [],
+  "image": "/uploadedImages/profiles/6903326e51f48cdc10f7c958.jpg?t=1761818165703",
+  "projects": [
+    "6903370a6d2d94dfa0d99f17"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "6903370a6d2d94dfa0d99f17"
+  ],
+  "languages": [
+    "C++",
+    "CSS",
+    "HTML"
+  ]
+},
+{
+  "_id": {
+    "$oid": "690337d76d2d94dfa0d99f1b"
+  },
+  "username": "Ava",
+  "surname": "Thompson",
+  "email": "ava@thompson.com",
+  "password": "ava123@A",
+  "birthday": "2000-03-12",
+  "occupation": "Architect",
+  "bio": "Architecture is my passion ;)",
+  "socials": "@ava.thomp",
+  "friends": [],
+  "image": "/uploadedImages/profiles/690337d76d2d94dfa0d99f1b.jpg?t=1761818734302",
+  "projects": [
+    "690338d86d2d94dfa0d99f1c"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "690338d86d2d94dfa0d99f1c"
+  ],
+  "languages": [
+    "CAD",
+    "HTML"
+  ]
+},
+{
+  "_id": {
+    "$oid": "690339b96d2d94dfa0d99f20"
+  },
+  "username": "Noah",
+  "surname": "Patel",
+  "email": "noah@patel.com",
+  "password": "noah123@A",
+  "birthday": "2005-05-03",
+  "occupation": "Marketing Specialist",
+  "bio": "Develops campaigns that connect brands.",
+  "socials": "@noah.patel",
+  "friends": [],
+  "image": "/uploadedImages/profiles/690339b96d2d94dfa0d99f20.jpg?t=1761820479396",
+  "projects": [
+    "69033fa31fe6eb9dd9bd77f0"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [],
+  "languages": [
+    "JavaScript"
+  ]
+},
+{
+  "_id": {
+    "$oid": "69034194af258fef6fac61fe"
+  },
+  "username": "Emma",
+  "surname": "Van Der Merwe",
+  "email": "emma@vdm.com",
+  "password": "emma123@A",
+  "birthday": "1998-10-22",
+  "occupation": "Photographer",
+  "bio": "Captures authentic moments and emotions",
+  "socials": "@emma.vdm",
+  "friends": [],
+  "image": "/uploadedImages/profiles/69034194af258fef6fac61fe.jpg?t=1761821163567",
+  "projects": [
+    "6903425eaf258fef6fac61ff"
+  ],
+  "connectedWith": [],
+  "role": "admin",
+  "checkedOut": [
+    "6903425eaf258fef6fac61ff"
+  ],
+  "languages": [
+    "CSS"
+  ],
+  "friendRequests": []
+},
+{
+  "_id": {
+    "$oid": "6903434caf258fef6fac6203"
+  },
+  "username": "Lucas",
+  "surname": "Adams",
+  "email": "lucas@adams.com",
+  "password": "lucas123@A",
+  "birthday": "2004-11-12",
+  "occupation": "Mobile App Developer",
+  "bio": "Develops high-performance Android and iOS apps",
+  "socials": "@lucas.adams",
+  "friends": [],
+  "image": "/uploadedImages/profiles/6903434caf258fef6fac6203.jpg?t=1761821602789",
+  "projects": [
+    "690345e74935081469b4ceb9"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "690345e74935081469b4ceb9"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6903469e4935081469b4cebe"
+  },
+  "username": "Chloe",
+  "surname": "Williams",
+  "email": "chloe@williams.com",
+  "password": "chloe123@A",
+  "birthday": "2001-09-27",
+  "occupation": "Frontend Developer",
+  "bio": "Specializes in creating responsive, accessible UI's",
+  "socials": "@chloe.w",
+  "friends": [],
+  "image": "/uploadedImages/profiles/6903469e4935081469b4cebe.jpg?t=1761822896669",
+  "projects": [
+    "6903472c4935081469b4cebf"
+  ],
+  "connectedWith": [],
+  "role": "user",
+  "checkedOut": [
+    "6903472c4935081469b4cebf"
+  ]
+},
+{
+  "_id": {
+    "$oid": "690347df4935081469b4cec5"
+  },
+  "username": "Admin",
+  "surname": "admin",
+  "email": "admin@admin.com",
+  "password": "admin123@A",
+  "birthday": null,
+  "occupation": null,
+  "bio": null,
+  "socials": null,
+  "friends": [],
+  "image": null,
+  "projects": [],
+  "connectedWith": [],
+  "role": "admin",
+  "checkedOut": [
+    "69032d152b6a516aceac74ec"
+  ]
+}]

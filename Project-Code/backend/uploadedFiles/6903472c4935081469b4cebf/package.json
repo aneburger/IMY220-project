@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "path": "^0.12.7"
+  },
+  "name": "imy220-a3",
+  "version": "1.0.0",
+  "main": "frontend/public/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "33-24565068",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "regenerator-runtime": "^0.14.1"
+  },
+  "type": "module"
+}

@@ -1,0 +1,297 @@
+[{
+  "_id": {
+    "$oid": "69031dece1d0791dd4797837"
+  },
+  "projectName": "Ethan's Project",
+  "createdOn": "2025-10-30T08:12:28.026Z",
+  "description": "I will be testing out some frameworks in this project.",
+  "type": "Web App",
+  "files": [
+    "package-lock.json",
+    "package.json"
+  ],
+  "members": [
+    "Ethan"
+  ],
+  "owner": "Ethan",
+  "version": "v.1.0.1",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/69031dece1d0791dd4797837.jpg?t=1761815490021",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "package.json": "Added files",
+    "package-lock.json": "Added files"
+  },
+  "requestingUser": "Ethan"
+},
+{
+  "_id": {
+    "$oid": "69032b042b6a516aceac74e5"
+  },
+  "projectName": "Maya's Project",
+  "createdOn": "2025-10-30T09:08:20.531Z",
+  "description": "I will be creating a farming simulator game for this project!",
+  "type": "Desktop App",
+  "files": [
+    "App.js",
+    "index.js"
+  ],
+  "members": [
+    "Maya"
+  ],
+  "owner": "Maya",
+  "version": "v.1.0.0",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/69032b042b6a516aceac74e5.jpg?t=1761815328908",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "App.js": "Added components",
+    "index.js": "Initial commit"
+  },
+  "requestingUser": "Maya"
+},
+{
+  "_id": {
+    "$oid": "69032d152b6a516aceac74ec"
+  },
+  "projectName": "Liam's Project",
+  "createdOn": "2025-10-30T09:17:09.126Z",
+  "description": "Micro-chip design",
+  "type": "Web App",
+  "files": [
+    "database.js",
+    "server.js"
+  ],
+  "members": [
+    "Liam",
+    "Sofia"
+  ],
+  "owner": "Liam",
+  "version": "v.1.0.0",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/69032d152b6a516aceac74ec.jpg?t=1761815841432",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "database.js": "Added project files.",
+    "server.js": "Added project files."
+  },
+  "requestingUser": "Liam"
+},
+{
+  "_id": {
+    "$oid": "6903370a6d2d94dfa0d99f17"
+  },
+  "projectName": "Daniel's Project",
+  "createdOn": "2025-10-30T09:59:38.878Z",
+  "description": "I will be creating an e-commerce website!!",
+  "type": "Desktop App",
+  "files": [
+    "README.txt",
+    "webpack.config.js"
+  ],
+  "members": [
+    "Daniel"
+  ],
+  "owner": "Daniel",
+  "version": "v.1.0.0",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/6903370a6d2d94dfa0d99f17.jpg?t=1761818434590",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "README.txt": "Added README",
+    "webpack.config.js": "Initial commit"
+  },
+  "requestingUser": "Daniel"
+},
+{
+  "_id": {
+    "$oid": "690338d86d2d94dfa0d99f1c"
+  },
+  "projectName": "Ava's Project",
+  "createdOn": "2025-10-30T10:07:20.157Z",
+  "description": "I will be designing my final project building in this project!",
+  "type": "Web App",
+  "files": [
+    "index.html",
+    "output.css"
+  ],
+  "members": [
+    "Ava"
+  ],
+  "owner": "Ava",
+  "version": "v.1.1.1",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/690338d86d2d94dfa0d99f1c.jpg?t=1761818984131",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "index.html": "Added files",
+    "output.css": "Added files"
+  },
+  "requestingUser": "Ava"
+},
+{
+  "_id": {
+    "$oid": "69033e791fe6eb9dd9bd77ed"
+  },
+  "projectName": "Sofia's Project",
+  "createdOn": "2025-10-30T10:31:21.633Z",
+  "description": "I will be designing a professional UI for a small business!",
+  "type": "Web App",
+  "files": [
+    "App.js",
+    "index.js"
+  ],
+  "members": [
+    "Sofia"
+  ],
+  "owner": "Sofia",
+  "version": "v.1.0.0",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/69033e791fe6eb9dd9bd77ed.jpg?t=1761820336157",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "index.js": "Added files",
+    "App.js": "Added files"
+  },
+  "requestingUser": "Sofia"
+},
+{
+  "_id": {
+    "$oid": "69033fa31fe6eb9dd9bd77f0"
+  },
+  "projectName": "Noah's Project",
+  "createdOn": "2025-10-30T10:36:19.439Z",
+  "description": "I will be developing a marketing strategy for one of my clients for this project.",
+  "type": "Web App",
+  "files": [
+    "index.tsx",
+    "App.tsx"
+  ],
+  "members": [
+    "Noah"
+  ],
+  "owner": "Noah",
+  "version": "v.1.0.0",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/69033fa31fe6eb9dd9bd77f0.jpg?t=1761820607366",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "index.tsx": "Initial commit",
+    "App.tsx": "Initial commit"
+  },
+  "requestingUser": "Noah"
+},
+{
+  "_id": {
+    "$oid": "6903425eaf258fef6fac61ff"
+  },
+  "projectName": "Emma's Project",
+  "createdOn": "2025-10-30T10:47:58.266Z",
+  "description": "I will be creating an platform to manage and share my clients' photos!",
+  "type": "Desktop App",
+  "files": [
+    "Search.tsx",
+    "index.tsx",
+    "App.tsx"
+  ],
+  "members": [
+    "Emma"
+  ],
+  "owner": "Emma",
+  "version": "v.1.1.1",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/6903425eaf258fef6fac61ff.jpeg?t=1761821373632",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "Search.tsx": "Initial commit",
+    "index.tsx": "Added more files",
+    "App.tsx": "Added more files"
+  },
+  "requestingUser": "Emma"
+},
+{
+  "_id": {
+    "$oid": "690345e74935081469b4ceb9"
+  },
+  "projectName": "Lucas's Mobile App",
+  "createdOn": "2025-10-30T11:03:03.050Z",
+  "description": "I will be creating an innovative mobile app for efficient note taking.",
+  "type": "Mobile App",
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "server.js"
+  ],
+  "members": [
+    "Lucas"
+  ],
+  "owner": "Lucas",
+  "version": "v.1.0.1",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/690345e74935081469b4ceb9.jpg?t=1761822192772",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "package.json": "Added initial files",
+    "package-lock.json": "Added initial files",
+    "server.js": "Added initial files"
+  },
+  "requestingUser": "Lucas"
+},
+{
+  "_id": {
+    "$oid": "6903472c4935081469b4cebf"
+  },
+  "projectName": "Chloe's Project",
+  "createdOn": "2025-10-30T11:08:28.310Z",
+  "description": "I will be creating a user-friendly UI for a client.",
+  "type": "Web App",
+  "files": [
+    "package.json",
+    "index.js",
+    "style.css"
+  ],
+  "members": [
+    "Chloe"
+  ],
+  "owner": "Chloe",
+  "version": "v.1.0.1",
+  "status": "In",
+  "projectImage": "/uploadedImages/projects/6903472c4935081469b4cebf.jpg?t=1761822528353",
+  "checkedOutBy": null,
+  "checkInMessages": {
+    "package.json": "Initialized a React project",
+    "index.js": "Initialized a Node project.",
+    "style.css": "Initialized a Node project."
+  },
+  "requestingUser": "Admin"
+},
+{
+  "_id": {
+    "$oid": "69037dc49db3bc82daf7d696"
+  },
+  "projectName": "E & L's Project",
+  "createdOn": "2025-10-30T15:01:24.933Z",
+  "description": "We will be creating a cool website together!",
+  "type": "Mobile App",
+  "files": [
+    "package-lock.json",
+    "README.txt",
+    "package.json"
+  ],
+  "members": [
+    "Ethan",
+    "Liam"
+  ],
+  "owner": "Ethan",
+  "version": "v.1.0.0",
+  "status": "Out",
+  "projectImage": "/uploadedImages/projects/69037dc49db3bc82daf7d696.png?t=1761838618391",
+  "checkedOutBy": "Liam",
+  "checkInMessages": {
+    "package.json": "Updated package.json",
+    "package-lock.json": "Added files",
+    "README.txt": "Added files",
+    "webpack.config.js": "Added files"
+  },
+  "requestingUser": "Admin"
+}]

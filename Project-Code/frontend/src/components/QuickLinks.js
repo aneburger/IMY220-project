@@ -22,53 +22,6 @@ const QuickLinks = () => {
         setIsOpen((isOpen) => !isOpen);
     }
 
-    
-    // const handleFriendRemoved = async (removedFriendUsername) => {
-    //     try {
-    //         const user = JSON.parse(localStorage.getItem('user'));
-    //         const response = await fetch(`http://localhost:3000/api/user/${user._id}/remove-friend`, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({ friendUsername: removedFriendUsername })
-    //         });
-    //         const data = await response.json();
-    //         if (!data.success) {
-    //             alert("Error removing friend");
-    //             return;
-    //         }
-
-    //         if (userObj && userObj.friends) {
-    //             setUserObj({
-    //                 ...userObj,
-    //                 friends: userObj.friends.filter(f => f !== removedFriendUsername)
-    //             });
-    //             localStorage.setItem('user', JSON.stringify(updatedUser));
-    //         }
-    //         if (userData && userData.friends) {
-    //             setUserData({
-    //                 ...userData,
-    //                 friends: userData.friends.filter(f => f !== removedFriendUsername)
-    //             });
-    //             localStorage.setItem('user', JSON.stringify(updatedUser));
-    //         }
-
-    //     } catch (error) {
-    //         alert("Error removing friend");
-    //         console.error(error);
-    //     }
-        
-    //     setConnectionStatus("not-connected");
-    //     fetch(`http://localhost:3000/api/profile/${userObj._id}`)
-    //         .then(res => res.json())
-    //         .then(updatedUser => {
-    //             localStorage.setItem('user', JSON.stringify(updatedUser));
-    //             setUserObj(updatedUser);
-    //         });
-    //     fetch(`http://localhost:3000/api/profile/${userId}`)
-    //         .then(res => res.json())
-    //         .then(updatedProfile => setUserData(updatedProfile));
-    //     setConnectionStatus("not-connected");
-    // };
 
     const handleFriendRemoved = async (removedFriendUsername) => {
         try {

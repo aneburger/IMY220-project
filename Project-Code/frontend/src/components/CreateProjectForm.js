@@ -164,14 +164,6 @@ const CreateProjectForm = ({ onCancel, onProjectCreated }) => {
                             onChange={handleChange} 
                             placeholder="E.g. 'v.1.2.3'" 
                             autoComplete="version"/>
-                
-                    {/*                     
-                    <label htmlFor="projectImage">Project Image:</label>
-                    <input type="file" 
-                            id="imgUpload"
-                            value={formData.projectImage}
-                            onChange={handleChange} 
-                            name="projectImage"/> */}
 
                     <label htmlFor="type" id="typeL">Type:</label>
                     <div id="typeApp">

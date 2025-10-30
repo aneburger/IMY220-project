@@ -8,51 +8,9 @@ const AddFiles = ({ projectFiles, projectId, onFilesAdded, onCancel }) => {
     const [selectedFiles, setSelectedFiles] = useState([]);
 
     const handleFileChange = (e) => {
-        // const filesArr = Array.from(e.target.files).map(f => f.name);
-        // setSelectedFiles(filesArr);
-
         setSelectedFiles(Array.from(e.target.files));
     };
 
-    // add only file names
-    // const handleSave = async (e) => {
-    //     e.preventDefault();
-    //     if (selectedFiles.length === 0) return;
-
-    //     const duplicates = projectFiles.filter(f => selectedFiles.includes(f));
-    //     // const duplicates = projectFiles.filter(f =>
-    //     //     selectedFiles.map(file => file.name).includes(f)
-    //     // );
-    //     let newFiles;
-    //     // const selectedFileNames = selectedFiles.map(file => file.name);
-    //     // const duplicates = projectFiles.filter(f => selectedFileNames.includes(f));
-    //     // let newFiles;
-
-
-    //     if (duplicates.length > 0) {
-    //         if (!window.confirm(`The following files already exist: ${duplicates.join(", ")}. Do you want to replace them?`)) {
-    //             return;
-    //         }
-            
-    //         newFiles = [
-    //             ...projectFiles.filter(f => !selectedFiles.includes(f)),
-    //             ...selectedFiles
-    //         ];
-    //     } else {
-    //         newFiles = [...projectFiles, ...selectedFiles];
-    //     }
-
-    //     const response = await fetch(`http://localhost:3000/api/project/${projectId}/files`, {
-    //         method: "PUT",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({ files: newFiles })
-    //     });
-    //     const data = await response.json();
-    //     if (data.success) {
-    //         onFilesAdded(data.project.files);
-    //         onCancel();
-    //     }
-    // };
 
 
     const handleSave = async (e) => {

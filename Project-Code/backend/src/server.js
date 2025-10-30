@@ -2,7 +2,7 @@
 
 
 import express from 'express';
-import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags, canModifyProject, canModifyUser, canModifyProjectFiles } from './database.js';
+import { addUser, getUser, getUserById, getProjectById, getProjects, addProject, deleteProject, updateUser, updateProject, addProjectMember, removeProjectMember, sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests, getFriends, removeFriend, changeProjectOwner, addDiscussionMessage, getDiscussionMessages, deleteUser, checkOutProject, checkInProject, addActivity, getFriendsActivity, getMemberProjectsActivity, getGlobalActivity, getProjectActivity, getUserActivity, getProjectsByLanguage, getProjectIdByNameAndOwner, getProjectFilesInfo, fuzzySearchUsers, fuzzySearchProjects, fuzzySearchHashtags, canModifyProject, canModifyUser, canModifyProjectFiles, canAddProjectMember } from './database.js';
 import multer from 'multer';
 import path from 'path';
 import cors from 'cors';
@@ -469,10 +469,10 @@ app.post('/api/project/:projectId/member', async (req, res) => {
    const { projectId } = req.params;
    const { memberUsername, requestingUser } = req.body;
    try {
-        const allowed = await canModifyProject(requestingUser, projectId);
+        const allowed = await canAddProjectMember(requestingUser, projectId);
         if (!allowed) return res.status(403).json({ success: false, message: "Permission denied." });
 
-        const result = await addProjectMember(projectId, memberUsername);
+        const result = await addProjectMember(projectId, memberUsername, requestingUser);
         if (!result.success) {
             return res.status(400).json(result);
         }
@@ -699,45 +699,6 @@ app.post('/api/project/create-with-files', uploadNewFiles.array('files'), async 
 });
 
 
-// app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), async (req, res) => {
-//     const { projectId } = req.params;
-//     const { username, checkInMessage, version } = req.body;
-//     try {
-//         const newFileNames = req.files ? req.files.map(f => f.originalname) : [];
-
-//         const project = await getProjectById(projectId);
-//         let updatedFiles = [...project.files];
-//         newFileNames.forEach(filename => {
-//             if (!updatedFiles.includes(filename)) {
-//                 updatedFiles.push(filename);
-//             }
-//         });
-
-//         const updatedMessages = Array.isArray(project.checkInMessages)
-//             ? [...project.checkInMessages, checkInMessage]
-//             : [checkInMessage];
-
-//         await updateProject(projectId, {
-//             files: updatedFiles,
-//             checkInMessages: updatedMessages,
-//             checkedOutBy: null,
-//             status: "In",
-//             version: version
-//         });
-
-//         // await updateUser(project.checkedOutBy, { $pull: { checkedOut: projectId.toString() } });
-//         if (project.checkedOutBy && /^[a-f\d]{24}$/i.test(project.checkedOutBy)) {
-//             await updateUser(project.checkedOutBy, { $pull: { checkedOut: projectId.toString() } });
-//         }
-
-//         const updatedProject = await getProjectById(projectId);
-
-//         res.json({ success: true, project: updatedProject });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ success: false, message: "Server error" });
-//     }
-// });
 
 
 app.post('/api/project/:projectId/checkin-files', uploadFiles.array('files'), async (req, res) => {

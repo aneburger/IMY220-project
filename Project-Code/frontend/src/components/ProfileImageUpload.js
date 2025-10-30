@@ -9,7 +9,7 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
 
     useEffect(() => {
         if (userObj.image) {
-            setPreview(userObj.image + `?t=${Date.now()}`);
+            setPreview(userObj.image + `?t=${Date.now()}`); // sets img preview with a query param so browser reloads the updated img
         } else {
             setPreview("/assets/images/profile.png");
         }
@@ -17,7 +17,7 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
 
     const handleDrag = (e) => {
         e.preventDefault();
-        e.stopPropagation();
+        e.stopPropagation();    // stops event to propagate down the dom tree
         setDragActive(e.type === "dragenter" || e.type === "dragover");
     };
 
@@ -25,13 +25,13 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
         e.preventDefault();
         e.stopPropagation();
         setDragActive(false);
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {  // dataTransfer to access dropped file
             handleFile(e.dataTransfer.files[0]);
         }
     };
 
     const handleFile = (file) => {
-        setPreview(URL.createObjectURL(file));
+        setPreview(URL.createObjectURL(file));  // so user sees instant preview
         const formData = new FormData();
         formData.append("profileImage", file);
         formData.append("userId", userObj._id);
@@ -48,9 +48,9 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                const cacheB = `?t=${Date.now()}`;
-                setPreview(data.image + cacheB);
-                if (onImageUploaded) onImageUploaded({ ...data.user, image: data.image + cacheB });
+                const cacheB = `?t=${Date.now()}`;  // makes img url
+                setPreview(data.image + cacheB);    // updates preview with that url
+                if (onImageUploaded) onImageUploaded({ ...data.user, image: data.image + cacheB }); // so parent can update its ui (state)
             } else {
                 alert("Error uploading image");
             }
@@ -64,7 +64,8 @@ const ProfileImageUpload = ({ userObj, onImageUploaded }) => {
     };
 
     return (
-        <div
+        // drop zone
+        <div 
             className={`profile-upload-block${dragActive ? " drag-active" : ""}`}
             onDragEnter={handleDrag}
             onDragOver={handleDrag}

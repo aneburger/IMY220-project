@@ -5,7 +5,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import path from 'path';
 import Fuse from 'fuse.js';
 
-const uri = "mongodb+srv://<<username>>:<<password>>@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
+const uri = "mongodb+srv://test-user:test-password@imyproject.uvrd6ue.mongodb.net/?retryWrites=true&w=majority&appName=imyProject";
 const client = new MongoClient(uri);
 
 const dbName = 'projectDB';
@@ -271,12 +271,20 @@ async function addProject(projectName, createdOn, description, type, files, memb
         };
         const result = await projectCollection.insertOne(projectDoc);
         const projectId = result.insertedId;
-        projectDoc._id = result.insertedId;
+        projectDoc._id = projectId;
 
         await userCollection.updateOne(
             { _id: new ObjectId(userId) },
-            { $push: { projects: projectId.toString() } }
+            { $addToSet: { projects: projectId.toString() } }
         );
+
+        if (membersArr.length > 0) {
+            await userCollection.updateMany(
+                { username: { $in: membersArr } },
+                { $addToSet: { projects: projectId.toString() } }
+            );
+        }
+
         return projectDoc;
     } catch (error) {
         console.error("Error creating project:", error);
@@ -414,28 +422,70 @@ async function updateProject(projectId, updateFields) {
     }
 }
 
-async function addProjectMember(projectId, memberUsername) {
+
+async function canAddProjectMember(requestingUsername, projectId) {
+  await client.connect();
+  if (!requestingUsername) return false;
+
+  const reqUser = await userCollection.findOne({ username: requestingUsername });
+  if (reqUser?.role === 'admin') return true;
+
+  const project = await projectCollection.findOne({ _id: new ObjectId(projectId) });
+  if (!project) return false;
+
+  if (project.owner === requestingUsername) return true;
+
+  if (Array.isArray(project.members) && project.members.includes(requestingUsername)) return true;
+
+  return false;
+}
+
+
+async function addProjectMember(projectId, memberUsername, requestingUsername = null) {
     try {
         await client.connect();
-        const user = await userCollection.findOne({ username: memberUsername });
-        if (!user) return { success: false, message: "User does not exist." };
+
+        const allowed = await canAddProjectMember(requestingUsername, projectId);
+        if (!allowed) {
+            return { success: false, message: "Permission denied." };
+        }
+
+        const memberUser = await userCollection.findOne({ username: memberUsername });
+        if (!memberUser) return { success: false, message: "User does not exist." };
 
         const project = await projectCollection.findOne({ _id: new ObjectId(projectId) });
-        if (project.members && project.members.includes(memberUsername)) {
+        if (!project) return { success: false, message: "Project not found." };
+
+        if (Array.isArray(project.members) && project.members.includes(memberUsername)) {
             return { success: false, message: "User is already a member of this project." };
         }
+
+        if (requestingUsername) {
+            const requester = await userCollection.findOne({ username: requestingUsername });
+            if (requester?.role !== 'admin') {
+                const friends = Array.isArray(requester?.friends) ? requester.friends : [];
+                if (!friends.includes(memberUsername)) {
+                    return { success: false, message: "You can only add your friends as members." };
+                }
+            }
+        } else {
+            return { success: false, message: "Requesting user required." };
+        }
+
 
         await projectCollection.updateOne(
             { _id: new ObjectId(projectId) },
             { $addToSet: { members: memberUsername } }
         );
 
+        const projectIdStr = projectId.toString();
         await userCollection.updateOne(
-            { _id: user._id },
-            { $addToSet: { projects: projectId.toString() } }
+            { _id: memberUser._id },
+            { $addToSet: { projects: projectIdStr } }
         );
 
-        return { success: true, user };
+        const updatedProject = await projectCollection.findOne({ _id: new ObjectId(projectId) });
+        return { success: true, project: updatedProject, user: memberUser };
     } catch (error) {
         console.error("Error adding project member:", error);
         throw error;
@@ -665,7 +715,9 @@ async function checkOutProject(projectId, username) {
             return { success: false, message: "Project is already checked out." };
         }
         
-        if (!project.members.includes(username)) {
+        const reqUser = await userCollection.findOne({ username });
+        const isAdmin = reqUser && String(reqUser.role || '').toLowerCase() === 'admin';
+        if (!isAdmin && !project.members.includes(username) && project.owner !== username) {
             return { success: false, message: "You are not a member of this project." };
         }
         
@@ -1080,3 +1132,4 @@ export { fuzzySearchHashtags };
 export { canModifyProject };
 export { canModifyUser };
 export { canModifyProjectFiles };
+export { canAddProjectMember };

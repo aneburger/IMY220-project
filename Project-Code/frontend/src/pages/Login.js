@@ -25,16 +25,10 @@ const Login = () => {
         if (!data.username) {
             newErrors.username = 'Username is required';
         }
-        // } else if (data.username != 'test user') {
-        //     newErrors.username = 'Username invalid.';
-        // }
 
         if (!data.password) {
             newErrors.password = 'Password is required';
         }
-        // } else if (data.password != '12345@Aa') {
-        //     newErrors.password = 'Password invalid.';
-        // }
 
         return newErrors;
     }

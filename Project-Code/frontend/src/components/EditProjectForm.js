@@ -140,11 +140,6 @@ const EditProjectForm = ({ project, onCancel, onProjectUpdated, requestingUser }
                     </select>
                 </div>
 
-                {/* <label htmlFor="addType">Add a new type:</label>
-                <input type="text" name="addType" id="addType" placeholder="E.g. 'Framework'" autoComplete="type"
-                        // value={formData.version}
-                        // onChange={handleChange}
-                /> */}
             
                 <div id="editProjectFormButtons">
                     <button type="submit">Save</button>

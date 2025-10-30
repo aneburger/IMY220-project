@@ -32,7 +32,9 @@ const CheckIn = ({ project, onProjectUpdated, isCheckedOutByMe, isCheckedOut }) 
     };
 
     if (!project.checkedOutBy) {
-        const canCheckOut = project.members.includes(loggedInUser.username);
+        const loggedInUser = JSON.parse(localStorage.getItem('user'));
+        const isAdmin = !!loggedInUser && (loggedInUser.role === 'admin');
+        const canCheckOut = isAdmin || (project.members && project.members.includes(loggedInUser.username));
         return (
             <div id="checkInButtonDiv">
                 <button

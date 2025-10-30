@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap'); /* Delius */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap'); /* Dosis */
+
+/* Ane' Burger 24565068 */
+
+body { 
+    background-color:#47566F;
+}
+
+#searchDiv {
+    width: 400px;
+    margin: auto;
+}
+
+#searchDiv label {
+    color: #fdfdfdd3;
+    font-family: "Dosis";
+    font-size: 30px;
+    font-weight: 550;
+}
+
+#search {
+    background-color: #FDFDFD;
+    border: 2px solid #adada7;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 5px 15px 5px 15px;
+    margin-left: 10px;
+    width: 200px;
+}
+
+#search:focus {
+    outline: none;
+    color: #787874;
+    font-family: 'Dosis';
+    font-size: 20px;
+}
+
+#loginDiv {
+    top: 0;
+    width: 770px;
+    height: 100vh;
+    background-color: #47566F ;
+    margin: auto;
+    margin-left: 370px;
+    z-index: 100;
+    position: absolute;
+}
+
+#loginDiv h1 {
+    color: #FDFDFD; 
+    font-size: 45px;
+    font-family: "Delius";
+    font-weight: 600;
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#mainDiv h1 {
+    color: #FDFDFD; 
+    font-size: 45px;
+    font-family: "Delius";
+    font-weight: 600;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+#mainDiv button {
+    font-family: "Dosis";
+    font-size: 19px;
+    background-color: #687488;
+    border-radius: 18px;
+    border: 2px solid #959baa;
+    padding: 4px 13px 8px 13px;
+    color: #ebebea;
+    font-weight: 500;
+    margin-left: 50px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#mainDiv button:hover {
+    cursor: pointer;
+    background-color: #5d677b;
+}
+
+#loginDiv input {
+    display: block;
+    background-color: #FDFDFD;
+    border: 2px solid #adada7;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 8px 15px 8px 15px;
+    margin-left: 200px;
+    margin-bottom: 25px;
+    width: 335px;
+}
+
+#loginDiv input:focus {
+    outline: none;
+    color: #787874;
+    font-family: 'Dosis';
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#loginDiv input::placeholder {
+    color: #787874;
+    font-family: 'Dosis';
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#loginDiv button {
+    font-family: "Dosis";
+    font-size: 19px;
+    background-color: #687488;
+    border-radius: 18px;
+    border: 2px solid #959baa;
+    padding: 4px 13px 8px 13px;
+    color: #ebebea;
+    font-weight: 500;
+    margin-left: 348px;
+    transition: background-color 0.4s ease-in-out;
+}
+
+#loginDiv button:hover {
+    cursor: pointer;
+    background-color: #5d677b;
+}
+
+#loginDiv .errorMessage {
+    font-family: "Dosis";
+    font-size: 16px;
+    color: #fa9632;
+    margin-left: 248px;
+}
+
+#newBook input {
+    display: block;
+    background-color: #FDFDFD;
+    border: 2px solid #adada7;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px 15px 5px 15px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    width: 450px;
+}
+
+#newBook input:focus {
+    outline: none;
+    color: #787874;
+    font-family: 'Dosis';
+    font-size: 15px;
+}
+
+#bookCard input {
+    display: block;
+    background-color: #FDFDFD;
+    border: 2px solid #adada7;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px 15px 5px 15px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    width: 450px;
+}
+
+#bookCard input:focus {
+    outline: none;
+    color: #787874;
+    font-family: 'Dosis';
+    font-size: 15px;
+}
+
+#addBook {
+    font-family: "Dosis";
+    font-size: 16px;
+    background-color: #233048;
+    border-radius: 18px;
+    border: 2px solid #1b2335;
+    padding: 8px 17px 10px 15px;
+    color: #ebebea;
+    font-weight: 500;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#addB {
+    width: 153px;
+    margin: auto;
+}
+
+#addBook:hover {
+    cursor: pointer;
+}
+
+#search::placeholder {
+    font-family: "Dosis";
+    color: #a4a39a;
+}
+
+#searchDiv #searchB {
+    position: absolute;
+    font-family: "Dosis";
+    font-size: 18px;
+    background-color: #3d4a62;
+    border-radius: 10px;
+    border: 2px solid #364059;
+    padding: 5px 13px 8px 13px;
+    color: #ebebea;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+#searchDiv #searchB:hover {
+    cursor: pointer;
+    background-color: #5d677b;
+}
+
+#bookCard {
+    background-color: #FDFDFD;
+    border: 2px solid transparent;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 28px;
+    padding: 20px 10px 25px 25px;
+    border-radius: 20px;
+}
+
+#checkedOutCard {
+    background-color: #FDFDFD;
+    border: 2px solid transparent;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 28px;
+    padding: 20px 10px 25px 25px;
+    border-radius: 20px;
+    margin-top: 32px;
+}
+
+#newBook {
+    background-color: #FDFDFD;
+    border: 2px solid transparent;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 28px;
+    padding: 20px 10px 25px 25px;
+    border-radius: 20px;
+}
+
+#bookCard:hover {
+    border: 2px solid #adada7;
+    cursor: pointer;
+}
+
+#checkedOutCard:hover {
+    border: 2px solid #adada7;
+    cursor: pointer;
+}
+
+#checkedOutCard .checkTitle {
+    font-weight: 650;
+    font-size: 23px;
+}
+
+#bookCard button {
+    display: inline-block;
+    font-family: "Dosis";
+    font-size: 16px;
+    background-color: #3d4a62;
+    border-radius: 18px;
+    border: 2px solid #364059;
+    padding: 4px 13px 5px 13px;
+    color: #ebebea;
+    font-weight: 500;
+    margin-right: 7px;
+    margin-left: 7px;
+}
+
+#newBook button {
+    font-family: "Dosis";
+    font-size: 16px;
+    background-color: #3d4a62;
+    border-radius: 18px;
+    border: 2px solid #364059;
+    padding: 4px 13px 5px 13px;
+    color: #ebebea;
+    font-weight: 500;
+    margin-right: 7px;
+}
+
+h2 {
+    color: #233048; 
+    font-size: 32px;
+    font-family: "Delius";
+    font-weight: 600;
+    margin-top: 0px;
+}
+
+p {
+    font-family: "Dosis";
+    font-weight: 450;
+    font-size: 19px;
+    color: #64635e;
+    letter-spacing: 2px;
+}

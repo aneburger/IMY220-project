@@ -17,52 +17,6 @@ const CheckInForm = ({ project, onCancel, onProjectCheckedIn }) => {
         setSelectedFiles(Array.from(e.target.files));
     };
 
-    // const handleSave = async (e) => {
-    //     e.preventDefault();
-    //     if (!checkInMessage.trim()) {
-    //         setError("Check-in message is required.");
-    //         return;
-    //     }
-    //     if (!version.trim()) {
-    //         setError("Version is required.");
-    //         return;
-    //     }
-        
-    //     const filesWithMessages = selectedFiles.map(filename => ({
-    //         filename,
-    //         message: checkInMessage
-    //     }));
-
-    //     const duplicates = project.files.filter(f => selectedFiles.includes(f));
-    //     if (duplicates.length > 0) {
-    //         if (!window.confirm(`The following files already exist: ${duplicates.join(", ")}. Do you want to replace them?`)) {
-    //             return;
-    //         }
-    //     }
-        
-    //     try {
-    //         const response = await fetch(`http://localhost:3000/api/project/${project._id}/checkin`, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({
-    //                 username: loggedInUser.username,
-    //                 files: filesWithMessages,
-    //                 checkInMessage,
-    //                 version
-    //             })
-    //         });
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             if (onProjectCheckedIn) onProjectCheckedIn(data.project);
-    //             onCancel();
-    //         } else {
-    //             setError(data.message || "Failed to check in project.");
-    //         }
-    //     } catch (err) {
-    //         setError("Error checking in project.");
-    //     }
-    // };
-
 
     const handleSave = async (e) => {
         e.preventDefault();
