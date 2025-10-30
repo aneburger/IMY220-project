@@ -16,3 +16,10 @@ http://localhost:3000
 
 docker compose up -d --build
 
+================================================================
+
+Folder structure:
+
+- /Database-Files contains my exported MongoDB json collections.
+- /backend contains my server and database logic (database.js and server.js) as well as the directories for uploaded files and images.
+- /frontend contains all my React components and Pages.
