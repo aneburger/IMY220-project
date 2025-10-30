@@ -12,7 +12,7 @@ https://github.com/aneburger/IMY220-project
 http://localhost:3000
 
 
-// Build and start the Docker Container with the following command:
+// Build and start the Docker Container with the following command in the root directory:
 
 docker compose up -d --build
 
