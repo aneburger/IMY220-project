@@ -4,12 +4,10 @@
   "main": "frontend/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack && babel backend/src -d backend/dist",
-    "start": "npm run build && node backend/dist/server.js",
-    "watch": "webpack -w",
-    "tw:build": "tailwindcss -c tailwind.config.js -i ./frontend/src/styles/tw-dropdown.css -o ./frontend/public/assets/style/css/tw-dropdown.css --minify",
-    "tw:watch": "tailwindcss -c tailwind.config.js -i ./frontend/src/styles/tw-dropdown.css -o ./frontend/public/assets/style/css/tw-dropdown.css --watch"
-  },
+    "build": "webpack --mode production",
+    "build:backend": "babel backend/src -d backend/dist",
+    "start": "npm run build:backend && node backend/dist/server.js"
+  }
   "author": "33-24565068",
   "license": "ISC",
   "description": "",
