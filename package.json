@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "build:backend": "babel backend/src -d backend/dist",
     "start": "npm run build:backend && node backend/dist/server.js"
-  }
+  },
   "author": "33-24565068",
   "license": "ISC",
   "description": "",
